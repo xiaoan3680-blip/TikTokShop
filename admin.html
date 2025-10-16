@@ -2,55 +2,46 @@
 <html lang="vi">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quản trị TikTokShop</title>
-
-    <!-- Liên kết CSS -->
     <link rel="stylesheet" href="admin.css">
 </head>
 
 <body>
     <h1>🎛️ Quản trị TikTokShop</h1>
 
-    <!-- ⚙️ Cấu hình trang chính -->
     <div class="card">
         <h2>⚙️ Cấu hình trang chính</h2>
-        <label for="title">Tiêu đề trang</label>
-        <input id="title" type="text" placeholder="Chào mừng đến TikTokShop 💖">
-
-        <label for="subtitle">Mô tả ngắn</label>
-        <input id="subtitle" type="text" placeholder="Mua sắm xu hướng TikTok với giá siêu hấp dẫn!">
-
-        <label for="homepage">Đường dẫn Trang chủ</label>
-        <input id="homepage" type="text" placeholder="https://tiktokshop888.com">
-
-        <label for="chat_id">Mã Chat TuDongChat</label>
-        <input id="chat_id" type="text" placeholder="Nhập mã chat TuDongChat của bạn...">
-
-        <label for="theme_color">Màu chủ đạo (chat/theme)</label>
-        <input id="theme_color" type="color" value="#ff0050">
-
-        <label for="chat_enabled">
-            <input type="checkbox" id="chat_enabled"> Bật Chat tự động
-        </label>
+        <label>Tiêu đề:</label>
+        <input id="title">
+        <label>Mô tả:</label>
+        <input id="subtitle">
+        <label>Logo (link ảnh):</label>
+        <input id="logo">
+        <label>Đường dẫn Trang chủ:</label>
+        <input id="homepage">
+        <label>Số điện thoại:</label>
+        <input id="phone">
+        <label>Mã Chat TuDongChat:</label>
+        <input id="chat_id">
+        <label><input type="checkbox" id="chat_enabled"> Bật Chat tự động</label>
+        <label>Màu chủ đạo:</label>
+        <input type="color" id="theme_color" value="#ff0050">
     </div>
 
-    <!-- 📱 Quản lý mã QR -->
     <div class="card">
         <h2>📱 Quản lý mã QR</h2>
         <div id="qr-list"></div>
         <button class="btn-primary" onclick="addQR()">➕ Thêm mã QR</button>
     </div>
 
-    <!-- 💾 Lưu thay đổi -->
     <div class="card">
         <h2>💾 Lưu toàn bộ thay đổi</h2>
         <button class="btn-primary" onclick="saveData()">Lưu dữ liệu</button>
         <p id="status"></p>
     </div>
 
-    <!-- Liên kết script quản trị -->
     <script src="admin.js"></script>
 </body>
 

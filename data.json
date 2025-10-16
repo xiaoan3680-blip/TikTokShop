@@ -3,6 +3,7 @@
         "title": "Chào mừng đến TikTokShop 💖",
         "subtitle": "Mua sắm xu hướng TikTok với giá siêu hấp dẫn!",
         "homepage": "https://tiktokshop888.com",
+        "logo": "https://i.imgur.com/fh4cPnx.jpeg",
         "chat_enabled": true,
         "chat_id": "Nd9qOWI0l8QwPObLIb9Dx",
         "theme_color": "#ff0050"
@@ -10,17 +11,17 @@
     "contact": {
         "phone": "0123456789",
         "facebook": "https://facebook.com/tiktokshop888",
-        "tiktok": "https://tiktok.com/@goccuaembong88",
+        "tiktok": "https://tiktok.com/@tiktokshop888",
         "instagram": "https://instagram.com/tiktokshop888"
     },
     "qrcodes": [
         {
-            "label": "TikTok Em Bống",
-            "image": "https://i.imgur.com/lrD4mlB.jpeg"
+            "label": "Zalo CSKH",
+            "image": "https://i.imgur.com/hRWK7MZ.png"
         },
         {
-            "label": "Zalo CSKH",
-            "image": ""
+            "label": "TikTok Shop",
+            "image": "https://i.imgur.com/lrD4mlB.jpeg"
         }
     ],
     "messages": []

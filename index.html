@@ -7,26 +7,28 @@
     <title>TikTokShop</title>
     <style>
         body {
-            margin: 0;
             font-family: 'Poppins', sans-serif;
             background-color: #000;
             color: #fff;
+            margin: 0;
+            text-align: center;
             overflow-x: hidden;
         }
 
         header {
             background: linear-gradient(90deg, #ff0050, #00f5ff);
-            padding: 15px 20px;
+            padding: 15px;
             text-align: center;
             color: #fff;
             position: sticky;
             top: 0;
             z-index: 1000;
+            box-shadow: 0 0 10px rgba(255, 0, 80, 0.4);
         }
 
         header h1 {
             margin: 0;
-            font-size: 26px;
+            font-size: 24px;
             letter-spacing: 1px;
         }
 
@@ -43,7 +45,7 @@
 
         .btn-primary:hover {
             opacity: 0.85;
-            transform: scale(1.03);
+            transform: scale(1.05);
         }
 
         section {
@@ -59,25 +61,34 @@
 
         .intro img {
             width: 240px;
-            border-radius: 14px;
+            border-radius: 15px;
             margin-top: 15px;
-            box-shadow: 0 0 15px rgba(255, 0, 80, 0.4);
+            box-shadow: 0 0 20px rgba(255, 0, 80, 0.5);
         }
 
         .features {
             display: flex;
-            justify-content: center;
             flex-wrap: wrap;
+            justify-content: center;
             gap: 25px;
             margin-top: 20px;
         }
 
         .feature-card {
             background: rgba(255, 255, 255, 0.05);
-            border-radius: 12px;
+            border-radius: 15px;
             padding: 20px;
             width: 280px;
             box-shadow: 0 0 15px rgba(255, 0, 80, 0.3);
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            max-width: 400px;
+            margin: auto;
         }
 
         input,
@@ -94,9 +105,9 @@
             resize: none;
         }
 
-        #qrSection img {
+        #qrContainer img {
             width: 150px;
-            border-radius: 8px;
+            border-radius: 10px;
             margin: 10px;
             box-shadow: 0 0 10px rgba(0, 245, 255, 0.3);
         }
@@ -104,28 +115,41 @@
         footer {
             background-color: #111;
             padding: 20px;
-            text-align: center;
-            color: #999;
+            color: #aaa;
             border-top: 1px solid #222;
+        }
+
+        .admin-link {
+            position: fixed;
+            bottom: 15px;
+            right: 15px;
+            background: linear-gradient(90deg, #00f5ff, #ff0050);
+            color: white;
+            padding: 10px 14px;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            box-shadow: 0 0 10px rgba(255, 0, 80, 0.4);
+        }
+
+        .admin-link:hover {
+            opacity: 0.85;
         }
     </style>
 </head>
 
 <body>
-    <!-- Header -->
     <header>
         <h1 id="siteTitle">TikTokShop</h1>
         <button class="btn-primary" id="homeButton">Trang chủ</button>
     </header>
 
-    <!-- Giới thiệu -->
     <section class="intro">
         <h2 class="gradient-text" id="welcomeTitle">🎀 Chào mừng đến TikTokShop 🎀</h2>
         <p id="siteSubtitle">Mua sắm theo xu hướng TikTok - Nơi mang đến sản phẩm hot nhất!</p>
-        <img id="introImage" src="https://i.imgur.com/fh4cPnx.jpeg" alt="TikTokShop">
+        <img id="logoImage" src="" alt="Logo TikTokShop">
     </section>
 
-    <!-- Ưu điểm -->
     <section>
         <h2 class="gradient-text">✨ Vì sao chọn TikTokShop?</h2>
         <div class="features">
@@ -144,7 +168,6 @@
         </div>
     </section>
 
-    <!-- Form liên hệ -->
     <section>
         <h2 class="gradient-text">📩 Liên hệ ngay với chúng tôi</h2>
         <form id="contactForm">
@@ -155,18 +178,20 @@
         </form>
     </section>
 
-    <!-- QR -->
     <section id="qrSection">
         <h2 class="gradient-text">📱 Kết nối với TikTokShop</h2>
         <div id="qrContainer"></div>
+        <p id="contactPhone"></p>
     </section>
 
-    <!-- Footer -->
     <footer>
-        © 2025 TikTokShop | CSKH: support@tiktokshop888.com
+        © 2025 TikTokShop - Mọi quyền được bảo lưu.
     </footer>
 
-    <!-- Script: Tự động tải dữ liệu -->
+    <!-- Nút truy cập admin -->
+    <a href="/admin" class="admin-link">🛠 Quản trị</a>
+
+    <!-- JS -->
     <script>
         async function loadSite() {
             const res = await fetch("/api/data");
@@ -177,13 +202,17 @@
             document.getElementById("welcomeTitle").textContent = data.site.title;
             document.getElementById("siteSubtitle").textContent = data.site.subtitle;
             document.getElementById("homeButton").onclick = () => window.location.href = data.site.homepage;
+            document.getElementById("contactPhone").textContent = "📞 Hotline: " + data.contact.phone;
+
+            // Logo
+            document.getElementById("logoImage").src = data.site.logo || "https://i.imgur.com/MpF2u1h.png";
 
             // QR
             const qrContainer = document.getElementById("qrContainer");
             qrContainer.innerHTML = data.qrcodes.map(qr => `
         <div>
           <b>${qr.label}</b><br>
-          ${qr.image ? `<img src="${qr.image}" alt="${qr.label}">` : "<p>Chưa có mã QR</p>"}
+          <img src="${qr.image}" alt="${qr.label}">
         </div>
       `).join("");
 
@@ -221,6 +250,17 @@
             const result = await res.json();
             alert(result.success ? "✅ Tin nhắn đã được gửi!" : "❌ Gửi thất bại, thử lại!");
             e.target.reset();
+        });
+
+        // Ảnh dự phòng nếu lỗi
+        const fallbackImage = "https://i.imgur.com/MpF2u1h.png";
+        window.addEventListener("load", () => {
+            document.querySelectorAll("img").forEach(img => {
+                img.addEventListener("error", function () {
+                    this.src = fallbackImage;
+                    this.onerror = null;
+                });
+            });
         });
     </script>
 </body>

@@ -31,7 +31,7 @@ app.get("/api/data", (req, res) => {
     }
 });
 
-// --- API gửi form ---
+// --- API gửi tin nhắn ---
 app.post("/api/contact-form", (req, res) => {
     try {
         const { name, email, message } = req.body;
@@ -60,8 +60,7 @@ app.post("/api/admin/update-data", (req, res) => {
     }
 });
 
-// Trang admin & trang chính
 app.get("/admin", (req, res) => res.sendFile(path.join(__dirname, "admin.html")));
 app.get("*", (req, res) => res.sendFile(path.join(__dirname, "index.html")));
 
-app.listen(PORT, () => console.log(`✅ Server đang chạy tại http://localhost:${PORT}`));
+app.listen(PORT, () => console.log(`✅ Server chạy tại http://localhost:${PORT}`));

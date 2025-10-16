@@ -1,84 +1,40 @@
-document.addEventListener("DOMContentLoaded", () => {
-    const form = document.querySelector("#adminForm");
-    const qrList = document.querySelector("#qr-list");
-    const messageBox = document.querySelector("#message-box");
+async function loadData() {
+    const res = await fetch("/api/data");
+    const data = await res.json();
 
-    // Tải dữ liệu ban đầu
-    fetch("/api/data")
-        .then((res) => res.json())
-        .then((data) => {
-            document.querySelector("#title").value = data.title || "";
-            document.querySelector("#description").value = data.description || "";
-            document.querySelector("#homepage").value = data.homepage || "";
-            document.querySelector("#phone").value = data.phone || "";
+    document.getElementById("phone").value = data.contact.phone;
+    document.getElementById("email").value = data.contact.email;
+    document.getElementById("facebook").value = data.contact.facebook;
+    document.getElementById("tiktok").value = data.contact.tiktok;
+    document.getElementById("zalo").value = data.contact.zalo;
 
-            qrList.innerHTML = "";
-            (data.qr_codes || []).forEach((qr, i) => {
-                const div = document.createElement("div");
-                div.classList.add("qr-item");
-                div.innerHTML = `
-          <span>${qr.name}</span>
-          <input type="text" value="${qr.image}" placeholder="Link hình ảnh QR">
-          <input type="text" value="${qr.link}" placeholder="Liên kết nền tảng">
-        `;
-                qrList.appendChild(div);
-            });
+    const qrList = document.getElementById("qrList");
+    qrList.innerHTML = data.qrcodes.map(
+        (qr, i) => `
+    <div>
+      <input value="${qr.label}" placeholder="Tên mã QR">
+      <input value="${qr.image}" placeholder="Link ảnh QR">
+    </div>`
+    ).join("");
+}
 
-            // Hiển thị tin nhắn
-            messageBox.innerHTML = "";
-            (data.messages || []).forEach((msg) => {
-                const m = document.createElement("div");
-                m.classList.add("qr-item");
-                m.innerHTML = `<strong>${msg.name}</strong> (${msg.email})<br><small>${msg.time}</small><br>${msg.message}`;
-                messageBox.appendChild(m);
-            });
-        });
-
-    // Thêm mã QR
-    document.getElementById("add-qr").addEventListener("click", () => {
-        const name = document.getElementById("new-qr-name").value;
-        const image = document.getElementById("new-qr-img").value;
-        const link = document.getElementById("new-qr-link").value;
-        if (!name || !image) return alert("Vui lòng nhập đầy đủ thông tin!");
-
-        const div = document.createElement("div");
-        div.classList.add("qr-item");
-        div.innerHTML = `
-      <span>${name}</span>
-      <input type="text" value="${image}" placeholder="Link hình ảnh QR">
-      <input type="text" value="${link}" placeholder="Liên kết nền tảng">
-    `;
-        qrList.appendChild(div);
-
-        document.getElementById("new-qr-name").value = "";
-        document.getElementById("new-qr-img").value = "";
-        document.getElementById("new-qr-link").value = "";
+document.getElementById("saveData").addEventListener("click", async () => {
+    const updatedData = {
+        contact: {
+            phone: document.getElementById("phone").value,
+            email: document.getElementById("email").value,
+            facebook: document.getElementById("facebook").value,
+            tiktok: document.getElementById("tiktok").value,
+            zalo: document.getElementById("zalo").value
+        }
+    };
+    const res = await fetch("/api/admin/update-data", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(updatedData)
     });
-
-    // Lưu thay đổi
-    form.addEventListener("submit", (e) => {
-        e.preventDefault();
-
-        const updatedData = {
-            title: document.querySelector("#title").value,
-            description: document.querySelector("#description").value,
-            homepage: document.querySelector("#homepage").value,
-            phone: document.querySelector("#phone").value,
-            qr_codes: Array.from(document.querySelectorAll(".qr-item")).map((item) => ({
-                name: item.querySelector("span").innerText,
-                image: item.querySelectorAll("input")[0].value,
-                link: item.querySelectorAll("input")[1].value
-            }))
-        };
-
-        fetch("/api/admin/update-data", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(updatedData)
-        })
-            .then((res) => res.json())
-            .then((res) => {
-                alert(res.success ? "✅ Lưu thành công!" : "❌ Lỗi khi cập nhật!");
-            });
-    });
+    const result = await res.json();
+    alert(result.success ? "✅ Lưu thành công!" : "❌ Lỗi khi lưu dữ liệu!");
 });
+
+loadData();

@@ -1,8 +1,8 @@
 {
+  "type": "commonjs",
   "name": "tiktokshop",
   "version": "1.0.0",
   "description": "TikTokShop Việt Nam - Nền tảng bán hàng trực tuyến hiện đại",
-  "type": "module",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"

@@ -5,40 +5,41 @@ async function loadData() {
     document.getElementById("title").value = data.site.title;
     document.getElementById("subtitle").value = data.site.subtitle;
     document.getElementById("logo").value = data.site.logo;
-    document.getElementById("homepage").value = data.site.homepage;
-    document.getElementById("phone").value = data.contact.phone;
     document.getElementById("chat_id").value = data.site.chat_id;
     document.getElementById("chat_enabled").checked = data.site.chat_enabled;
-    document.getElementById("theme_color").value = data.site.theme_color;
 
-    renderQR(data.qrcodes);
+    renderContacts(data.contacts);
 }
 
-function renderQR(qrs) {
-    const container = document.getElementById("qr-list");
-    container.innerHTML = qrs.map((qr, i) => `
-    <div class="qr-item">
-      <input id="qr-label-${i}" value="${qr.label}" placeholder="Tên QR">
-      <input id="qr-img-${i}" value="${qr.image}" placeholder="Link ảnh QR">
-      <button class="btn-primary" onclick="deleteQR(${i})">Xóa</button>
+function renderContacts(list) {
+    const div = document.getElementById("contact-list");
+    div.innerHTML = list.map((c, i) => `
+    <div class="contact-item">
+      <input id="c-name-${i}" value="${c.name}" placeholder="Tên">
+      <input id="c-link-${i}" value="${c.link}" placeholder="Liên kết">
+      <input id="c-icon-${i}" value="${c.icon}" placeholder="Icon (link ảnh)">
+      <input id="c-color-${i}" value="${c.color}" placeholder="Màu (#hex)">
+      <button onclick="removeContact(${i})">Xóa</button>
     </div>
   `).join("");
 }
 
-function addQR() {
-    const container = document.getElementById("qr-list");
-    const index = container.children.length;
-    const div = document.createElement("div");
-    div.className = "qr-item";
-    div.innerHTML = `
-    <input id="qr-label-${index}" placeholder="Tên QR">
-    <input id="qr-img-${index}" placeholder="Link ảnh QR">
-  `;
-    container.appendChild(div);
+function addContact() {
+    const div = document.getElementById("contact-list");
+    const i = div.children.length;
+    div.insertAdjacentHTML("beforeend", `
+    <div class="contact-item">
+      <input id="c-name-${i}" placeholder="Tên">
+      <input id="c-link-${i}" placeholder="Liên kết">
+      <input id="c-icon-${i}" placeholder="Icon">
+      <input id="c-color-${i}" placeholder="Màu (#hex)">
+      <button onclick="removeContact(${i})">Xóa</button>
+    </div>
+  `);
 }
 
-function deleteQR(i) {
-    document.getElementById(`qr-label-${i}`).parentNode.remove();
+function removeContact(i) {
+    document.getElementById(`c-name-${i}`).parentNode.remove();
 }
 
 async function saveData() {
@@ -48,31 +49,27 @@ async function saveData() {
     data.site.title = document.getElementById("title").value;
     data.site.subtitle = document.getElementById("subtitle").value;
     data.site.logo = document.getElementById("logo").value;
-    data.site.homepage = document.getElementById("homepage").value;
-    data.contact.phone = document.getElementById("phone").value;
     data.site.chat_id = document.getElementById("chat_id").value;
     data.site.chat_enabled = document.getElementById("chat_enabled").checked;
-    data.site.theme_color = document.getElementById("theme_color").value;
 
-    const qrs = [];
-    document.querySelectorAll('[id^="qr-label-"]').forEach((el, i) => {
-        qrs.push({
-            label: el.value,
-            image: document.getElementById(`qr-img-${i}`).value
+    const list = [];
+    document.querySelectorAll('.contact-item').forEach((el, i) => {
+        list.push({
+            name: document.getElementById(`c-name-${i}`).value,
+            link: document.getElementById(`c-link-${i}`).value,
+            icon: document.getElementById(`c-icon-${i}`).value,
+            color: document.getElementById(`c-color-${i}`).value
         });
     });
-    data.qrcodes = qrs;
+    data.contacts = list;
 
-    const update = await fetch("/api/admin/update-data", {
+    const save = await fetch("/api/admin/update-data", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data)
     });
-
-    const result = await update.json();
-    document.getElementById("status").textContent = result.success
-        ? "✅ Đã lưu dữ liệu thành công!"
-        : "❌ Lưu thất bại!";
+    const resSave = await save.json();
+    document.getElementById("status").textContent = resSave.success ? "✅ Đã lưu thành công!" : "❌ Lỗi khi lưu!";
 }
 
 loadData();

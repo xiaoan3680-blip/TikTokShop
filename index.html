@@ -7,261 +7,161 @@
     <title>TikTokShop</title>
     <style>
         body {
-            font-family: 'Poppins', sans-serif;
-            background-color: #000;
+            font-family: "Poppins", sans-serif;
+            background: #0d0d0d;
             color: #fff;
             margin: 0;
             text-align: center;
-            overflow-x: hidden;
         }
 
         header {
-            background: linear-gradient(90deg, #ff0050, #00f5ff);
-            padding: 15px;
-            text-align: center;
-            color: #fff;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 0 10px rgba(255, 0, 80, 0.4);
+            background: linear-gradient(90deg, #ff66a3, #00e6ff);
+            padding: 12px;
+            font-size: 22px;
+            font-weight: 700;
+            box-shadow: 0 0 15px rgba(255, 102, 163, 0.4);
         }
 
-        header h1 {
-            margin: 0;
-            font-size: 24px;
-            letter-spacing: 1px;
-        }
-
-        .btn-primary {
-            background: linear-gradient(90deg, #ff0050, #00f5ff);
-            color: #fff;
+        .btn {
+            display: inline-block;
+            padding: 8px 16px;
+            background: linear-gradient(90deg, #ff66a3, #00e6ff);
+            color: white;
             border: none;
             border-radius: 8px;
-            padding: 10px 20px;
+            margin: 8px;
+            font-weight: 600;
             cursor: pointer;
-            font-weight: bold;
             transition: 0.3s;
         }
 
-        .btn-primary:hover {
+        .btn:hover {
             opacity: 0.85;
             transform: scale(1.05);
         }
 
-        section {
-            padding: 50px 20px;
-            text-align: center;
-        }
-
-        .gradient-text {
-            background: linear-gradient(90deg, #00f5ff, #ff0050);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .intro img {
-            width: 240px;
+        .logo {
+            max-width: 160px;
             border-radius: 15px;
-            margin-top: 15px;
-            box-shadow: 0 0 20px rgba(255, 0, 80, 0.5);
+            margin: 15px;
+            box-shadow: 0 0 20px rgba(255, 102, 163, 0.6);
         }
 
-        .features {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 25px;
-            margin-top: 20px;
-        }
-
-        .feature-card {
+        .card {
             background: rgba(255, 255, 255, 0.05);
             border-radius: 15px;
+            margin: 15px auto;
             padding: 20px;
-            width: 280px;
-            box-shadow: 0 0 15px rgba(255, 0, 80, 0.3);
+            width: 90%;
+            max-width: 600px;
+            box-shadow: 0 0 15px rgba(255, 102, 163, 0.3);
         }
 
-        form {
-            display: flex;
-            flex-direction: column;
+        .contacts {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 15px;
+            justify-content: center;
             align-items: center;
-            gap: 10px;
-            max-width: 400px;
-            margin: auto;
         }
 
-        input,
-        textarea {
-            width: 100%;
-            padding: 10px;
-            border-radius: 8px;
-            border: 1px solid #333;
-            background-color: #111;
+        .contact-card {
+            padding: 15px;
+            border-radius: 15px;
             color: #fff;
+            transition: 0.3s;
         }
 
-        textarea {
-            resize: none;
+        .contact-card img {
+            width: 50px;
+            border-radius: 50%;
+            margin-bottom: 8px;
         }
 
-        #qrContainer img {
-            width: 150px;
-            border-radius: 10px;
-            margin: 10px;
-            box-shadow: 0 0 10px rgba(0, 245, 255, 0.3);
+        .contact-card button {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .contact-card:hover {
+            transform: scale(1.03);
         }
 
         footer {
-            background-color: #111;
+            margin-top: 40px;
             padding: 20px;
-            color: #aaa;
-            border-top: 1px solid #222;
-        }
-
-        .admin-link {
-            position: fixed;
-            bottom: 15px;
-            right: 15px;
-            background: linear-gradient(90deg, #00f5ff, #ff0050);
-            color: white;
-            padding: 10px 14px;
-            border-radius: 8px;
-            font-weight: 600;
-            text-decoration: none;
-            box-shadow: 0 0 10px rgba(255, 0, 80, 0.4);
-        }
-
-        .admin-link:hover {
-            opacity: 0.85;
+            background: rgba(255, 255, 255, 0.05);
+            font-size: 14px;
+            color: #ccc;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
     </style>
 </head>
 
 <body>
-    <header>
-        <h1 id="siteTitle">TikTokShop</h1>
-        <button class="btn-primary" id="homeButton">Trang chủ</button>
-    </header>
+    <header id="title">TikTokShop 💎</header>
 
-    <section class="intro">
-        <h2 class="gradient-text" id="welcomeTitle">🎀 Chào mừng đến TikTokShop 🎀</h2>
-        <p id="siteSubtitle">Mua sắm theo xu hướng TikTok - Nơi mang đến sản phẩm hot nhất!</p>
-        <img id="logoImage" src="" alt="Logo TikTokShop">
-    </section>
+    <img id="logo" class="logo" src="" alt="TikTokShop">
 
-    <section>
-        <h2 class="gradient-text">✨ Vì sao chọn TikTokShop?</h2>
-        <div class="features">
-            <div class="feature-card">
-                <h3>🚀 Giao hàng nhanh</h3>
-                <p>Ship toàn quốc chỉ 2-3 ngày, theo dõi đơn hàng dễ dàng.</p>
-            </div>
-            <div class="feature-card">
-                <h3>✅ Hàng chính hãng</h3>
-                <p>Tất cả sản phẩm đều được chọn lọc kỹ càng, có kiểm chứng.</p>
-            </div>
-            <div class="feature-card">
-                <h3>💬 Hỗ trợ 24/7</h3>
-                <p>Đội ngũ CSKH luôn sẵn sàng hỗ trợ bạn mọi lúc mọi nơi.</p>
-            </div>
-        </div>
-    </section>
+    <div class="card">
+        <h2 id="subtitle"></h2>
+    </div>
 
-    <section>
-        <h2 class="gradient-text">📩 Liên hệ ngay với chúng tôi</h2>
-        <form id="contactForm">
-            <input type="text" id="name" placeholder="Họ và tên" required>
-            <input type="text" id="phone" placeholder="Số điện thoại liên hệ" required>
-            <textarea id="message" rows="4" placeholder="Nội dung liên hệ..." required></textarea>
-            <button type="submit" class="btn-primary">Gửi ngay</button>
-        </form>
-    </section>
+    <div class="card">
+        <h3>📞 Liên hệ & Kết nối</h3>
+        <div id="contacts" class="contacts"></div>
+    </div>
 
-    <section id="qrSection">
-        <h2 class="gradient-text">📱 Kết nối với TikTokShop</h2>
-        <div id="qrContainer"></div>
-        <p id="contactPhone"></p>
-    </section>
+    <div class="card">
+        <h3>📖 Giới thiệu TikTokShop</h3>
+        <p>TikTokShop là nền tảng mua sắm xu hướng hiện đại, giúp bạn khám phá và sở hữu những sản phẩm hot nhất mạng xã
+            hội với trải nghiệm mượt mà, an toàn và nhanh chóng.</p>
+    </div>
 
     <footer>
-        © 2025 TikTokShop - Mọi quyền được bảo lưu.
+        © 2025 TikTokShop — Mua sắm cùng xu hướng TikTok 💖
     </footer>
 
-    <!-- Nút truy cập admin -->
-    <a href="/admin" class="admin-link">🛠 Quản trị</a>
-
-    <!-- JS -->
     <script>
         async function loadSite() {
             const res = await fetch("/api/data");
             const data = await res.json();
 
-            // Giao diện chính
-            document.getElementById("siteTitle").textContent = data.site.title;
-            document.getElementById("welcomeTitle").textContent = data.site.title;
-            document.getElementById("siteSubtitle").textContent = data.site.subtitle;
-            document.getElementById("homeButton").onclick = () => window.location.href = data.site.homepage;
-            document.getElementById("contactPhone").textContent = "📞 Hotline: " + data.contact.phone;
+            document.getElementById("title").textContent = data.site.title;
+            document.getElementById("subtitle").textContent = data.site.subtitle;
+            document.getElementById("logo").src = data.site.logo || "https://i.imgur.com/hRWK7MZ.png";
 
-            // Logo
-            document.getElementById("logoImage").src = data.site.logo || "https://i.imgur.com/MpF2u1h.png";
-
-            // QR
-            const qrContainer = document.getElementById("qrContainer");
-            qrContainer.innerHTML = data.qrcodes.map(qr => `
-        <div>
-          <b>${qr.label}</b><br>
-          <img src="${qr.image}" alt="${qr.label}">
+            const container = document.getElementById("contacts");
+            container.innerHTML = data.contacts.map(c => `
+        <div class="contact-card" style="background:${c.color}">
+          <img src="${c.icon}" alt="${c.name}">
+          <h4>${c.name}</h4>
+          <a href="${c.link}" target="_blank">
+            <button>Liên hệ ngay</button>
+          </a>
         </div>
       `).join("");
 
-            // Chat tự động
+            document.querySelectorAll("img").forEach(img => {
+                img.addEventListener("error", () => { img.src = "https://i.imgur.com/hRWK7MZ.png"; });
+            });
+
             if (data.site.chat_enabled && data.site.chat_id) {
                 const s = document.createElement("script");
                 s.src = "https://app.tudongchat.com/js/chatbox.js";
                 s.onload = () => {
                     const chat = new TuDongChat(data.site.chat_id);
-                    chat.initial({
-                        position: 'right',
-                        welcomeText: 'Xin chào 👋! Mình có thể giúp gì cho bạn hôm nay?',
-                        themeColor: data.site.theme_color || '#ff0050'
-                    });
+                    chat.initial({ position: 'right', themeColor: data.site.theme_color });
                 };
                 document.body.appendChild(s);
             }
         }
-
         loadSite();
-
-        // Gửi form liên hệ
-        document.getElementById("contactForm").addEventListener("submit", async (e) => {
-            e.preventDefault();
-            const data = {
-                name: document.getElementById("name").value,
-                email: document.getElementById("phone").value,
-                message: document.getElementById("message").value,
-            };
-            const res = await fetch("/api/contact-form", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(data),
-            });
-            const result = await res.json();
-            alert(result.success ? "✅ Tin nhắn đã được gửi!" : "❌ Gửi thất bại, thử lại!");
-            e.target.reset();
-        });
-
-        // Ảnh dự phòng nếu lỗi
-        const fallbackImage = "https://i.imgur.com/MpF2u1h.png";
-        window.addEventListener("load", () => {
-            document.querySelectorAll("img").forEach(img => {
-                img.addEventListener("error", function () {
-                    this.src = fallbackImage;
-                    this.onerror = null;
-                });
-            });
-        });
     </script>
 </body>
 

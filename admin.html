@@ -12,33 +12,27 @@
     <h1>🎛️ Quản trị TikTokShop</h1>
 
     <div class="card">
-        <h2>⚙️ Cấu hình trang chính</h2>
+        <h2>⚙️ Cấu hình trang</h2>
         <label>Tiêu đề:</label>
         <input id="title">
         <label>Mô tả:</label>
         <input id="subtitle">
         <label>Logo (link ảnh):</label>
         <input id="logo">
-        <label>Đường dẫn Trang chủ:</label>
-        <input id="homepage">
-        <label>Số điện thoại:</label>
-        <input id="phone">
-        <label>Mã Chat TuDongChat:</label>
+        <label>Chat ID:</label>
         <input id="chat_id">
-        <label><input type="checkbox" id="chat_enabled"> Bật Chat tự động</label>
-        <label>Màu chủ đạo:</label>
-        <input type="color" id="theme_color" value="#ff0050">
+        <label><input type="checkbox" id="chat_enabled"> Bật Chat</label>
     </div>
 
     <div class="card">
-        <h2>📱 Quản lý mã QR</h2>
-        <div id="qr-list"></div>
-        <button class="btn-primary" onclick="addQR()">➕ Thêm mã QR</button>
+        <h2>💬 Liên hệ</h2>
+        <div id="contact-list"></div>
+        <button class="btn" onclick="addContact()">➕ Thêm liên hệ</button>
     </div>
 
     <div class="card">
-        <h2>💾 Lưu toàn bộ thay đổi</h2>
-        <button class="btn-primary" onclick="saveData()">Lưu dữ liệu</button>
+        <h2>💾 Lưu thay đổi</h2>
+        <button class="btn" onclick="saveData()">Lưu lại</button>
         <p id="status"></p>
     </div>
 

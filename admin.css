@@ -1,58 +1,149 @@
-/* --- Giao diện admin TikTokShop --- */
+/* ==========================
+   🌈 TikTokShop Admin Style
+   ========================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
 
 body {
     background: #000;
     color: #fff;
-    font-family: "Poppins", sans-serif;
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    padding: 0;
     overflow-x: hidden;
 }
 
+/* ---------- Header ---------- */
+h1 {
+    text-align: center;
+    font-size: 2rem;
+    background: linear-gradient(90deg, #00f5ff, #ff0050);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-top: 30px;
+    letter-spacing: 1px;
+}
+
+/* ---------- Card Container ---------- */
 .card {
-    background: linear-gradient(145deg, #111, #0a0a0a);
-    border: 1px solid #222;
+    background: rgba(255, 255, 255, 0.05);
     border-radius: 16px;
-    padding: 20px;
+    box-shadow: 0 0 20px rgba(255, 0, 80, 0.3);
+    padding: 25px;
+    margin: 20px auto;
+    width: 90%;
+    max-width: 700px;
+    text-align: left;
     transition: 0.3s;
 }
 
 .card:hover {
-    box-shadow: 0 0 25px rgba(255, 0, 80, 0.3);
-    transform: translateY(-3px);
+    transform: scale(1.01);
+    box-shadow: 0 0 25px rgba(0, 245, 255, 0.4);
 }
 
-.neon-input {
-    background: #1a1a1a;
-    border: 1px solid #333;
-    color: #fff;
-    border-radius: 8px;
-    padding: 10px;
+/* ---------- Inputs ---------- */
+input[type="text"],
+input[type="color"],
+input[type="password"],
+textarea {
     width: 100%;
-    outline: none;
-}
-
-.neon-input:focus {
-    border-color: #25f4ee;
-    box-shadow: 0 0 8px #25f4ee;
-}
-
-.neon-btn {
-    background: linear-gradient(90deg, #ff0050, #25f4ee);
-    color: white;
-    padding: 10px 16px;
+    padding: 10px;
+    margin-top: 6px;
+    margin-bottom: 14px;
+    border: none;
     border-radius: 8px;
+    background: #111;
+    color: #fff;
+    font-size: 15px;
+    outline: none;
+    transition: all 0.3s;
+}
+
+input:focus,
+textarea:focus {
+    box-shadow: 0 0 8px #ff0050;
+    background: #151515;
+}
+
+label {
+    font-weight: 600;
+    font-size: 0.95rem;
+    display: block;
+    margin-top: 10px;
+    color: #00f5ff;
+}
+
+/* ---------- Buttons ---------- */
+.btn-primary {
+    background: linear-gradient(90deg, #ff0050, #00f5ff);
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
     font-weight: 600;
     transition: 0.3s;
 }
 
-.neon-btn:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 15px #25f4ee;
+.btn-primary:hover {
+    opacity: 0.85;
+    transform: scale(1.03);
 }
 
-.text-tiktok-pink {
-    color: #ff0050;
+/* ---------- QR Section ---------- */
+#qr-list {
+    margin-top: 10px;
 }
 
-.text-tiktok-cyan {
-    color: #25f4ee;
+.qr-item {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid #333;
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 10px;
+    position: relative;
+}
+
+.qr-item img {
+    width: 100px;
+    border-radius: 8px;
+    display: block;
+    margin-top: 10px;
+}
+
+.qr-item button {
+    margin-top: 10px;
+    background: #ff0050;
+    border: none;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.qr-item button:hover {
+    background: #d00040;
+}
+
+/* ---------- Save Section ---------- */
+#status {
+    text-align: center;
+    font-weight: bold;
+    color: #00f5ff;
+    margin-top: 10px;
+}
+
+/* ---------- Scrollbar ---------- */
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(#00f5ff, #ff0050);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #000;
 }

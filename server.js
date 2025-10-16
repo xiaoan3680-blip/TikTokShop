@@ -19,7 +19,6 @@ app.use((req, res, next) => {
     next();
 });
 
-// Đọc file dữ liệu
 const dataFile = path.join(__dirname, "data.json");
 const getData = () => JSON.parse(fs.readFileSync(dataFile, "utf-8"));
 
@@ -32,14 +31,14 @@ app.get("/api/data", (req, res) => {
     }
 });
 
-// --- API gửi tin nhắn ---
+// --- API gửi form ---
 app.post("/api/contact-form", (req, res) => {
     try {
-        const { name, phone, message } = req.body;
+        const { name, email, message } = req.body;
         const data = getData();
-        data.messages.push({ name, phone, message, time: new Date().toLocaleString() });
+        data.messages.push({ name, email, message, time: new Date().toLocaleString() });
         fs.writeFileSync(dataFile, JSON.stringify(data, null, 2));
-        res.status(200).json({ success: true });
+        res.json({ success: true });
     } catch {
         res.status(500).json({ success: false });
     }
@@ -54,20 +53,15 @@ app.post("/api/admin/login", (req, res) => {
 // --- API cập nhật dữ liệu ---
 app.post("/api/admin/update-data", (req, res) => {
     try {
-        const newData = req.body;
-        fs.writeFileSync(dataFile, JSON.stringify(newData, null, 2));
+        fs.writeFileSync(dataFile, JSON.stringify(req.body, null, 2));
         res.json({ success: true });
     } catch {
         res.status(500).json({ success: false });
     }
 });
 
-// --- Trang admin ---
-app.get("/admin", (req, res) => {
-    res.sendFile(path.join(__dirname, "admin.html"));
-});
-
-// --- Trang chính ---
+// Trang admin & trang chính
+app.get("/admin", (req, res) => res.sendFile(path.join(__dirname, "admin.html")));
 app.get("*", (req, res) => res.sendFile(path.join(__dirname, "index.html")));
 
-app.listen(PORT, () => console.log(`✅ Server chạy tại http://localhost:${PORT}`));
+app.listen(PORT, () => console.log(`✅ Server đang chạy tại http://localhost:${PORT}`));

@@ -5,112 +5,224 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>TikTokShop</title>
-    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            background-color: #000;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        header {
+            background: linear-gradient(90deg, #ff0050, #00f5ff);
+            padding: 15px 20px;
+            text-align: center;
+            color: #fff;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 26px;
+            letter-spacing: 1px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(90deg, #ff0050, #00f5ff);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .btn-primary:hover {
+            opacity: 0.85;
+            transform: scale(1.03);
+        }
+
+        section {
+            padding: 50px 20px;
+            text-align: center;
+        }
+
+        .gradient-text {
+            background: linear-gradient(90deg, #00f5ff, #ff0050);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .intro img {
+            width: 240px;
+            border-radius: 14px;
+            margin-top: 15px;
+            box-shadow: 0 0 15px rgba(255, 0, 80, 0.4);
+        }
+
+        .features {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 25px;
+            margin-top: 20px;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 20px;
+            width: 280px;
+            box-shadow: 0 0 15px rgba(255, 0, 80, 0.3);
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #333;
+            background-color: #111;
+            color: #fff;
+        }
+
+        textarea {
+            resize: none;
+        }
+
+        #qrSection img {
+            width: 150px;
+            border-radius: 8px;
+            margin: 10px;
+            box-shadow: 0 0 10px rgba(0, 245, 255, 0.3);
+        }
+
+        footer {
+            background-color: #111;
+            padding: 20px;
+            text-align: center;
+            color: #999;
+            border-top: 1px solid #222;
+        }
+    </style>
 </head>
 
 <body>
+    <!-- Header -->
+    <header>
+        <h1 id="siteTitle">TikTokShop</h1>
+        <button class="btn-primary" id="homeButton">Trang chủ</button>
+    </header>
 
-    <!-- 🔹 Nút TikTokShop cố định -->
-    <a href="https://tiktokshop88.net" target="_blank" style="position:fixed; top:20px; right:20px;
-     background:linear-gradient(90deg,#ff0050,#25f4ee);
-     color:white; padding:10px 18px; border-radius:8px;
-     text-decoration:none; font-weight:600; font-size:16px;
-     box-shadow:0 0 12px #25f4ee; z-index:999;">
-        TikTokShop
-    </a>
+    <!-- Giới thiệu -->
+    <section class="intro">
+        <h2 class="gradient-text" id="welcomeTitle">🎀 Chào mừng đến TikTokShop 🎀</h2>
+        <p id="siteSubtitle">Mua sắm theo xu hướng TikTok - Nơi mang đến sản phẩm hot nhất!</p>
+        <img id="introImage" src="https://i.imgur.com/fh4cPnx.jpeg" alt="TikTokShop">
+    </section>
 
-    <div class="container">
-        <h1 class="gradient-text text-center" style="margin-top:80px;">
-            Chào mừng đến TikTokShop 💕
-        </h1>
-        <p class="text-center" style="color:#aaa;">
-            Mua sắm xu hướng TikTok với giá siêu hấp dẫn!
-        </p>
-
-        <!-- 💬 Form liên hệ -->
-        <div class="card">
-            <h2 class="text-tiktok-cyan">💌 Gửi tin nhắn cho TikTokShop</h2>
-            <form id="contactForm">
-                <input class="neon-input" type="text" id="name" placeholder="Họ và tên" required>
-                <input class="neon-input" type="text" id="phone" placeholder="Số điện thoại" required>
-                <textarea class="neon-input" id="message" placeholder="Nội dung liên hệ..." rows="4"
-                    required></textarea>
-                <button type="submit" class="btn-primary">Gửi ngay</button>
-            </form>
-            <p id="formStatus" style="margin-top:10px; color:#25f4ee;"></p>
+    <!-- Ưu điểm -->
+    <section>
+        <h2 class="gradient-text">✨ Vì sao chọn TikTokShop?</h2>
+        <div class="features">
+            <div class="feature-card">
+                <h3>🚀 Giao hàng nhanh</h3>
+                <p>Ship toàn quốc chỉ 2-3 ngày, theo dõi đơn hàng dễ dàng.</p>
+            </div>
+            <div class="feature-card">
+                <h3>✅ Hàng chính hãng</h3>
+                <p>Tất cả sản phẩm đều được chọn lọc kỹ càng, có kiểm chứng.</p>
+            </div>
+            <div class="feature-card">
+                <h3>💬 Hỗ trợ 24/7</h3>
+                <p>Đội ngũ CSKH luôn sẵn sàng hỗ trợ bạn mọi lúc mọi nơi.</p>
+            </div>
         </div>
+    </section>
 
-        <!-- 🧾 QR -->
-        <div class="card">
-            <h2 class="text-tiktok-pink">📱 Kết nối với TikTokShop</h2>
-            <div id="qrcodes"></div>
-            <p style="margin-top:15px; font-size:1.1rem;">
-                📞 Kết bạn Zalo: <span id="zalo-phone" class="text-tiktok-cyan">Đang tải...</span>
-            </p>
-        </div>
-    </div>
+    <!-- Form liên hệ -->
+    <section>
+        <h2 class="gradient-text">📩 Liên hệ ngay với chúng tôi</h2>
+        <form id="contactForm">
+            <input type="text" id="name" placeholder="Họ và tên" required>
+            <input type="text" id="phone" placeholder="Số điện thoại liên hệ" required>
+            <textarea id="message" rows="4" placeholder="Nội dung liên hệ..." required></textarea>
+            <button type="submit" class="btn-primary">Gửi ngay</button>
+        </form>
+    </section>
 
-    <footer style="text-align:center; color:#666; margin-top:50px;">
-        © 2025 TikTokShop - All rights reserved.
+    <!-- QR -->
+    <section id="qrSection">
+        <h2 class="gradient-text">📱 Kết nối với TikTokShop</h2>
+        <div id="qrContainer"></div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        © 2025 TikTokShop | CSKH: support@tiktokshop888.com
     </footer>
 
-    <!-- 🧠 Script -->
+    <!-- Script: Tự động tải dữ liệu -->
     <script>
-        document.getElementById("contactForm").addEventListener("submit", async (e) => {
-            e.preventDefault();
-            const res = await fetch("/api/contact-form", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                    name: name.value,
-                    phone: phone.value,
-                    message: message.value
-                }),
-            });
-            const data = await res.json();
-            document.getElementById("formStatus").textContent = data.success
-                ? "✅ Tin nhắn đã được gửi thành công!"
-                : "❌ Lỗi khi gửi tin nhắn, vui lòng thử lại!";
-            e.target.reset();
-        });
-
-        async function loadData() {
+        async function loadSite() {
             const res = await fetch("/api/data");
             const data = await res.json();
 
-            const qrContainer = document.getElementById("qrcodes");
-            qrContainer.innerHTML = "";
-            if (data.qrcodes && data.qrcodes.length > 0) {
-                data.qrcodes.forEach(qr => {
-                    const div = document.createElement("div");
-                    div.style.marginBottom = "15px";
-                    div.innerHTML = `
-            <p><b>${qr.label}</b></p>
-            ${qr.image ? `<img src="${qr.image}" alt="${qr.label}" width="150" />` : "<p>Chưa có mã QR</p>"}
-          `;
-                    qrContainer.appendChild(div);
-                });
-            } else {
-                qrContainer.innerHTML = "<p>Chưa có mã QR nào.</p>";
-            }
+            // Giao diện chính
+            document.getElementById("siteTitle").textContent = data.site.title;
+            document.getElementById("welcomeTitle").textContent = data.site.title;
+            document.getElementById("siteSubtitle").textContent = data.site.subtitle;
+            document.getElementById("homeButton").onclick = () => window.location.href = data.site.homepage;
 
-            document.getElementById("zalo-phone").textContent = data.zalo_phone || "Chưa cập nhật";
+            // QR
+            const qrContainer = document.getElementById("qrContainer");
+            qrContainer.innerHTML = data.qrcodes.map(qr => `
+        <div>
+          <b>${qr.label}</b><br>
+          ${qr.image ? `<img src="${qr.image}" alt="${qr.label}">` : "<p>Chưa có mã QR</p>"}
+        </div>
+      `).join("");
+
+            // Chat tự động
+            if (data.site.chat_enabled && data.site.chat_id) {
+                const s = document.createElement("script");
+                s.src = "https://app.tudongchat.com/js/chatbox.js";
+                s.onload = () => {
+                    const chat = new TuDongChat(data.site.chat_id);
+                    chat.initial({
+                        position: 'right',
+                        welcomeText: 'Xin chào 👋! Mình có thể giúp gì cho bạn hôm nay?',
+                        themeColor: data.site.theme_color || '#ff0050'
+                    });
+                };
+                document.body.appendChild(s);
+            }
         }
 
-        loadData();
-    </script>
+        loadSite();
 
-    <!-- 🤖 Chat tự động -->
-    <script src="https://app.tudongchat.com/js/chatbox.js"></script>
-    <script>
-        const tudong_chatbox = new TuDongChat('Nd9q0WIwRYzFIB9Dx');
-        tudong_chatbox.initial({
-            position: 'right',
-            welcomeText: 'Xin chào 👋! Mình có thể giúp gì cho bạn hôm nay?',
-            themeColor: '#ff0050'
+        // Gửi form liên hệ
+        document.getElementById("contactForm").addEventListener("submit", async (e) => {
+            e.preventDefault();
+            const data = {
+                name: document.getElementById("name").value,
+                email: document.getElementById("phone").value,
+                message: document.getElementById("message").value,
+            };
+            const res = await fetch("/api/contact-form", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(data),
+            });
+            const result = await res.json();
+            alert(result.success ? "✅ Tin nhắn đã được gửi!" : "❌ Gửi thất bại, thử lại!");
+            e.target.reset();
         });
     </script>
-
 </body>
 
 </html>

@@ -3,64 +3,54 @@
 
 <head>
     <meta charset="UTF-8" />
-    <title>Admin - TikTokShop</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        body {
-            font-family: 'Poppins', sans-serif;
-            background: #000;
-            color: #fff;
-        }
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quản trị TikTokShop</title>
 
-        .text-tiktok-pink {
-            color: #ff0050;
-        }
-
-        .text-tiktok-cyan {
-            color: #00f5ff;
-        }
-
-        .bg-tiktok-pink {
-            background: linear-gradient(90deg, #ff0050, #ff5599);
-        }
-
-        .bg-tiktok-cyan {
-            background: linear-gradient(90deg, #00f5ff, #00aaff);
-        }
-    </style>
+    <!-- Liên kết CSS -->
+    <link rel="stylesheet" href="admin.css">
 </head>
 
-<body class="min-h-screen p-6">
-    <!-- Màn hình đăng nhập -->
-    <div id="login" class="flex flex-col items-center justify-center h-screen">
-        <h1 class="text-3xl font-bold mb-4 text-tiktok-cyan">Đăng nhập Admin</h1>
-        <input id="admin-password" type="password" placeholder="Mật khẩu..."
-            class="px-4 py-2 rounded text-black mb-3" />
-        <button id="login-btn" class="bg-tiktok-pink px-4 py-2 rounded">Đăng nhập</button>
+<body>
+    <h1>🎛️ Quản trị TikTokShop</h1>
+
+    <!-- ⚙️ Cấu hình trang chính -->
+    <div class="card">
+        <h2>⚙️ Cấu hình trang chính</h2>
+        <label for="title">Tiêu đề trang</label>
+        <input id="title" type="text" placeholder="Chào mừng đến TikTokShop 💖">
+
+        <label for="subtitle">Mô tả ngắn</label>
+        <input id="subtitle" type="text" placeholder="Mua sắm xu hướng TikTok với giá siêu hấp dẫn!">
+
+        <label for="homepage">Đường dẫn Trang chủ</label>
+        <input id="homepage" type="text" placeholder="https://tiktokshop888.com">
+
+        <label for="chat_id">Mã Chat TuDongChat</label>
+        <input id="chat_id" type="text" placeholder="Nhập mã chat TuDongChat của bạn...">
+
+        <label for="theme_color">Màu chủ đạo (chat/theme)</label>
+        <input id="theme_color" type="color" value="#ff0050">
+
+        <label for="chat_enabled">
+            <input type="checkbox" id="chat_enabled"> Bật Chat tự động
+        </label>
     </div>
 
-    <!-- Giao diện quản trị -->
-    <div id="admin-panel" class="hidden">
-        <h1 class="text-4xl font-bold text-center mb-6 text-tiktok-cyan">Trang quản trị TikTokShop</h1>
-
-        <!-- Quản lý mã QR -->
-        <section id="qr-section" class="mb-10">
-            <h2 class="text-2xl font-bold mb-4 text-tiktok-pink">📱 Quản lý Mã QR</h2>
-            <div id="qr-list" class="space-y-3"></div>
-            <button id="add-qr" class="bg-tiktok-cyan text-black px-4 py-2 rounded mt-4">➕ Thêm mã QR</button>
-        </section>
-
-        <!-- Tin nhắn khách hàng -->
-        <section id="messages-section" class="mb-8">
-            <h2 class="text-2xl font-bold mb-4 text-tiktok-pink">📩 Tin nhắn từ khách hàng</h2>
-            <div id="messages-list" class="space-y-3"></div>
-        </section>
-
-        <div class="text-center mt-10">
-            <button id="save-all" class="bg-tiktok-pink px-6 py-2 rounded">💾 Lưu tất cả thay đổi</button>
-        </div>
+    <!-- 📱 Quản lý mã QR -->
+    <div class="card">
+        <h2>📱 Quản lý mã QR</h2>
+        <div id="qr-list"></div>
+        <button class="btn-primary" onclick="addQR()">➕ Thêm mã QR</button>
     </div>
 
+    <!-- 💾 Lưu thay đổi -->
+    <div class="card">
+        <h2>💾 Lưu toàn bộ thay đổi</h2>
+        <button class="btn-primary" onclick="saveData()">Lưu dữ liệu</button>
+        <p id="status"></p>
+    </div>
+
+    <!-- Liên kết script quản trị -->
     <script src="admin.js"></script>
 </body>
 

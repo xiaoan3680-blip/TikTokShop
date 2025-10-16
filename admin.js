@@ -1,102 +1,78 @@
-let appData = {};
-
-// --- Tải dữ liệu từ server ---
 async function loadData() {
     const res = await fetch("/api/data");
-    return await res.json();
+    const data = await res.json();
+
+    document.getElementById("title").value = data.site.title;
+    document.getElementById("subtitle").value = data.site.subtitle;
+    document.getElementById("homepage").value = data.site.homepage;
+    document.getElementById("chat_id").value = data.site.chat_id;
+    document.getElementById("chat_enabled").checked = data.site.chat_enabled;
+    document.getElementById("theme_color").value = data.site.theme_color;
+
+    renderQR(data.qrcodes);
 }
 
-// --- Lưu dữ liệu lên server ---
-async function saveData() {
-    await fetch("/api/admin/update-data", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(appData),
-    });
-    alert("✅ Dữ liệu đã được lưu thành công!");
-}
-
-// --- Hiển thị danh sách mã QR ---
-function renderQRList() {
-    const list = document.getElementById("qr-list");
-    list.innerHTML = "";
-    appData.qrcodes.forEach((qr, index) => {
-        const div = document.createElement("div");
-        div.className = "border border-gray-700 p-4 rounded bg-[#111]";
-        div.innerHTML = `
-      <label>Tên QR:</label>
-      <input type="text" value="${qr.label}" id="label-${index}" class="text-black rounded w-full mb-2 px-2 py-1" />
-      <label>Link ảnh QR:</label>
-      <input type="text" value="${qr.image}" id="image-${index}" class="text-black rounded w-full mb-2 px-2 py-1" placeholder="Dán link ảnh .png hoặc .jpg">
-      <div class="flex justify-between items-center">
-        ${qr.image ? `<img src="${qr.image}" class="w-32 h-32 border rounded">` : "<p class='italic text-gray-400'>Chưa có ảnh</p>"}
-        <button onclick="deleteQR(${index})" class="bg-red-500 px-3 py-1 rounded">🗑️ Xóa</button>
-      </div>
-    `;
-        list.appendChild(div);
-    });
-}
-
-// --- Xóa mã QR ---
-function deleteQR(i) {
-    appData.qrcodes.splice(i, 1);
-    renderQRList();
-}
-
-// --- Hiển thị tin nhắn khách hàng ---
-function renderMessages() {
-    const list = document.getElementById("messages-list");
-    if (!appData.messages || appData.messages.length === 0) {
-        list.innerHTML = "<p class='italic text-gray-400'>Chưa có tin nhắn nào.</p>";
-        return;
-    }
-
-    list.innerHTML = appData.messages.map(msg => `
-    <div class="border border-gray-700 p-4 rounded bg-[#111]">
-      <p><strong>👤 Tên:</strong> ${msg.name}</p>
-      <p><strong>📧 Email:</strong> ${msg.email}</p>
-      <p><strong>💬 Tin nhắn:</strong> ${msg.message}</p>
-      <p class="text-gray-400 text-sm">🕒 ${msg.time}</p>
+function renderQR(qrs) {
+    const container = document.getElementById("qr-list");
+    container.innerHTML = qrs.map((qr, i) => `
+    <div style="border:1px solid #333; border-radius:8px; padding:10px; margin:10px;">
+      <input id="qr-label-${i}" value="${qr.label}" placeholder="Tên QR">
+      <input id="qr-img-${i}" value="${qr.image}" placeholder="Link ảnh QR">
+      <button class="btn-primary" onclick="deleteQR(${i})">Xóa</button>
     </div>
   `).join("");
 }
 
-// --- Thêm mã QR mới ---
-document.getElementById("add-qr").onclick = () => {
-    appData.qrcodes.push({ label: "QR mới", image: "" });
-    renderQRList();
-};
+function addQR() {
+    const container = document.getElementById("qr-list");
+    const index = container.children.length;
+    const div = document.createElement("div");
+    div.innerHTML = `
+    <div style="border:1px solid #333; border-radius:8px; padding:10px; margin:10px;">
+      <input id="qr-label-${index}" placeholder="Tên QR">
+      <input id="qr-img-${index}" placeholder="Link ảnh QR">
+    </div>
+  `;
+    container.appendChild(div);
+}
 
-// --- Lưu toàn bộ dữ liệu ---
-document.getElementById("save-all").onclick = async () => {
-    appData.qrcodes.forEach((qr, i) => {
-        qr.label = document.getElementById(`label-${i}`).value;
-        qr.image = document.getElementById(`image-${i}`).value;
+function deleteQR(index) {
+    document.getElementById(`qr-label-${index}`).parentNode.remove();
+}
+
+async function saveData() {
+    const res = await fetch("/api/data");
+    const data = await res.json();
+
+    data.site = {
+        title: document.getElementById("title").value,
+        subtitle: document.getElementById("subtitle").value,
+        homepage: document.getElementById("homepage").value,
+        chat_id: document.getElementById("chat_id").value,
+        chat_enabled: document.getElementById("chat_enabled").checked,
+        theme_color: document.getElementById("theme_color").value
+    };
+
+    const qrs = [];
+    const qrDivs = document.querySelectorAll("[id^='qr-label-']");
+    qrDivs.forEach((el, i) => {
+        qrs.push({
+            label: document.getElementById(`qr-label-${i}`).value,
+            image: document.getElementById(`qr-img-${i}`).value
+        });
     });
-    await saveData();
-};
+    data.qrcodes = qrs;
 
-// --- Đăng nhập admin ---
-document.getElementById("login-btn").onclick = async () => {
-    const pw = document.getElementById("admin-password").value;
-    const res = await fetch("/api/admin/login", {
+    const update = await fetch("/api/admin/update-data", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ password: pw }),
+        body: JSON.stringify(data)
     });
-    const data = await res.json();
-    if (data.success) {
-        document.getElementById("login").classList.add("hidden");
-        document.getElementById("admin-panel").classList.remove("hidden");
-        appData = await loadData();
-        renderQRList();
-        renderMessages();
 
-        // Tự động làm mới danh sách tin nhắn mỗi 15 giây
-        setInterval(async () => {
-            appData = await loadData();
-            renderMessages();
-        }, 15000);
+    const result = await update.json();
+    document.getElementById("status").textContent = result.success
+        ? "✅ Đã lưu dữ liệu thành công!"
+        : "❌ Lưu thất bại!";
+}
 
-    } else alert("❌ Sai mật khẩu!");
-};
+loadData();

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # 🎵 TikTokShop — Website Thương Hiệu Thông Minh 2025
 
 **TikTokShop** là website giới thiệu và quản lý thương hiệu thông minh,
@@ -106,3 +107,7 @@ Nếu bạn cần hỗ trợ cài đặt hoặc tuỳ chỉnh thêm:
 
 Email: support@tiktokshop88.net
 Website: https://tiktokshop88.net
+=======
+# TikTokShop
+Nền tảng bán hàng TikTok
+>>>>>>> 825c23585b020546e6b086aeb8bd34be5e1b6461

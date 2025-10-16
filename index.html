@@ -10,7 +10,7 @@
 
 <body>
 
-    <!-- 🔹 Nút trang chủ cố định (chỉ hiện chữ TikTokShop) -->
+    <!-- 🔹 Nút TikTokShop cố định -->
     <a href="https://tiktokshop88.net" target="_blank" style="position:fixed; top:20px; right:20px;
      background:linear-gradient(90deg,#ff0050,#25f4ee);
      color:white; padding:10px 18px; border-radius:8px;
@@ -21,7 +21,7 @@
 
     <div class="container">
         <h1 class="gradient-text text-center" style="margin-top:80px;">
-            Chào mừng đến TikTokShop 🎉
+            Chào mừng đến TikTokShop 💕
         </h1>
         <p class="text-center" style="color:#aaa;">
             Mua sắm xu hướng TikTok với giá siêu hấp dẫn!
@@ -32,7 +32,7 @@
             <h2 class="text-tiktok-cyan">💌 Gửi tin nhắn cho TikTokShop</h2>
             <form id="contactForm">
                 <input class="neon-input" type="text" id="name" placeholder="Họ và tên" required>
-                <input class="neon-input" type="email" id="email" placeholder="Email" required>
+                <input class="neon-input" type="text" id="phone" placeholder="Số điện thoại" required>
                 <textarea class="neon-input" id="message" placeholder="Nội dung liên hệ..." rows="4"
                     required></textarea>
                 <button type="submit" class="btn-primary">Gửi ngay</button>
@@ -40,7 +40,7 @@
             <p id="formStatus" style="margin-top:10px; color:#25f4ee;"></p>
         </div>
 
-        <!-- 🧾 QR Code hiển thị -->
+        <!-- 🧾 QR -->
         <div class="card">
             <h2 class="text-tiktok-pink">📱 Kết nối với TikTokShop</h2>
             <div id="qrcodes"></div>
@@ -54,9 +54,8 @@
         © 2025 TikTokShop - All rights reserved.
     </footer>
 
-    <!-- 🧠 Script gửi form -->
+    <!-- 🧠 Script -->
     <script>
-        // Gửi form liên hệ
         document.getElementById("contactForm").addEventListener("submit", async (e) => {
             e.preventDefault();
             const res = await fetch("/api/contact-form", {
@@ -64,7 +63,7 @@
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
                     name: name.value,
-                    email: email.value,
+                    phone: phone.value,
                     message: message.value
                 }),
             });
@@ -75,12 +74,10 @@
             e.target.reset();
         });
 
-        // Lấy dữ liệu QR + số Zalo
         async function loadData() {
             const res = await fetch("/api/data");
             const data = await res.json();
 
-            // QR
             const qrContainer = document.getElementById("qrcodes");
             qrContainer.innerHTML = "";
             if (data.qrcodes && data.qrcodes.length > 0) {
@@ -97,7 +94,6 @@
                 qrContainer.innerHTML = "<p>Chưa có mã QR nào.</p>";
             }
 
-            // Số Zalo
             document.getElementById("zalo-phone").textContent = data.zalo_phone || "Chưa cập nhật";
         }
 
@@ -105,9 +101,9 @@
     </script>
 
     <!-- 🤖 Chat tự động -->
-    <script src="https://tudongchat.com/js/chatbox.js"></script>
+    <script src="https://app.tudongchat.com/js/chatbox.js"></script>
     <script>
-        const tudong_chatbox = new TuDongChat('Nd9q0WIwRYzFIB9Dx'); // Mã chat của bạn
+        const tudong_chatbox = new TuDongChat('Nd9q0WIwRYzFIB9Dx');
         tudong_chatbox.initial({
             position: 'right',
             welcomeText: 'Xin chào 👋! Mình có thể giúp gì cho bạn hôm nay?',

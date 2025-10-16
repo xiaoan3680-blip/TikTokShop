@@ -1,6 +1,3 @@
-/* === Giao diện chính TikTokShop === */
-
-/* Tổng thể trang */
 body {
     background-color: #000;
     color: #fff;
@@ -10,21 +7,18 @@ body {
     overflow-x: hidden;
 }
 
-/* Khung nội dung chính */
 .container {
     max-width: 900px;
     margin: auto;
     padding: 20px;
 }
 
-/* Hiệu ứng chữ TikTok */
 .gradient-text {
     background: linear-gradient(90deg, #00f5ff, #ff0050);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 
-/* Nút chính (nút gửi, nút TikTokShop) */
 .btn-primary {
     background: linear-gradient(90deg, #ff0050, #00f5ff);
     color: #fff;
@@ -42,7 +36,6 @@ body {
     box-shadow: 0 0 15px #25f4ee;
 }
 
-/* Ô nhập liệu */
 .neon-input {
     background: #1a1a1a;
     border: 1px solid #333;
@@ -61,7 +54,6 @@ body {
     box-shadow: 0 0 10px #25f4ee;
 }
 
-/* Thẻ (card) hiển thị */
 .card {
     background: linear-gradient(145deg, #111, #0a0a0a);
     border: 1px solid #222;
@@ -69,15 +61,8 @@ body {
     padding: 20px;
     margin-top: 25px;
     box-shadow: 0 0 10px rgba(255, 0, 80, 0.2);
-    transition: 0.3s;
 }
 
-.card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 0 25px rgba(255, 0, 80, 0.4);
-}
-
-/* Văn bản TikTok */
 .text-tiktok-pink {
     color: #ff0050;
 }
@@ -88,25 +73,4 @@ body {
 
 .text-center {
     text-align: center;
-}
-
-/* Footer */
-footer {
-    text-align: center;
-    color: #888;
-    font-size: 0.9rem;
-    margin-top: 60px;
-    padding-bottom: 30px;
-}
-
-/* Hiệu ứng ảnh QR */
-#qrcodes img {
-    border-radius: 8px;
-    border: 1px solid #333;
-    transition: 0.3s;
-}
-
-#qrcodes img:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 10px #25f4ee;
 }

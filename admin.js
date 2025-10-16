@@ -1,74 +1,69 @@
-let appData = { contact: {} };
+let appData = {};
 
-// --- Lấy dữ liệu từ server ---
 async function loadData() {
     const res = await fetch("/api/data");
-    const data = await res.json();
-    return data;
+    return await res.json();
 }
 
-// --- Ghi dữ liệu vào server ---
 async function saveData() {
-    const res = await fetch("/api/data", {
+    await fetch("/api/admin/update-data", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(appData),
     });
-    return await res.json();
+    alert("✅ Đã lưu dữ liệu thành công!");
 }
 
-// --- Hiển thị giao diện form liên hệ ---
-function renderContact() {
-    const section = document.getElementById("admin-contact");
-    if (!section) return;
-
-    section.innerHTML = `
-    <h2 class='text-xl font-semibold mb-4 text-tiktok-cyan'>Thông tin liên hệ & Mạng xã hội</h2>
-
-    <label>Email:</label>
-    <input type='email' id='contact-email' value='${appData.contact.email || ""}'>
-
-    <label>Điện thoại:</label>
-    <input type='text' id='contact-phone' value='${appData.contact.phone || ""}'>
-
-    <label>Facebook:</label>
-    <input type='text' id='contact-facebook' value='${appData.contact.facebook || ""}'>
-
-    <label>TikTok:</label>
-    <input type='text' id='contact-tiktok' value='${appData.contact.tiktok || ""}'>
-
-    <label>Instagram:</label>
-    <input type='text' id='contact-instagram' value='${appData.contact.instagram || ""}'>
-
-    <label>Ảnh mã QR (URL):</label>
-    <input type='text' id='contact-qr' value='${appData.contact.qr || ""}' placeholder='Dán link hình QR...'>
-    
-    <div style="text-align:center; margin-top:15px">
-      ${appData.contact.qr
-            ? `<img src="${appData.contact.qr}" class="w-40 h-40 border rounded">`
-            : "<p class='text-gray-400 italic'>Chưa có mã QR</p>"
-        }
-    </div>
-
-    <button id='save-contact-btn' class='bg-tiktok-pink text-white px-4 py-2 rounded mt-4'>💾 Lưu thông tin</button>
-  `;
-
-    document.getElementById("save-contact-btn").onclick = async () => {
-        appData.contact.email = document.getElementById("contact-email").value;
-        appData.contact.phone = document.getElementById("contact-phone").value;
-        appData.contact.facebook = document.getElementById("contact-facebook").value;
-        appData.contact.tiktok = document.getElementById("contact-tiktok").value;
-        appData.contact.instagram = document.getElementById("contact-instagram").value;
-        appData.contact.qr = document.getElementById("contact-qr").value;
-
-        await saveData();
-        alert("✅ Đã lưu thông tin liên hệ thành công!");
-        renderContact();
-    };
+function renderQRList() {
+    const list = document.getElementById("qr-list");
+    list.innerHTML = "";
+    appData.qrcodes.forEach((qr, index) => {
+        const div = document.createElement("div");
+        div.className = "border border-gray-700 p-4 rounded";
+        div.innerHTML = `
+      <label>Tên QR:</label>
+      <input type="text" value="${qr.label}" id="label-${index}" class="text-black rounded w-full mb-2 px-2 py-1" />
+      <label>Link ảnh QR:</label>
+      <input type="text" value="${qr.image}" id="image-${index}" class="text-black rounded w-full mb-2 px-2 py-1" placeholder="Dán link ảnh .png hoặc .jpg">
+      <div class="flex justify-between">
+        ${qr.image ? `<img src="${qr.image}" class="w-32 h-32 border rounded">` : "<p class='italic text-gray-400'>Chưa có ảnh</p>"}
+        <button onclick="deleteQR(${index})" class="bg-red-500 px-3 py-1 rounded">🗑️ Xóa</button>
+      </div>
+    `;
+        list.appendChild(div);
+    });
 }
 
-// --- Khi load trang ---
-window.onload = async () => {
-    appData = await loadData();
-    renderContact();
+function deleteQR(i) {
+    appData.qrcodes.splice(i, 1);
+    renderQRList();
+}
+
+document.getElementById("add-qr").onclick = () => {
+    appData.qrcodes.push({ label: "QR mới", image: "" });
+    renderQRList();
+};
+
+document.getElementById("save-all").onclick = async () => {
+    appData.qrcodes.forEach((qr, i) => {
+        qr.label = document.getElementById(`label-${i}`).value;
+        qr.image = document.getElementById(`image-${i}`).value;
+    });
+    await saveData();
+};
+
+document.getElementById("login-btn").onclick = async () => {
+    const pw = document.getElementById("admin-password").value;
+    const res = await fetch("/api/admin/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ password: pw }),
+    });
+    const data = await res.json();
+    if (data.success) {
+        document.getElementById("login").classList.add("hidden");
+        document.getElementById("admin-panel").classList.remove("hidden");
+        appData = await loadData();
+        renderQRList();
+    } else alert("❌ Sai mật khẩu!");
 };

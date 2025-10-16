@@ -4,265 +4,131 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>TikTokShop - Trang chính</title>
+    <title>TikTokShop - Nền tảng bán hàng chuyên nghiệp</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        "tiktok-pink": "#ff0050",
-                        "tiktok-cyan": "#25f4ee"
-                    },
-                    fontFamily: { sans: ["Poppins", "Inter", "sans-serif"] }
-                }
-            }
-        };
-    </script>
     <style>
-        body {
-            background: #000;
-            color: #fff;
-            font-family: "Poppins", sans-serif;
-            overflow-x: hidden;
-        }
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
 
-        html {
-            scroll-behavior: smooth;
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #000;
+            color: #fff;
         }
 
         .gradient-text {
-            background: linear-gradient(120deg, #25f4ee, #ff0050);
+            background: linear-gradient(90deg, #00f5ff, #ff0050);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
-        .neon-btn {
-            background: linear-gradient(90deg, #ff0050, #25f4ee);
-            box-shadow: 0 0 20px rgba(255, 0, 80, 0.3);
-            transition: all 0.3s;
-        }
-
-        .neon-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 30px rgba(37, 244, 238, 0.6);
-        }
-
-        .step-card {
-            background: linear-gradient(145deg, #111, #0a0a0a);
-            border-radius: 20px;
-            border: 1px solid #222;
-            padding: 24px;
+        .btn-primary {
+            background: linear-gradient(90deg, #ff0050, #00f5ff);
+            color: #fff;
+            font-weight: 600;
+            border-radius: 8px;
             transition: 0.3s;
         }
 
-        .step-card:hover {
-            box-shadow: 0 0 25px rgba(255, 0, 80, 0.3);
-            transform: translateY(-5px);
-        }
-
-        #intro {
-            position: fixed;
-            inset: 0;
-            background: #000;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 9999;
-            animation: fadeOut 1s ease 2.5s forwards;
-        }
-
-        #intro-logo {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #25f4ee, #ff0050);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 0 40px #ff0050a0;
-            animation: glow 2s infinite alternate;
-        }
-
-        #intro-logo img {
-            width: 70px;
-            height: 70px;
-            object-fit: contain;
-            filter: drop-shadow(0 0 10px #25f4ee);
-        }
-
-        @keyframes glow {
-            from {
-                box-shadow: 0 0 20px #ff005050;
-                transform: scale(1);
-            }
-
-            to {
-                box-shadow: 0 0 60px #25f4ee80;
-                transform: scale(1.05);
-            }
-        }
-
-        @keyframes fadeOut {
-            to {
-                opacity: 0;
-                visibility: hidden;
-            }
+        .btn-primary:hover {
+            opacity: 0.8;
         }
     </style>
 </head>
 
-<body>
-    <!-- Intro -->
-    <div id="intro">
-        <div id="intro-logo">
-            <img src="https://tiktokshop88.net/logo.png" alt="TikTokShop Logo" onerror="this.style.display='none';" />
-        </div>
-    </div>
+<body class="overflow-x-hidden">
 
-    <!-- Header -->
-    <header class="fixed top-0 left-0 w-full z-50 bg-black/70 backdrop-blur-md border-b border-gray-800">
-        <div class="max-w-7xl mx-auto flex justify-between items-center px-6 py-4">
-            <h1 class="text-2xl font-bold gradient-text">TikTokShop</h1>
-            <nav class="hidden sm:flex gap-6">
-                <a href="#hero" class="text-gray-300 hover:text-tiktok-cyan">Trang chủ</a>
-                <a href="#project" class="text-gray-300 hover:text-tiktok-cyan">Dự án</a>
-                <a href="#learning" class="text-gray-300 hover:text-tiktok-cyan">Lộ trình</a>
-                <a href="#contact" class="text-gray-300 hover:text-tiktok-cyan">Liên hệ</a>
-            </nav>
-        </div>
+    <!-- HEADER -->
+    <header class="flex justify-between items-center py-4 px-8 bg-[#0a0a0a] border-b border-gray-800">
+        <h1 class="text-2xl font-bold gradient-text">TikTokShop</h1>
+        <nav class="space-x-6">
+            <a href="#about" class="hover:text-pink-500">Giới thiệu</a>
+            <a href="#qrs" class="hover:text-pink-500">Liên hệ</a>
+            <a href="#contact" class="hover:text-pink-500">Gửi tin nhắn</a>
+        </nav>
     </header>
 
-    <!-- Hero -->
-    <section id="hero" class="min-h-screen flex flex-col justify-center items-center text-center px-6">
-        <div data-aos="fade-up" class="max-w-2xl">
-            <h1 class="text-5xl sm:text-6xl font-extrabold gradient-text mb-4">TikTokShop</h1>
-            <p class="text-gray-300 text-lg mb-8">Xây dựng thương hiệu, bán hàng và khởi nghiệp cùng TikTok E-commerce
+    <!-- HERO -->
+    <section class="text-center py-20 bg-[#0a0a0a]">
+        <h2 class="text-5xl font-bold mb-6 gradient-text">Nền tảng bán hàng chuyên nghiệp 2025</h2>
+        <p class="text-gray-300 text-lg mb-8">
+            Phát triển thương hiệu và tạo thu nhập cùng TikTok E-commerce.
+        </p>
+        <a href="#contact" class="btn-primary px-8 py-3 inline-block">Bắt đầu ngay</a>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="py-20 bg-[#111] text-center border-t border-gray-800">
+        <div class="max-w-4xl mx-auto px-6">
+            <h3 class="text-4xl font-bold mb-6 gradient-text">Về TikTokShop</h3>
+            <p class="text-gray-300 leading-relaxed">
+                TikTokShop là nền tảng giúp bạn kết nối sản phẩm của mình với hàng triệu người dùng TikTok.
+                Với giao diện hiện đại, tính năng thông minh và công cụ bán hàng tự động,
+                TikTokShop mang lại cho bạn trải nghiệm kinh doanh tối ưu.
             </p>
-            <a href="https://tiktokshop88.net" target="_blank"
-                class="neon-btn px-10 py-3 rounded-full text-white font-semibold">Truy cập ngay TikTokShop88</a>
         </div>
     </section>
 
-    <!-- Project -->
-    <section id="project" class="py-24 bg-[#0a0a0a] border-t border-gray-800 text-center">
-        <div data-aos="fade-up" class="max-w-4xl mx-auto">
-            <h2 class="text-4xl font-bold text-tiktok-pink mb-4">Lời mời tham gia</h2>
-            <h3 class="text-3xl font-bold gradient-text mb-6">Dự án TikTok E-commerce</h3>
-            <p class="text-gray-300 mb-8 max-w-2xl mx-auto">
-                Biến điện thoại thành công cụ kiếm tiền. Tham gia dự án khởi nghiệp TikTok E-commerce cùng chúng tôi.
-            </p>
-            <a href="#contact" class="neon-btn px-8 py-3 rounded-full text-white font-semibold inline-block">
-                Bắt đầu hành trình ngay
-            </a>
+    <!-- QR SECTION -->
+    <section id="qrs" class="py-20 bg-[#0a0a0a] text-center border-t border-gray-800">
+        <div class="max-w-5xl mx-auto px-4">
+            <h2 class="text-4xl font-bold gradient-text mb-10">Kết nối nhanh qua Mã QR</h2>
+            <div id="qr-container" class="flex flex-wrap justify-center gap-8"></div>
         </div>
     </section>
 
-    <!-- Learning -->
-    <section id="learning" class="py-24 bg-[#0b0b0b] text-center border-t border-gray-800">
-        <div data-aos="fade-up" class="max-w-5xl mx-auto px-4">
-            <h2 class="text-4xl font-bold text-tiktok-cyan mb-4">Lộ trình học tập của bạn</h2>
-            <p class="text-gray-400 mb-12">Từ người mới bắt đầu đến chuyên gia bán hàng TikTok</p>
-            <div class="grid md:grid-cols-2 gap-6">
-                <div class="step-card">
-                    <h3 class="text-xl font-bold mb-2">Khởi đầu</h3>
-                    <p class="text-gray-400">Tìm hiểu cơ bản về TikTok Shop và cách thức hoạt động</p>
-                </div>
-                <div class="step-card">
-                    <h3 class="text-xl font-bold mb-2">Thiết lập cửa hàng</h3>
-                    <p class="text-gray-400">Hướng dẫn từng bước tạo và tối ưu hóa cửa hàng của bạn</p>
-                </div>
-                <div class="step-card">
-                    <h3 class="text-xl font-bold mb-2">Chọn sản phẩm</h3>
-                    <p class="text-gray-400">Chiến lược chọn sản phẩm hot trend và có lợi nhuận cao</p>
-                </div>
-                <div class="step-card">
-                    <h3 class="text-xl font-bold mb-2">Marketing & Bán hàng</h3>
-                    <p class="text-gray-400">Tạo content viral và tối ưu doanh số bán hàng</p>
-                </div>
-            </div>
-        </div>
+    <!-- CONTACT FORM -->
+    <section id="contact" class="py-20 bg-[#111] text-center border-t border-gray-800">
+        <h3 class="text-3xl font-bold mb-6 gradient-text">Liên hệ với chúng tôi</h3>
+        <form id="contact-form" class="max-w-md mx-auto space-y-4">
+            <input id="name" type="text" placeholder="Họ và tên" required class="w-full p-3 rounded text-black" />
+            <input id="email" type="email" placeholder="Email" required class="w-full p-3 rounded text-black" />
+            <textarea id="message" rows="4" placeholder="Tin nhắn của bạn..." required
+                class="w-full p-3 rounded text-black"></textarea>
+            <button class="btn-primary w-full py-3">Gửi tin nhắn</button>
+        </form>
     </section>
 
-    <!-- Liên hệ -->
-    <section id="contact" class="py-24 bg-[#0a0a0a] border-t border-gray-800">
-        <div data-aos="fade-up" class="max-w-5xl mx-auto text-center px-4">
-            <h2 class="text-4xl font-bold gradient-text mb-10">Liên hệ với TikTokShop</h2>
-            <p class="text-gray-400 mb-10">Chúng tôi luôn sẵn sàng hỗ trợ và hợp tác cùng bạn 💬</p>
-
-            <div class="flex flex-wrap justify-center gap-4 mb-12">
-                <a href="mailto:support@tiktokshop88.net"
-                    class="flex items-center gap-2 bg-gradient-to-r from-tiktok-pink to-tiktok-cyan text-white px-6 py-3 rounded-full shadow-[0_0_20px_#25f4ee80] hover:scale-105 hover:shadow-[0_0_30px_#25f4ee] transition">📧
-                    Gửi Email</a>
-                <a href="tel:0123456789"
-                    class="flex items-center gap-2 bg-gradient-to-r from-tiktok-cyan to-tiktok-pink text-white px-6 py-3 rounded-full shadow-[0_0_20px_#ff005080] hover:scale-105 hover:shadow-[0_0_30px_#ff0050] transition">📞
-                    Gọi ngay</a>
-                <a href="https://facebook.com/tiktokshop88" target="_blank"
-                    class="flex items-center gap-2 bg-gradient-to-r from-blue-600 to-blue-400 text-white px-6 py-3 rounded-full shadow-[0_0_20px_#25f4ee50] hover:scale-105 hover:shadow-[0_0_25px_#25f4ee] transition">🌐
-                    Facebook</a>
-                <a href="https://www.tiktok.com/@tiktokshop88" target="_blank"
-                    class="flex items-center gap-2 bg-gradient-to-r from-tiktok-pink to-tiktok-cyan text-white px-6 py-3 rounded-full shadow-[0_0_20px_#ff005050] hover:scale-105 hover:shadow-[0_0_25px_#ff0050] transition">🎵
-                    TikTok</a>
-                <a href="https://instagram.com/tiktokshop88" target="_blank"
-                    class="flex items-center gap-2 bg-gradient-to-r from-pink-500 to-yellow-400 text-white px-6 py-3 rounded-full shadow-[0_0_20px_#ff005050] hover:scale-105 hover:shadow-[0_0_25px_#ff0050] transition">📸
-                    Instagram</a>
-            </div>
-
-            <div class="flex flex-col items-center mb-16">
-                <div
-                    class="bg-[#1a1a1a] p-4 rounded-2xl border border-gray-700 shadow-[0_0_25px_#25f4ee60] hover:shadow-[0_0_30px_#ff005050] transition-all duration-300">
-                    <img src="https://tiktokshop88.net/qr.png" alt="QR Code TikTokShop"
-                        class="w-48 h-48 rounded-lg border border-gray-700 object-cover">
-                </div>
-                <p class="text-gray-400 mt-3 italic">📷 Quét mã để kết nối nhanh với chúng tôi</p>
-            </div>
-
-            <h3 class="text-2xl font-bold text-tiktok-pink mb-4">Hoặc gửi tin nhắn trực tiếp 💬</h3>
-            <form id="contact-form" class="max-w-lg mx-auto space-y-4">
-                <input id="user-name" type="text" placeholder="Tên của bạn" required
-                    class="w-full px-4 py-3 rounded-lg bg-gray-800 text-white focus:ring-2 focus:ring-tiktok-cyan outline-none" />
-                <input id="user-email" type="email" placeholder="Email" required
-                    class="w-full px-4 py-3 rounded-lg bg-gray-800 text-white focus:ring-2 focus:ring-tiktok-cyan outline-none" />
-                <textarea id="user-message" rows="4" placeholder="Tin nhắn của bạn" required
-                    class="w-full px-4 py-3 rounded-lg bg-gray-800 text-white focus:ring-2 focus:ring-tiktok-pink outline-none"></textarea>
-                <button type="submit" class="neon-btn w-full py-3 rounded-lg font-semibold text-white">📩 Gửi tin
-                    nhắn</button>
-                <p id="form-status" class="text-gray-400 text-sm mt-2"></p>
-            </form>
-        </div>
-    </section>
-
-    <footer class="text-center text-gray-400 py-8 border-t border-gray-800">
-        © 2025 <span class="text-tiktok-pink font-semibold">TikTokShop</span> — Thiết kế chuyên nghiệp bởi <span
-            class="text-tiktok-cyan font-semibold">Node.js & Express</span>
+    <!-- FOOTER -->
+    <footer class="text-center py-6 border-t border-gray-800 bg-[#0a0a0a] text-gray-400 text-sm">
+        <p>© 2025 TikTokShop - Nền tảng bán hàng chuyên nghiệp</p>
     </footer>
 
+    <!-- JS -->
     <script>
-        AOS.init({ duration: 800, once: true });
+        // --- Hiển thị QR ---
+        async function loadQRCodes() {
+            const res = await fetch("/api/data");
+            const data = await res.json();
+            const container = document.getElementById("qr-container");
+            container.innerHTML = data.qrcodes.map(qr => `
+        <div class="p-4 bg-[#111] border border-gray-700 rounded-xl shadow-md">
+          ${qr.image
+                    ? `<img src="${qr.image}" alt="${qr.label}" class="w-48 h-48 object-contain mx-auto mb-3 rounded-lg">`
+                    : `<div class='w-48 h-48 bg-gray-800 flex items-center justify-center mx-auto mb-3 text-gray-500 italic'>Chưa có ảnh</div>`}
+          <p class="text-tiktok-cyan font-semibold">${qr.label}</p>
+        </div>
+      `).join("");
+        }
+        loadQRCodes();
+
+        // --- Gửi tin nhắn ---
         document.getElementById("contact-form").addEventListener("submit", async (e) => {
             e.preventDefault();
-            const name = user - name.value, email = user - email.value, message = user - message.value, status = form - status;
-            try {
-                const res = await fetch("/api/contact-form", {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ name, email, message })
-                });
-                status.textContent = res.ok ? "✅ Tin nhắn đã được gửi!" : "❌ Gửi thất bại.";
-                if (res.ok) e.target.reset();
-            } catch { status.textContent = "⚠️ Lỗi kết nối máy chủ."; }
+            const name = document.getElementById("name").value;
+            const email = document.getElementById("email").value;
+            const message = document.getElementById("message").value;
+
+            const res = await fetch("/api/contact-form", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ name, email, message })
+            });
+            const data = await res.json();
+            alert(data.success ? "✅ Gửi thành công!" : "❌ Gửi thất bại!");
+            e.target.reset();
         });
     </script>
 
-    <!-- Chatbot TuDongChat -->
-    <script src="https://app.tudongchat.com/js/chatbox.js"></script>
-    <script>
-        setTimeout(() => {
-            const tudong_chatbox = new TuDongChat('Nd9qOWI0l8QwPObLIb9Dx');
-            tudong_chatbox.initial();
-        }, 3000);
-    </script>
 </body>
 
 </html>

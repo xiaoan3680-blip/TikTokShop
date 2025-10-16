@@ -3,163 +3,31 @@
 
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Admin - TikTokShop</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        "tiktok-pink": "#ff0050",
-                        "tiktok-cyan": "#25f4ee"
-                    }
-                }
-            }
-        };
-    </script>
 </head>
 
 <body class="bg-black text-white font-sans">
-    <section id="login-section" class="min-h-screen flex items-center justify-center">
-        <div class="bg-gray-900 p-10 rounded-2xl shadow-xl w-full max-w-md text-center border border-gray-800">
-            <h1 class="text-3xl font-bold text-tiktok-cyan mb-6">Đăng nhập Admin</h1>
-            <input id="admin-password" type="password" placeholder="Nhập mật khẩu"
-                class="w-full px-4 py-2 rounded-lg bg-gray-800 text-white mb-4 focus:ring-2 focus:ring-tiktok-cyan outline-none" />
-            <button id="login-btn"
-                class="w-full py-2 rounded-lg bg-tiktok-pink hover:bg-pink-600 font-semibold transition-all duration-300">Đăng
-                nhập</button>
-            <p id="login-status" class="mt-4 text-gray-400"></p>
-        </div>
-    </section>
+    <div id="login" class="flex flex-col items-center justify-center h-screen">
+        <h1 class="text-3xl font-bold mb-4 text-tiktok-cyan">Đăng nhập Admin</h1>
+        <input id="admin-password" type="password" placeholder="Mật khẩu..."
+            class="px-4 py-2 rounded text-black mb-3" />
+        <button id="login-btn" class="bg-tiktok-pink px-4 py-2 rounded">Đăng nhập</button>
+    </div>
 
-    <section id="admin-panel" class="hidden p-6 max-w-6xl mx-auto space-y-12">
-        <h1 class="text-4xl font-bold text-center text-tiktok-cyan mb-10">Bảng Quản Trị TikTokShop</h1>
+    <div id="admin-panel" class="hidden p-6">
+        <h1 class="text-3xl font-bold text-center mb-6 text-tiktok-cyan">Quản trị hệ thống TikTokShop</h1>
 
-        <!-- Cấu hình trang -->
-        <div class="bg-[#141414] p-6 rounded-2xl shadow-lg border border-gray-800">
-            <h2 class="text-2xl font-bold text-tiktok-pink mb-4">⚙️ Cấu hình Trang chính</h2>
-            <div class="grid sm:grid-cols-2 gap-4">
-                <input id="title" class="input" placeholder="Tên thương hiệu" />
-                <input id="slogan" class="input" placeholder="Câu slogan" />
-                <input id="brand_description" class="input col-span-full" placeholder="Mô tả thương hiệu" />
-                <input id="brand_link" class="input col-span-full" placeholder="Link truy cập" />
-                <input id="brand_image" class="input col-span-full" placeholder="Link logo" />
-            </div>
-        </div>
+        <section id="qr-section" class="mb-8">
+            <h2 class="text-2xl font-bold mb-4 text-tiktok-pink">📱 Quản lý Mã QR</h2>
+            <div id="qr-list" class="space-y-3"></div>
+            <button id="add-qr" class="bg-tiktok-cyan text-black px-4 py-2 rounded mt-4">➕ Thêm mã QR</button>
+        </section>
 
-        <!-- Thông tin liên hệ -->
-        <div class="bg-[#141414] p-6 rounded-2xl shadow-lg border border-gray-800">
-            <h2 class="text-2xl font-bold text-tiktok-cyan mb-4">📞 Thông tin liên hệ</h2>
-            <div class="grid sm:grid-cols-2 gap-4">
-                <input id="email" class="input" placeholder="Email" />
-                <input id="phone" class="input" placeholder="Số điện thoại" />
-                <input id="facebook" class="input" placeholder="Facebook link" />
-                <input id="tiktok" class="input" placeholder="TikTok link" />
-                <input id="instagram" class="input" placeholder="Instagram link" />
-            </div>
-        </div>
+        <button id="save-all" class="bg-tiktok-pink px-6 py-2 rounded">💾 Lưu tất cả</button>
+    </div>
 
-        <div class="text-center">
-            <button id="save-btn"
-                class="bg-gradient-to-r from-tiktok-pink to-tiktok-cyan px-10 py-3 rounded-full font-semibold text-white shadow-[0_0_20px_#25f4ee80] hover:scale-105 transition">💾
-                Lưu tất cả thay đổi</button>
-        </div>
-
-        <!-- Tin nhắn -->
-        <div class="bg-[#141414] p-6 rounded-2xl shadow-lg border border-gray-800">
-            <h2 class="text-2xl font-bold text-tiktok-pink mb-6">📨 Tin nhắn người dùng</h2>
-            <div id="messages" class="space-y-4"></div>
-        </div>
-    </section>
-
-    <style>
-        .input {
-            background: #1a1a1a;
-            border: 1px solid #333;
-            color: white;
-            padding: 10px;
-            border-radius: 8px;
-            width: 100%;
-            outline: none;
-            transition: 0.3s;
-        }
-
-        .input:focus {
-            border-color: #25f4ee;
-            box-shadow: 0 0 8px #25f4ee80;
-        }
-    </style>
-
-    <script>
-        const loginSection = document.getElementById("login-section");
-        const adminPanel = document.getElementById("admin-panel");
-        const statusEl = document.getElementById("login-status");
-
-        document.getElementById("login-btn").addEventListener("click", async () => {
-            const password = document.getElementById("admin-password").value.trim();
-            const res = await fetch("/api/admin/login", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ password })
-            });
-            const data = await res.json();
-            if (data.success) {
-                loginSection.classList.add("hidden");
-                adminPanel.classList.remove("hidden");
-                loadData();
-            } else {
-                statusEl.textContent = "❌ Sai mật khẩu, thử lại!";
-                statusEl.classList.add("text-red-400");
-            }
-        });
-
-        async function loadData() {
-            const res = await fetch("/api/data");
-            const data = await res.json();
-
-            for (const key in data.site)
-                if (document.getElementById(key)) document.getElementById(key).value = data.site[key];
-
-            for (const key in data.contact)
-                if (document.getElementById(key)) document.getElementById(key).value = data.contact[key];
-
-            const msgEl = document.getElementById("messages");
-            if (data.messages.length === 0) msgEl.innerHTML = "<p class='text-gray-500 italic'>Chưa có tin nhắn nào.</p>";
-            else
-                msgEl.innerHTML = data.messages
-                    .map(m => `
-          <div class='border border-gray-700 rounded-xl p-4 hover:shadow-[0_0_10px_#25f4ee50] transition'>
-            <p><b class='text-tiktok-cyan'>${m.name}</b> • <span class='text-gray-400 text-sm'>${m.time}</span></p>
-            <p class='text-gray-300 text-sm mt-1'>📧 ${m.email}</p>
-            <p class='mt-2 text-gray-200'>${m.message}</p>
-          </div>`)
-                    .join("");
-        }
-
-        document.getElementById("save-btn").addEventListener("click", async () => {
-            const site = {
-                title: title.value,
-                slogan: slogan.value,
-                brand_description: brand_description.value,
-                brand_link: brand_link.value,
-                brand_image: brand_image.value
-            };
-            const contact = {
-                email: email.value,
-                phone: phone.value,
-                facebook: facebook.value,
-                tiktok: tiktok.value,
-                instagram: instagram.value
-            };
-            await fetch("/api/admin/update-data", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ site, contact })
-            });
-            alert("✅ Đã lưu thay đổi!");
-        });
-    </script>
+    <script src="admin.js"></script>
 </body>
 
 </html>

@@ -1,0 +1,185 @@
+< !DOCTYPE html><html lang="vi"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Admin - TikTokShop</title><script src="https://cdn.tailwindcss.com"></script><script>tailwind.config= {
+    theme: {
+        extend: {
+            colors: {
+                "tiktok-pink": "#ff0050",
+                    "tiktok-cyan": "#25f4ee"
+            }
+
+            ,
+            fontFamily: {
+                sans: ["Poppins", "Inter", "sans-serif"]
+            }
+        }
+    }
+}
+
+;
+
+</script><style>body {
+    background: #000;
+    color: #fff;
+    font-family: "Poppins", sans-serif;
+    overflow-x: hidden;
+}
+
+.card {
+    background: linear-gradient(145deg, #111, #0a0a0a);
+    border: 1px solid #222;
+    border-radius: 16px;
+    padding: 20px;
+    transition: 0.3s;
+}
+
+.card:hover {
+    box-shadow: 0 0 25px rgba(255, 0, 80, 0.3);
+    transform: translateY(-3px);
+}
+
+.neon-input {
+    background: #1a1a1a;
+    border: 1px solid #333;
+    color: #fff;
+    border-radius: 8px;
+    padding: 10px;
+    width: 100%;
+    outline: none;
+}
+
+.neon-input:focus {
+    border-color: #25f4ee;
+    box-shadow: 0 0 8px #25f4ee;
+}
+
+.neon-btn {
+    background: linear-gradient(90deg, #ff0050, #25f4ee);
+    color: white;
+    padding: 10px 16px;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.neon-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px #25f4ee;
+}
+
+</style></head><body class="min-h-screen flex flex-col items-center p-6"><h1 class="text-4xl font-extrabold gradient-text mb-10">Admin TikTokShop</h1>< !-- Màn hình đăng nhập --><div id="login" class="card max-w-md w-full text-center"><h2 class="text-2xl font-bold mb-4 text-tiktok-cyan">🔐 Đăng nhập quản trị</h2><input id="admin-password" type="password" placeholder="Nhập mật khẩu..." class="neon-input mb-4"><button id="login-btn" class="neon-btn w-full">Đăng nhập</button><p id="login-status" class="mt-3 text-gray-400 text-sm"></p></div>< !-- Bảng quản trị --><div id="dashboard" class="hidden w-full max-w-5xl mt-10 space-y-10">< !-- Cấu hình trang chính --><div class="card"><h2 class="text-2xl font-bold text-tiktok-cyan mb-4">🌐 Cấu hình Trang chính</h2><div class="grid md:grid-cols-2 gap-4"><div><label class="text-gray-300 text-sm">Tiêu đề:</label><input id="site-title" class="neon-input" placeholder="TikTokShop"></div><div><label class="text-gray-300 text-sm">Khẩu hiệu:</label><input id="site-slogan" class="neon-input"></div><div class="md:col-span-2"><label class="text-gray-300 text-sm">Mô tả thương hiệu:</label><textarea id="site-description" class="neon-input" rows="3"></textarea></div><div><label class="text-gray-300 text-sm">Link thương hiệu:</label><input id="site-link" class="neon-input" placeholder="https://tiktokshop88.net"></div><div><label class="text-gray-300 text-sm">Ảnh thương hiệu (logo):</label><input id="site-image" class="neon-input" placeholder="https://tiktokshop88.net/logo.png"></div></div></div>< !-- Thông tin liên hệ --><div class="card"><h2 class="text-2xl font-bold text-tiktok-pink mb-4">📞 Thông tin liên hệ</h2><div class="grid md:grid-cols-2 gap-4"><div><label class="text-gray-300 text-sm">Email:</label><input id="contact-email" class="neon-input"></div><div><label class="text-gray-300 text-sm">Điện thoại:</label><input id="contact-phone" class="neon-input"></div><div><label class="text-gray-300 text-sm">Facebook:</label><input id="contact-facebook" class="neon-input"></div><div><label class="text-gray-300 text-sm">TikTok:</label><input id="contact-tiktok" class="neon-input"></div><div><label class="text-gray-300 text-sm">Instagram:</label><input id="contact-instagram" class="neon-input"></div><div><label class="text-gray-300 text-sm">Ảnh QR (link ảnh):</label><input id="contact-qr" class="neon-input"></div></div></div>< !-- Danh sách tin nhắn --><div class="card"><h2 class="text-2xl font-bold text-tiktok-cyan mb-4">💬 Tin nhắn từ khách hàng</h2><div id="messages" class="space-y-3 text-gray-300 text-sm"><p>Đang tải...</p></div></div><button id="save-btn" class="neon-btn w-full py-3 text-lg">💾 Lưu tất cả thay đổi</button><p id="save-status" class="text-center text-gray-400 mt-2"></p></div><script>async function fetchData() {
+    const res=await fetch('/api/data');
+    return await res.json();
+}
+
+// Đăng nhập
+document.getElementById('login-btn').addEventListener('click', async ()=> {
+        const password=document.getElementById('admin-password').value.trim();
+
+        const res=await fetch('/api/admin/login', {
+
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+
+            ,
+            body: JSON.stringify({
+                password
+            })
+    });
+const data=await res.json();
+const status=document.getElementById('login-status');
+
+if (data.success) {
+    status.textContent='✅ Đăng nhập thành công!';
+    document.getElementById('login').classList.add('hidden');
+    document.getElementById('dashboard').classList.remove('hidden');
+    loadData();
+}
+
+else {
+    status.textContent='❌ Mật khẩu sai!';
+}
+});
+
+// Tải dữ liệu
+async function loadData() {
+    const data=await fetchData();
+    document.getElementById('site-title').value=data.site.title;
+    document.getElementById('site-slogan').value=data.site.slogan;
+    document.getElementById('site-description').value=data.site.brand_description;
+    document.getElementById('site-link').value=data.site.brand_link;
+    document.getElementById('site-image').value=data.site.brand_image;
+    document.getElementById('contact-email').value=data.contact.email;
+    document.getElementById('contact-phone').value=data.contact.phone;
+    document.getElementById('contact-facebook').value=data.contact.facebook;
+    document.getElementById('contact-tiktok').value=data.contact.tiktok;
+    document.getElementById('contact-instagram').value=data.contact.instagram;
+    document.getElementById('contact-qr').value=data.contact.qr || '';
+
+    const msgBox=document.getElementById('messages');
+    msgBox.innerHTML='';
+
+    if (data.messages.length===0) {
+        msgBox.innerHTML='<p class="italic text-gray-500">Chưa có tin nhắn nào.</p>';
+    }
+
+    else {
+        data.messages.forEach(m=> {
+                msgBox.innerHTML +=` <div class="p-3 bg-[#1a1a1a] rounded-lg border border-gray-700" > <p><b>$ {
+                    m.name
+                }
+
+                </b> — <i>$ {
+                    m.email
+                }
+
+                </i></p> <p class="text-gray-400 mt-1" >$ {
+                    m.message
+                }
+
+                </p> <p class="text-xs text-gray-500 mt-1" >$ {
+                    m.time
+                }
+
+                </p> </div>`;
+            });
+    }
+}
+
+// Lưu thay đổi
+document.getElementById('save-btn').addEventListener('click', async ()=> {
+        const payload= {
+            site: {
+                title: site-title.value,
+                slogan: site-slogan.value,
+                brand_description: site-description.value,
+                brand_link: site-link.value,
+                brand_image: site-image.value
+            }
+
+            ,
+            contact: {
+                email: contact-email.value,
+                phone: contact-phone.value,
+                facebook: contact-facebook.value,
+                tiktok: contact-tiktok.value,
+                instagram: contact-instagram.value,
+                qr: contact-qr.value
+            }
+        }
+
+        ;
+
+        const res=await fetch('/api/admin/update-data', {
+
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+
+            ,
+            body: JSON.stringify(payload)
+        });
+    document.getElementById('save-status').textContent=res.ok ? '✅ Đã lưu thành công!' : '❌ Lỗi lưu dữ liệu!';
+});
+</script></body></html>

@@ -1,88 +1,84 @@
-async function fetchData() {
-    const res = await fetch('/api/data');
-    return await res.json();
-}
+document.addEventListener("DOMContentLoaded", () => {
+    const form = document.querySelector("#adminForm");
+    const qrList = document.querySelector("#qr-list");
+    const messageBox = document.querySelector("#message-box");
 
-async function loadData() {
-    const data = await fetchData();
+    // Tải dữ liệu ban đầu
+    fetch("/api/data")
+        .then((res) => res.json())
+        .then((data) => {
+            document.querySelector("#title").value = data.title || "";
+            document.querySelector("#description").value = data.description || "";
+            document.querySelector("#homepage").value = data.homepage || "";
+            document.querySelector("#phone").value = data.phone || "";
 
-    // Thông tin chung
-    document.getElementById('site-title').value = data.site?.title || '';
-    document.getElementById('site-slogan').value = data.site?.slogan || '';
-    document.getElementById('site-link').value = data.site?.brand_link || '';
-    document.getElementById('site-image').value = data.site?.brand_image || '';
-    document.getElementById('contact-phone').value = data.contact?.phone || '';
-    document.getElementById('chat-code').value = data.chat?.code || '';
-    document.getElementById('chat-enable').checked = data.chat?.enabled || false;
+            qrList.innerHTML = "";
+            (data.qr_codes || []).forEach((qr, i) => {
+                const div = document.createElement("div");
+                div.classList.add("qr-item");
+                div.innerHTML = `
+          <span>${qr.name}</span>
+          <input type="text" value="${qr.image}" placeholder="Link hình ảnh QR">
+          <input type="text" value="${qr.link}" placeholder="Liên kết nền tảng">
+        `;
+                qrList.appendChild(div);
+            });
 
-    // Liên hệ
-    document.getElementById('contact-email').value = data.contact?.email || '';
-    document.getElementById('contact-facebook').value = data.contact?.facebook || '';
-    document.getElementById('contact-tiktok').value = data.contact?.tiktok || '';
-    document.getElementById('contact-instagram').value = data.contact?.instagram || '';
+            // Hiển thị tin nhắn
+            messageBox.innerHTML = "";
+            (data.messages || []).forEach((msg) => {
+                const m = document.createElement("div");
+                m.classList.add("qr-item");
+                m.innerHTML = `<strong>${msg.name}</strong> (${msg.email})<br><small>${msg.time}</small><br>${msg.message}`;
+                messageBox.appendChild(m);
+            });
+        });
 
-    // QR
-    const qrList = document.getElementById('qr-list');
-    qrList.innerHTML = '';
-    data.qrcodes?.forEach((qr, i) => {
-        const div = document.createElement('div');
-        div.className = 'qr-item';
+    // Thêm mã QR
+    document.getElementById("add-qr").addEventListener("click", () => {
+        const name = document.getElementById("new-qr-name").value;
+        const image = document.getElementById("new-qr-img").value;
+        const link = document.getElementById("new-qr-link").value;
+        if (!name || !image) return alert("Vui lòng nhập đầy đủ thông tin!");
+
+        const div = document.createElement("div");
+        div.classList.add("qr-item");
         div.innerHTML = `
-      <span>${qr.label}</span>
-      <input type="text" value="${qr.image}" readonly />
-      <button onclick="removeQR(${i})">Xóa</button>
+      <span>${name}</span>
+      <input type="text" value="${image}" placeholder="Link hình ảnh QR">
+      <input type="text" value="${link}" placeholder="Liên kết nền tảng">
     `;
         qrList.appendChild(div);
+
+        document.getElementById("new-qr-name").value = "";
+        document.getElementById("new-qr-img").value = "";
+        document.getElementById("new-qr-link").value = "";
     });
-}
 
-function removeQR(index) {
-    fetch('/api/admin/remove-qr', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ index })
-    }).then(() => loadData());
-}
+    // Lưu thay đổi
+    form.addEventListener("submit", (e) => {
+        e.preventDefault();
 
-document.getElementById('add-qr').onclick = () => {
-    const label = document.getElementById('qr-label').value;
-    const image = document.getElementById('qr-image').value;
-    fetch('/api/admin/add-qr', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ label, image })
-    }).then(() => loadData());
-};
+        const updatedData = {
+            title: document.querySelector("#title").value,
+            description: document.querySelector("#description").value,
+            homepage: document.querySelector("#homepage").value,
+            phone: document.querySelector("#phone").value,
+            qr_codes: Array.from(document.querySelectorAll(".qr-item")).map((item) => ({
+                name: item.querySelector("span").innerText,
+                image: item.querySelectorAll("input")[0].value,
+                link: item.querySelectorAll("input")[1].value
+            }))
+        };
 
-document.getElementById('save-main').onclick = () => {
-    const payload = {
-        title: document.getElementById('site-title').value,
-        slogan: document.getElementById('site-slogan').value,
-        brand_link: document.getElementById('site-link').value,
-        brand_image: document.getElementById('site-image').value,
-        phone: document.getElementById('contact-phone').value,
-        chat_code: document.getElementById('chat-code').value,
-        chat_enable: document.getElementById('chat-enable').checked
-    };
-    fetch('/api/admin/update-data', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
+        fetch("/api/admin/update-data", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(updatedData)
+        })
+            .then((res) => res.json())
+            .then((res) => {
+                alert(res.success ? "✅ Lưu thành công!" : "❌ Lỗi khi cập nhật!");
+            });
     });
-};
-
-document.getElementById('save-contact').onclick = () => {
-    const payload = {
-        email: document.getElementById('contact-email').value,
-        facebook: document.getElementById('contact-facebook').value,
-        tiktok: document.getElementById('contact-tiktok').value,
-        instagram: document.getElementById('contact-instagram').value
-    };
-    fetch('/api/admin/update-contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
-    });
-};
-
-loadData();
+});

@@ -13,25 +13,41 @@ const PORT = process.env.PORT || 3000;
 app.use(bodyParser.json());
 app.use(express.static(__dirname));
 
+const dataFile = path.join(__dirname, "data.json");
+
+// Hàm đọc file JSON
+const getData = () => JSON.parse(fs.readFileSync(dataFile, "utf-8"));
+
 // Ghi log truy cập
 app.use((req, res, next) => {
     console.log(`[${new Date().toISOString()}] ${req.method} ${req.url}`);
     next();
 });
 
-const dataFile = path.join(__dirname, "data.json");
-const getData = () => JSON.parse(fs.readFileSync(dataFile, "utf-8"));
+// API: Lấy dữ liệu
+app.get("/api/data", (req, res) => res.json(getData()));
 
-// --- API đọc dữ liệu ---
-app.get("/api/data", (req, res) => {
+// API: Gửi form liên hệ
+app.post("/api/contact-form", (req, res) => {
     try {
-        res.json(getData());
-    } catch {
-        res.status(500).json({ error: "Không thể đọc dữ liệu" });
+        const { name, email, message } = req.body;
+        const data = getData();
+        data.messages.push({ name, email, message, time: new Date().toLocaleString() });
+        fs.writeFileSync(dataFile, JSON.stringify(data, null, 2));
+        res.json({ success: true });
+    } catch (err) {
+        console.error("Lỗi ghi form:", err);
+        res.status(500).json({ success: false });
     }
 });
 
-// --- API cập nhật dữ liệu ---
+// API: Đăng nhập admin
+app.post("/api/admin/login", (req, res) => {
+    const { password } = req.body;
+    res.json({ success: password === "tiktok123" });
+});
+
+// API: Cập nhật dữ liệu trang
 app.post("/api/admin/update-data", (req, res) => {
     try {
         fs.writeFileSync(dataFile, JSON.stringify(req.body, null, 2));
@@ -41,7 +57,7 @@ app.post("/api/admin/update-data", (req, res) => {
     }
 });
 
-app.get("/admin", (req, res) => res.sendFile(path.join(__dirname, "admin.html")));
+// Giao diện chính
 app.get("*", (req, res) => res.sendFile(path.join(__dirname, "index.html")));
 
 app.listen(PORT, () => console.log(`✅ Server chạy tại http://localhost:${PORT}`));

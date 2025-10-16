@@ -5,9 +5,33 @@
     <meta charset="UTF-8" />
     <title>Admin - TikTokShop</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #000;
+            color: #fff;
+        }
+
+        .text-tiktok-pink {
+            color: #ff0050;
+        }
+
+        .text-tiktok-cyan {
+            color: #00f5ff;
+        }
+
+        .bg-tiktok-pink {
+            background: linear-gradient(90deg, #ff0050, #ff5599);
+        }
+
+        .bg-tiktok-cyan {
+            background: linear-gradient(90deg, #00f5ff, #00aaff);
+        }
+    </style>
 </head>
 
-<body class="bg-black text-white font-sans">
+<body class="min-h-screen p-6">
+    <!-- Màn hình đăng nhập -->
     <div id="login" class="flex flex-col items-center justify-center h-screen">
         <h1 class="text-3xl font-bold mb-4 text-tiktok-cyan">Đăng nhập Admin</h1>
         <input id="admin-password" type="password" placeholder="Mật khẩu..."
@@ -15,16 +39,26 @@
         <button id="login-btn" class="bg-tiktok-pink px-4 py-2 rounded">Đăng nhập</button>
     </div>
 
-    <div id="admin-panel" class="hidden p-6">
-        <h1 class="text-3xl font-bold text-center mb-6 text-tiktok-cyan">Quản trị hệ thống TikTokShop</h1>
+    <!-- Giao diện quản trị -->
+    <div id="admin-panel" class="hidden">
+        <h1 class="text-4xl font-bold text-center mb-6 text-tiktok-cyan">Trang quản trị TikTokShop</h1>
 
-        <section id="qr-section" class="mb-8">
+        <!-- Quản lý mã QR -->
+        <section id="qr-section" class="mb-10">
             <h2 class="text-2xl font-bold mb-4 text-tiktok-pink">📱 Quản lý Mã QR</h2>
             <div id="qr-list" class="space-y-3"></div>
             <button id="add-qr" class="bg-tiktok-cyan text-black px-4 py-2 rounded mt-4">➕ Thêm mã QR</button>
         </section>
 
-        <button id="save-all" class="bg-tiktok-pink px-6 py-2 rounded">💾 Lưu tất cả</button>
+        <!-- Tin nhắn khách hàng -->
+        <section id="messages-section" class="mb-8">
+            <h2 class="text-2xl font-bold mb-4 text-tiktok-pink">📩 Tin nhắn từ khách hàng</h2>
+            <div id="messages-list" class="space-y-3"></div>
+        </section>
+
+        <div class="text-center mt-10">
+            <button id="save-all" class="bg-tiktok-pink px-6 py-2 rounded">💾 Lưu tất cả thay đổi</button>
+        </div>
     </div>
 
     <script src="admin.js"></script>

@@ -1,32 +1,24 @@
 {
     "site": {
-        "title": "TikTokShop Việt Nam",
-        "subtitle": "Nền tảng bán hàng trực tuyến hiện đại – Giao diện chuyên nghiệp, tối ưu di động.",
-        "logo": "https://i.imgur.com/hRWK7MZ.png",
-        "chat_enabled": true,
-        "chat_id": "Nd9qOWI0l8QwPObLIb9Dx",
-        "theme_color": "#ff0050"
+        "title": "TikTokShop",
+        "main_title": "Mở Gian Hàng TikTok Shop Chuyên Nghiệp – Bán Hàng Hiệu Quả Từ A–Z",
+        "description": "Lina Support giúp bạn mở shop TikTok nhanh chóng, miễn phí 100%, có chuyên viên hướng dẫn từng bước – từ đăng ký, đăng sản phẩm đến bán đơn đầu tiên!"
     },
     "contacts": [
         {
             "name": "Zalo CSKH",
-            "link": "https://zalo.me/0123456789",
-            "color": "#00AEEF"
+            "link": "https://zalo.me",
+            "phone": "0123456789"
         },
         {
-            "name": "TikTok Chính thức",
-            "link": "https://www.tiktok.com/@tiktokshop888",
-            "color": "#ff0050"
+            "name": "TikTok",
+            "link": "https://tiktok.com/@tiktokshop",
+            "phone": ""
         },
         {
             "name": "Facebook",
-            "link": "https://facebook.com/tiktokshop888",
-            "color": "#1877F2"
-        },
-        {
-            "name": "Hotline",
-            "link": "tel:0123456789",
-            "color": "#25D366"
+            "link": "https://facebook.com/tiktokshop",
+            "phone": ""
         }
     ]
 }

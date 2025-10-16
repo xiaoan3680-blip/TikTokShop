@@ -2,222 +2,190 @@
 <html lang="vi">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>TikTokShop Việt Nam</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TikTokShop - Mở Gian Hàng Chuyên Nghiệp</title>
     <style>
-        :root {
-            --pink: #ff0050;
-            --cyan: #00f5ff;
-            --bg: #111;
-            --card: #1b1b1b;
-            --text: #f5f5f5;
-        }
-
         body {
-            font-family: "Inter", sans-serif;
-            background: var(--bg);
-            color: var(--text);
+            background-color: #0a0a0a;
+            color: #fff;
+            font-family: 'Inter', sans-serif;
             margin: 0;
+            padding: 0;
             line-height: 1.6;
         }
 
         header {
-            background: linear-gradient(90deg, var(--pink), var(--cyan));
-            padding: 15px;
-            font-size: 1.4em;
-            font-weight: 700;
+            background: linear-gradient(90deg, #ff0050, #00f2ea);
             text-align: center;
-            color: #fff;
-            box-shadow: 0 0 25px rgba(255, 0, 80, 0.3);
+            padding: 20px;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: white;
         }
 
-        .logo {
-            display: block;
-            margin: 25px auto 10px;
-            width: 150px;
-            border-radius: 14px;
-            box-shadow: 0 0 25px rgba(255, 0, 80, 0.3);
+        .hero {
+            text-align: center;
+            padding: 60px 20px 40px;
         }
 
-        .section {
-            background: var(--card);
-            border-radius: 14px;
-            margin: 20px auto;
-            padding: 25px;
-            max-width: 850px;
-            box-shadow: 0 0 15px rgba(255, 0, 80, 0.15);
-        }
-
-        h2 {
-            background: linear-gradient(90deg, var(--pink), var(--cyan));
+        .hero h1 {
+            font-size: 2rem;
+            background: linear-gradient(90deg, #ff0066, #00e0ff);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            font-weight: 800;
         }
 
-        .contacts {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 15px;
-            margin-top: 15px;
+        .hero p {
+            font-size: 1.1rem;
+            color: #ccc;
+            max-width: 700px;
+            margin: 20px auto;
         }
 
-        .contact-card {
-            border-radius: 12px;
-            padding: 15px;
-            color: white;
+        .cta-buttons {
+            margin-top: 25px;
+        }
+
+        .cta-buttons a {
+            display: inline-block;
+            margin: 10px;
+            padding: 12px 24px;
+            border-radius: 25px;
+            font-weight: 600;
+            text-decoration: none;
+            color: #fff;
+            background: linear-gradient(90deg, #ff0050, #00e0ff);
             transition: 0.3s;
         }
 
-        .contact-card:hover {
-            transform: scale(1.03);
+        .cta-buttons a:hover {
+            opacity: 0.85;
         }
 
-        .contact-card button {
-            background: rgba(255, 255, 255, 0.15);
-            border: none;
-            color: white;
-            padding: 8px 12px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: 600;
+        section {
+            background: #111;
+            margin: 25px auto;
+            padding: 30px 20px;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 900px;
+            box-shadow: 0 0 15px rgba(255, 0, 128, 0.3);
         }
 
-        .info {
-            text-align: left;
-            max-width: 700px;
-            margin: 0 auto;
-            color: #ccc;
-        }
-
-        .info h3 {
-            color: var(--pink);
-            margin-top: 18px;
+        h2 {
+            text-align: center;
+            color: #00eaff;
+            font-weight: 700;
+            margin-bottom: 20px;
         }
 
         ul {
-            padding-left: 20px;
+            list-style: none;
+            padding: 0;
+        }
+
+        ul li {
+            background: #1a1a1a;
+            margin: 10px 0;
+            padding: 15px;
+            border-radius: 10px;
+            color: #ddd;
+            box-shadow: 0 0 8px rgba(255, 255, 255, 0.05);
+        }
+
+        .qr-section {
+            text-align: center;
+        }
+
+        .qr-section img {
+            width: 200px;
+            height: 200px;
+            border-radius: 10px;
+            box-shadow: 0 0 12px rgba(255, 0, 128, 0.3);
+            margin: 20px auto;
         }
 
         footer {
-            background: #0c0c0c;
-            color: #aaa;
-            font-size: 0.9em;
             text-align: center;
-            padding: 20px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 25px 15px;
+            background: #0b0b0b;
+            color: #999;
+            font-size: 0.9rem;
             margin-top: 30px;
-        }
-
-        @media (max-width: 600px) {
-            .logo {
-                width: 120px;
-            }
-
-            .section {
-                padding: 18px;
-            }
         }
     </style>
 </head>
 
 <body>
-    <header id="title">TikTokShop Việt Nam</header>
-    <img id="logo" class="logo" src="" alt="TikTokShop Logo">
+    <header id="site-title">TikTokShop</header>
 
-    <div class="section">
-        <h2 id="subtitle"></h2>
+    <div class="hero">
+        <h1 id="main-title">Bắt đầu kinh doanh trên TikTok Shop ngay hôm nay!</h1>
+        <p id="main-description">Tăng doanh thu – Tăng hiển thị – Xây thương hiệu cá nhân chỉ với vài bước đơn giản.</p>
+        <div class="cta-buttons">
+            <a id="cta1" href="#">Liên hệ Zalo chuyên viên</a>
+            <a id="cta2" href="#">Nhận tư vấn miễn phí</a>
+        </div>
     </div>
 
-    <div class="section">
+    <section id="benefits">
+        <h2>Vì sao nên bắt đầu bán hàng trên TikTok Shop?</h2>
+        <ul>
+            <li>Tiếp cận hàng triệu người mua mỗi ngày.</li>
+            <li>Không cần vốn lớn – bán hàng ngay cả khi bạn chưa có sản phẩm riêng.</li>
+            <li>Miễn phí mở shop và đăng sản phẩm.</li>
+            <li>Tăng đơn nhanh, dễ viral nhờ thuật toán thông minh.</li>
+            <li>Quản lý dễ dàng mọi hoạt động bán hàng.</li>
+        </ul>
+    </section>
+
+    <section id="support">
+        <h2>Hỗ trợ chuyên viên TikTok Shop</h2>
+        <p>Lina Support đồng hành cùng bạn từ bước đầu:</p>
+        <ul>
+            <li>Hướng dẫn tạo tài khoản & xác minh gian hàng</li>
+            <li>Tư vấn đăng sản phẩm & tối ưu video bán hàng</li>
+            <li>Hỗ trợ tăng đơn – chạy quảng cáo hiệu quả</li>
+            <li>Cập nhật xu hướng, chiến lược bán hàng mới nhất</li>
+        </ul>
+    </section>
+
+    <section class="qr-section">
         <h2>Liên hệ & Kết nối</h2>
-        <div id="contacts" class="contacts"></div>
-    </div>
+        <div id="contact-list"></div>
+    </section>
 
-    <div class="section">
-        <h2>Giới thiệu TikTokShop</h2>
-        <div class="info">
-            <p><strong>TikTokShop</strong> là nền tảng thương mại điện tử chính thức của TikTok – giúp nhà bán hàng tiếp
-                cận hàng triệu khách hàng mỗi ngày thông qua nội dung video và livestream sáng tạo.</p>
-        </div>
-    </div>
+    <footer>
+        © 2025 TikTokShop | Hỗ trợ: support@tiktokshop888.com
+    </footer>
 
-    <div class="section">
-        <h2>Lợi ích khi kinh doanh trên TikTok Shop</h2>
-        <div class="info">
-            <h3>Tiếp cận lượng khách hàng khổng lồ</h3>
-            <p>TikTok có hàng trăm triệu người dùng mỗi ngày. Sản phẩm của bạn dễ dàng tiếp cận đúng đối tượng thông qua
-                video ngắn và livestream.</p>
-
-            <h3>Bán hàng trực tiếp trong ứng dụng</h3>
-            <p>Khách có thể xem video, click mua, thanh toán — tất cả ngay trong TikTok, giúp tăng tỷ lệ chốt đơn và
-                giảm rủi ro mất khách.</p>
-
-            <h3>Hỗ trợ quảng cáo và thuật toán thông minh</h3>
-            <p>Hệ thống đề xuất sản phẩm dựa trên sở thích người dùng, giúp tăng lượt xem và doanh số nhanh chóng.</p>
-
-            <h3>Livestream bán hàng hiệu quả</h3>
-            <p>Kết hợp livestream + mini game + mã giảm giá giúp tăng gấp 3–5 lần doanh thu và xây dựng thương hiệu mạnh
-                mẽ hơn.</p>
-
-            <h3>Chính sách hỗ trợ người bán</h3>
-            <p>TikTok hỗ trợ miễn phí vận chuyển, hoàn tiền, giảm phí hoa hồng và nhiều chiến dịch “Deal Hot”, “Flash
-                Sale”.</p>
-
-            <h3>Cơ hội cho người mới</h3>
-            <p>Không cần vốn lớn – chỉ cần sản phẩm và nội dung hấp dẫn để bắt đầu bán hàng ngay.</p>
-        </div>
-    </div>
-
-    <div class="section">
-        <h2>Hỗ trợ & Tư vấn TikTok Shop</h2>
-        <div class="info">
-            <p>Liên hệ chuyên viên qua Zalo để được tư vấn và hỗ trợ thiết lập gian hàng TikTok Shop miễn phí – bao gồm
-                hướng dẫn đăng ký, đăng sản phẩm và tối ưu bán hàng.</p>
-            <p style="text-align:center; margin-top:20px;">
-                <a href="https://zalo.me/0123456789" target="_blank" style="background:linear-gradient(90deg, var(--pink), var(--cyan));
-                 color:white; padding:10px 20px; border-radius:8px; text-decoration:none;
-                 font-weight:600;">Liên hệ chuyên viên Zalo</a>
-            </p>
-        </div>
-    </div>
-
-    <footer>© 2025 TikTokShop Việt Nam – Nền tảng bán hàng chính thức.</footer>
-
+    <!-- Chat tự động -->
+    <script src="https://app.tudongchat.com/js/chatbox.js"></script>
     <script>
-        async function loadSite() {
-            const res = await fetch("/api/data");
-            const data = await res.json();
+        const tudong_chatbox = new TuDongChat('Nd9qOWI0l8QwPObLIb9Dx');
+        tudong_chatbox.initial();
 
-            document.getElementById("title").textContent = data.site.title;
-            document.getElementById("subtitle").textContent = data.site.subtitle;
-            document.getElementById("logo").src = data.site.logo || "https://i.imgur.com/hRWK7MZ.png";
+        // Dữ liệu động từ data.json
+        fetch("/api/data")
+            .then(res => res.json())
+            .then(data => {
+                document.getElementById("site-title").innerText = data.site.title;
+                document.getElementById("main-title").innerText = data.site.main_title;
+                document.getElementById("main-description").innerText = data.site.description;
 
-            document.querySelectorAll("img").forEach(img => {
-                img.onerror = () => (img.src = "https://i.imgur.com/hRWK7MZ.png");
+                const contactList = document.getElementById("contact-list");
+                contactList.innerHTML = "";
+                data.contacts.forEach(c => {
+                    contactList.innerHTML += `
+            <div class="contact-card">
+              <h3>${c.name}</h3>
+              <p>${c.phone || ""}</p>
+              <a href="${c.link}" target="_blank" class="cta">Liên hệ ngay</a>
+            </div>`;
+                });
             });
-
-            const ctn = document.getElementById("contacts");
-            ctn.innerHTML = data.contacts.map(c => `
-        <div class="contact-card" style="background:${c.color}">
-          <h4>${c.name}</h4>
-          <a href="${c.link}" target="_blank">
-            <button>Liên hệ ngay</button>
-          </a>
-        </div>
-      `).join("");
-
-            if (data.site.chat_enabled && data.site.chat_id) {
-                const s = document.createElement("script");
-                s.src = "https://app.tudongchat.com/js/chatbox.js";
-                s.onload = () => {
-                    const chat = new TuDongChat(data.site.chat_id);
-                    chat.initial({ position: "right", themeColor: data.site.theme_color });
-                };
-                document.body.appendChild(s);
-            }
-        }
-        loadSite();
     </script>
 </body>
 

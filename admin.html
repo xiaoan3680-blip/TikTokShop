@@ -9,34 +9,69 @@
 </head>
 
 <body>
-    <h1>Quản trị TikTokShop Việt Nam</h1>
+    <h1>Trang quản trị TikTokShop</h1>
 
-    <div class="card">
+    <section>
         <h2>Cấu hình trang</h2>
-        <label>Tiêu đề:</label>
-        <input id="title">
-        <label>Mô tả:</label>
-        <input id="subtitle">
-        <label>Logo (link ảnh):</label>
-        <input id="logo">
-        <label>Mã chatbox (TuDongChat ID):</label>
-        <input id="chat_id">
-        <label><input type="checkbox" id="chat_enabled"> Bật chat tự động</label>
-    </div>
+        <input id="title" placeholder="Tiêu đề trang">
+        <input id="main_title" placeholder="Tiêu đề chính">
+        <textarea id="description" placeholder="Mô tả"></textarea>
+    </section>
 
-    <div class="card">
-        <h2>Liên hệ & Kênh kết nối</h2>
-        <div id="contact-list"></div>
-        <button class="btn" onclick="addContact()">Thêm liên hệ mới</button>
-    </div>
+    <section>
+        <h2>Danh sách liên hệ</h2>
+        <div id="contacts"></div>
+        <button id="addContact">Thêm liên hệ</button>
+    </section>
 
-    <div class="card">
-        <h2>Lưu cấu hình</h2>
-        <button class="btn" onclick="saveData()">💾 Lưu thay đổi</button>
-        <p id="status"></p>
-    </div>
+    <button id="save">Lưu thay đổi</button>
 
-    <script src="admin.js"></script>
+    <script>
+        let data = {};
+
+        fetch("/api/data")
+            .then(res => res.json())
+            .then(d => {
+                data = d;
+                document.getElementById("title").value = d.site.title;
+                document.getElementById("main_title").value = d.site.main_title;
+                document.getElementById("description").value = d.site.description;
+                loadContacts();
+            });
+
+        function loadContacts() {
+            const cDiv = document.getElementById("contacts");
+            cDiv.innerHTML = "";
+            data.contacts.forEach((c, i) => {
+                cDiv.innerHTML += `
+          <div>
+            <input value="${c.name}" onchange="updateContact(${i}, 'name', this.value)">
+            <input value="${c.link}" onchange="updateContact(${i}, 'link', this.value)">
+            <input value="${c.phone || ''}" onchange="updateContact(${i}, 'phone', this.value)">
+          </div>`;
+            });
+        }
+
+        function updateContact(i, key, value) {
+            data.contacts[i][key] = value;
+        }
+
+        document.getElementById("addContact").onclick = () => {
+            data.contacts.push({ name: "Liên hệ mới", link: "#", phone: "" });
+            loadContacts();
+        };
+
+        document.getElementById("save").onclick = () => {
+            data.site.title = document.getElementById("title").value;
+            data.site.main_title = document.getElementById("main_title").value;
+            data.site.description = document.getElementById("description").value;
+            fetch("/api/admin/update-data", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(data)
+            }).then(() => alert("Đã lưu thành công"));
+        };
+    </script>
 </body>
 
 </html>

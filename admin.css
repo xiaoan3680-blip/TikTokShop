@@ -1,68 +1,128 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
 body {
-    background: #111;
+    background-color: #0d0d0d;
     color: #fff;
-    font-family: "Inter", sans-serif;
-    text-align: center;
-    padding-bottom: 50px;
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    padding: 0;
 }
 
-h1 {
-    background: linear-gradient(90deg, #ff0050, #00f5ff);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    margin-top: 25px;
+.admin-header {
+    text-align: center;
+    padding: 25px;
+    background: linear-gradient(90deg, #00f2ea, #ff0050);
+    color: #fff;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+.admin-header span {
+    color: #000;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 30px auto;
+    padding: 0 20px;
 }
 
 .card {
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 14px;
-    margin: 20px auto;
-    padding: 20px;
-    width: 90%;
-    max-width: 700px;
-    box-shadow: 0 0 15px rgba(255, 0, 80, 0.3);
-    text-align: left;
+    background: #151515;
+    border: 1px solid #222;
+    border-radius: 12px;
+    box-shadow: 0 0 15px rgba(255, 0, 80, 0.1);
+    padding: 25px;
+    margin-bottom: 25px;
 }
 
-label {
-    display: block;
-    margin-top: 8px;
-    color: #ccc;
+.card h2 {
+    background: linear-gradient(90deg, #00f2ea, #ff0050);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 1.3rem;
+    margin-bottom: 20px;
 }
 
-input {
+.form-grid {
+    display: grid;
+    grid-template-columns: 150px 1fr;
+    gap: 10px 15px;
+    align-items: center;
+}
+
+input[type="text"],
+input[type="email"],
+textarea {
     width: 100%;
     padding: 10px;
-    margin-top: 6px;
     border-radius: 8px;
     border: none;
-    background: #222;
-    color: white;
-    font-size: 14px;
+    background: #1a1a1a;
+    color: #fff;
+    font-size: 0.95rem;
 }
 
-button,
-.btn {
-    background: linear-gradient(90deg, #ff0050, #00f5ff);
+.btn-primary,
+.btn-gradient {
+    margin-top: 20px;
+    padding: 10px 20px;
     border: none;
-    color: white;
-    padding: 8px 16px;
-    border-radius: 8px;
+    border-radius: 25px;
     font-weight: 600;
     cursor: pointer;
-    margin-top: 10px;
-    transition: 0.3s;
 }
 
-button:hover {
-    opacity: 0.85;
-    transform: scale(1.03);
+.btn-primary {
+    background: linear-gradient(90deg, #ff0050, #00f2ea);
+    color: #fff;
 }
 
-.contact-item {
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 10px;
-    padding: 10px;
-    margin: 10px 0;
+.btn-gradient {
+    background: linear-gradient(90deg, #00f2ea, #ff0050);
+    color: #fff;
+}
+
+.qr-form {
+    margin-top: 20px;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.qr-form input {
+    flex: 1;
+}
+
+#qr-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.qr-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #1a1a1a;
+    padding: 10px 15px;
+    border-radius: 8px;
+}
+
+.qr-item button {
+    background: #ff0050;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.footer {
+    text-align: center;
+    padding: 15px;
+    font-size: 0.9rem;
+    color: #aaa;
+    border-top: 1px solid #222;
+    margin-top: 30px;
 }

@@ -1,14 +1,17 @@
 {
   "name": "tiktokshop",
   "version": "1.0.0",
-  "description": "TikTokShop web",
+  "description": "TikTokShop Việt Nam - Nền tảng bán hàng trực tuyến hiện đại",
   "main": "server.js",
-  "type": "module",
   "scripts": {
     "start": "node server.js"
   },
   "dependencies": {
     "express": "^4.18.2",
     "body-parser": "^1.20.2"
-  }
+  },
+  "engines": {
+    "node": ">=18.x"
+  },
+  "license": "MIT"
 }

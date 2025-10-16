@@ -2,6 +2,9 @@ services:
   - type: web
     name: tiktokshop
     env: node
-    buildCommand: npm install
-    startCommand: npm start
     plan: free
+    buildCommand: "npm install"
+    startCommand: "node server.js"
+    envVars:
+      NODE_ENV: production
+    autoDeploy: true

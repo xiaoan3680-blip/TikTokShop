@@ -1,54 +1,66 @@
 body {
     background: #111;
     color: #fff;
-    font-family: 'Poppins', sans-serif;
+    font-family: "Inter", sans-serif;
     text-align: center;
     padding-bottom: 50px;
 }
 
 h1 {
-    background: linear-gradient(90deg, #ff66a3, #00e6ff);
+    background: linear-gradient(90deg, #ff0050, #00f5ff);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    margin-top: 25px;
 }
 
 .card {
     background: rgba(255, 255, 255, 0.05);
-    border-radius: 15px;
+    border-radius: 14px;
     margin: 20px auto;
     padding: 20px;
     width: 90%;
     max-width: 700px;
-    box-shadow: 0 0 15px rgba(255, 102, 163, 0.3);
+    box-shadow: 0 0 15px rgba(255, 0, 80, 0.3);
+    text-align: left;
+}
+
+label {
+    display: block;
+    margin-top: 8px;
+    color: #ccc;
 }
 
 input {
-    width: 90%;
+    width: 100%;
     padding: 10px;
-    margin: 8px 0;
+    margin-top: 6px;
     border-radius: 8px;
     border: none;
     background: #222;
     color: white;
+    font-size: 14px;
 }
 
 button,
 .btn {
-    background: linear-gradient(90deg, #ff66a3, #00e6ff);
+    background: linear-gradient(90deg, #ff0050, #00f5ff);
     border: none;
     color: white;
     padding: 8px 16px;
     border-radius: 8px;
-    font-weight: bold;
+    font-weight: 600;
     cursor: pointer;
     margin-top: 10px;
+    transition: 0.3s;
 }
 
 button:hover {
     opacity: 0.85;
+    transform: scale(1.03);
 }
 
 .contact-item {
+    background: rgba(255, 255, 255, 0.05);
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 10px;
     padding: 10px;

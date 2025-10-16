@@ -1,113 +1,146 @@
-<<<<<<< HEAD
-# 🎵 TikTokShop — Website Thương Hiệu Thông Minh 2025
+# 🛍️ TikTokShop Việt Nam – Website Bán Hàng Chuyên Nghiệp
 
-**TikTokShop** là website giới thiệu và quản lý thương hiệu thông minh,
-được xây dựng bằng **Node.js + Express + TailwindCSS** với giao diện neon phong cách TikTok.
+Dự án **TikTokShop Việt Nam** là nền tảng giới thiệu và quản lý gian hàng TikTokShop với giao diện **chuyên nghiệp**, **màu sắc neon dịu phong cách TikTok**, và **tối ưu hiển thị trên mọi thiết bị**.
 
 ---
 
 ## 🚀 Tính năng nổi bật
 
-✅ Giao diện **neon TikTok** đẹp mắt, tương thích mọi thiết bị (PC, tablet, mobile)  
-✅ Trang **Admin riêng** để chỉnh nội dung và xem tin nhắn  
-✅ Hỗ trợ **gửi tin nhắn từ người dùng** → lưu trực tiếp vào `data.json`  
-✅ **Hiệu ứng cuộn, gradient, neon động** siêu mượt  
-✅ Dễ triển khai, không cần database phức tạp  
-✅ Có thể **deploy online (Render, Vercel, hoặc Replit)**
+### 👨‍💻 Trang chính (`index.html`)
+- Giao diện hiện đại, tông đen–xám ánh hồng neon.  
+- Tự động hiển thị dữ liệu từ `data.json`.  
+- Các phần nội dung chuyên nghiệp:
+  - Giới thiệu TikTokShop  
+  - Lợi ích khi kinh doanh trên TikTok Shop  
+  - Hỗ trợ & tư vấn qua Zalo  
+  - Liên hệ & kênh kết nối  
+- **Tự động thay ảnh lỗi bằng ảnh mặc định** (không còn “Image Not Found”).  
+- **Chat tự động (TuDongChat)** hoạt động ổn định ở góc phải.
+
+### ⚙️ Trang quản trị (`/admin`)
+- Quản lý toàn bộ nội dung trang mà **không cần sửa code**.  
+- Có thể chỉnh:
+  - Tiêu đề, mô tả, logo  
+  - Chatbox ID  
+  - Danh sách liên hệ (Zalo, TikTok, Facebook, Hotline, v.v.)  
+- Giao diện **neon dịu, chuyên nghiệp**, font **Inter**.  
+- Lưu dữ liệu trực tiếp vào `data.json` qua API.
+
+### 🧩 Backend (`server.js`)
+- Xây dựng bằng **Express.js**  
+- Cấu hình API đọc & ghi dữ liệu (`/api/data`, `/api/admin/update-data`)  
+- Ghi log truy cập để tiện theo dõi người dùng.  
+- Hỗ trợ deploy dễ dàng trên Render hoặc bất kỳ server Node nào.
 
 ---
 
-## 📂 Cấu trúc thư mục
+## 🗂 Cấu trúc dự án
 
-TikTokShop/
-├── index.html # Trang chính (giao diện người dùng)
-├── admin.html # Trang quản trị nội dung
-├── server.js # Server Node.js + Express
-├── data.json # Lưu dữ liệu website & tin nhắn
-├── README.md # Tài liệu hướng dẫn này
+📁 TikTokShop/
+├── server.js
+├── data.json
+├── index.html
+├── admin.html
+├── admin.js
+├── admin.css
+├── render.yaml
+├── package.json
+└── README.md
 
 yaml
 Sao chép mã
 
 ---
 
-## ⚙️ Cài đặt & Chạy thử
+## 🧠 Cài đặt & chạy cục bộ
 
 ### 1️⃣ Cài Node.js
-Tải tại: [https://nodejs.org](https://nodejs.org)  
-Kiểm tra:
+Cần Node >= **18.x**
+
 ```bash
 node -v
 2️⃣ Cài dependencies
-Mở Terminal trong thư mục TikTokShop:
-
 bash
 Sao chép mã
-npm init -y
-npm install express
-3️⃣ Chạy server
+npm install
+3️⃣ Chạy ứng dụng
 bash
 Sao chép mã
-node server.js
-Trình duyệt mở:
+npm start
+Truy cập tại:
+👉 http://localhost:3000
 
-arduino
+🌐 Triển khai trên Render
+Tự động triển khai
+Khi bạn push code lên GitHub, Render sẽ tự động:
+
+Cài đặt dependencies (npm install)
+
+Chạy server (node server.js)
+
+Cung cấp website trực tuyến với HTTPS tự động.
+
+Cấu hình Render
+Trong file render.yaml:
+
+yaml
 Sao chép mã
-http://localhost:3000
-🔑 Đăng nhập trang Admin
+services:
+  - type: web
+    name: tiktokshop
+    env: node
+    plan: free
+    buildCommand: "npm install"
+    startCommand: "node server.js"
+🔧 Chỉnh sửa nội dung website
+Trang chính
+Dữ liệu hiển thị được lấy từ data.json.
+Để thay đổi, có 2 cách:
+
+✅ Cách 1: Dùng trang Admin
 Truy cập:
 
 bash
 Sao chép mã
-http://localhost:3000/admin.html
-Mật khẩu mặc định:
+https://tiktokshop888.com/admin
+Nhập thông tin và nhấn “Lưu thay đổi” → dữ liệu được cập nhật tự động.
 
-nginx
+⚙️ Cách 2: Sửa trực tiếp data.json
+Mở file:
+
+json
 Sao chép mã
-tiktok123
-Bạn có thể đổi mật khẩu trong file server.js:
+{
+  "site": {
+    "title": "TikTokShop Việt Nam",
+    "subtitle": "Nền tảng bán hàng hiện đại..."
+  }
+}
+💬 Chat tự động
+Chatbox được tích hợp sẵn qua TuDongChat.com
+Thay đổi ID trong data.json:
+
+json
+Sao chép mã
+"chat_id": "Nd9qOWI0l8QwPObLIb9Dx"
+🖼 Ảnh fallback (phòng lỗi)
+Mọi ảnh (logo, liên hệ, QR...) đều có cơ chế tự động thay bằng ảnh mặc định:
 
 js
 Sao chép mã
-const ADMIN_PASSWORD = "tiktok123";
-💬 Gửi và xem tin nhắn
-Khách truy cập gửi tin qua form trên trang chính (index.html)
+img.onerror = () => (img.src = "https://i.imgur.com/hRWK7MZ.png");
+🔐 Bảo mật & ghi chú
+Mật khẩu admin được định sẵn trong server.js có thể thay đổi:
 
-Tin nhắn sẽ được lưu trong data.json
+js
+Sao chép mã
+password === "tiktok123"
+Không chia sẻ mã chatbox hoặc mật khẩu admin công khai.
 
-Vào admin.html để xem tất cả tin nhắn ngay lập tức
+Nên bật HTTPS (Render tự cấu hình).
 
-🌍 Tùy chỉnh nhanh
-Thành phần	File chỉnh	Ghi chú
-Tên thương hiệu	data.json (site.title)	Hiện ở đầu trang
-Câu slogan	data.json (site.slogan)	Hiện ngay dưới tiêu đề
-Mô tả thương hiệu	data.json (site.brand_description)	Giữa trang
-Link truy cập	data.json (site.brand_link)	Đã gắn https://tiktokshop88.net
-Liên hệ (email, facebook,...)	data.json (contact)	Hiện ở mục Liên hệ
+👑 Bản quyền
+© 2025 TikTokShop Việt Nam
+Phát triển bởi nhóm Linh Dan
+Mọi bản quyền thuộc về chủ sở hữu hợp pháp.
 
-🧠 Triển khai online (tùy chọn)
-Bạn có thể deploy web dễ dàng trên:
-
-Render.com
-
-Vercel.com
-
-Replit.com
-
-Hoặc bất kỳ hosting nào hỗ trợ Node.js.
-Sau khi deploy, website hoạt động 24/7 như một trang thương hiệu thực thụ 🌐
-
-👨‍💻 Tác giả & Bản quyền
-© 2025 TikTokShop
-Phát triển bởi TikTokShop Team
-Giao diện chuyên nghiệp & công nghệ bởi Node.js & Express
-
-📧 Liên hệ kỹ thuật
-Nếu bạn cần hỗ trợ cài đặt hoặc tuỳ chỉnh thêm:
-
-Email: support@tiktokshop88.net
-Website: https://tiktokshop88.net
-=======
-# TikTokShop
-Nền tảng bán hàng TikTok
->>>>>>> 825c23585b020546e6b086aeb8bd34be5e1b6461

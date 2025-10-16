@@ -1,52 +1,32 @@
 {
     "site": {
-        "title": "TikTokShop 💎",
-        "subtitle": "Mua sắm xu hướng TikTok – Giao diện Neon nhẹ, sang trọng.",
-        "homepage": "https://tiktokshop888.com",
+        "title": "TikTokShop Việt Nam",
+        "subtitle": "Nền tảng bán hàng trực tuyến hiện đại – Giao diện chuyên nghiệp, tối ưu di động.",
         "logo": "https://i.imgur.com/hRWK7MZ.png",
         "chat_enabled": true,
         "chat_id": "Nd9qOWI0l8QwPObLIb9Dx",
-        "theme_color": "#ff66a3"
+        "theme_color": "#ff0050"
     },
-    "contact": {
-        "email": "support@tiktokshop888.com",
-        "phone": "0123456789"
-    },
-    "qrcodes": [
-        {
-            "label": "Zalo CSKH",
-            "image": "https://i.imgur.com/hRWK7MZ.png"
-        },
-        {
-            "label": "TikTok Shop",
-            "image": "https://i.imgur.com/lrD4mlB.jpeg"
-        }
-    ],
     "contacts": [
         {
             "name": "Zalo CSKH",
-            "link": "https://zalo.me/",
-            "icon": "https://i.imgur.com/hRWK7MZ.png",
-            "color": "#00aefd"
+            "link": "https://zalo.me/0123456789",
+            "color": "#00AEEF"
         },
         {
-            "name": "TikTok",
-            "link": "https://tiktok.com/@tiktokshop888",
-            "icon": "https://i.imgur.com/4Y5YhXx.png",
+            "name": "TikTok Chính thức",
+            "link": "https://www.tiktok.com/@tiktokshop888",
             "color": "#ff0050"
         },
         {
             "name": "Facebook",
             "link": "https://facebook.com/tiktokshop888",
-            "icon": "https://i.imgur.com/Orj5A3k.png",
             "color": "#1877F2"
         },
         {
             "name": "Hotline",
             "link": "tel:0123456789",
-            "icon": "https://i.imgur.com/lXfPQKC.png",
             "color": "#25D366"
         }
-    ],
-    "messages": []
+    ]
 }

@@ -15,10 +15,9 @@ function renderContacts(list) {
     const div = document.getElementById("contact-list");
     div.innerHTML = list.map((c, i) => `
     <div class="contact-item">
-      <input id="c-name-${i}" value="${c.name}" placeholder="Tên">
-      <input id="c-link-${i}" value="${c.link}" placeholder="Liên kết">
-      <input id="c-icon-${i}" value="${c.icon}" placeholder="Icon (link ảnh)">
-      <input id="c-color-${i}" value="${c.color}" placeholder="Màu (#hex)">
+      <input id="c-name-${i}" value="${c.name}" placeholder="Tên liên hệ">
+      <input id="c-link-${i}" value="${c.link}" placeholder="Liên kết (URL)">
+      <input id="c-color-${i}" value="${c.color}" placeholder="Màu nền (#hex)">
       <button onclick="removeContact(${i})">Xóa</button>
     </div>
   `).join("");
@@ -29,10 +28,9 @@ function addContact() {
     const i = div.children.length;
     div.insertAdjacentHTML("beforeend", `
     <div class="contact-item">
-      <input id="c-name-${i}" placeholder="Tên">
-      <input id="c-link-${i}" placeholder="Liên kết">
-      <input id="c-icon-${i}" placeholder="Icon">
-      <input id="c-color-${i}" placeholder="Màu (#hex)">
+      <input id="c-name-${i}" placeholder="Tên liên hệ">
+      <input id="c-link-${i}" placeholder="Liên kết (URL)">
+      <input id="c-color-${i}" placeholder="Màu nền (#hex)">
       <button onclick="removeContact(${i})">Xóa</button>
     </div>
   `);
@@ -57,7 +55,6 @@ async function saveData() {
         list.push({
             name: document.getElementById(`c-name-${i}`).value,
             link: document.getElementById(`c-link-${i}`).value,
-            icon: document.getElementById(`c-icon-${i}`).value,
             color: document.getElementById(`c-color-${i}`).value
         });
     });
@@ -68,8 +65,9 @@ async function saveData() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data)
     });
+
     const resSave = await save.json();
-    document.getElementById("status").textContent = resSave.success ? "✅ Đã lưu thành công!" : "❌ Lỗi khi lưu!";
+    document.getElementById("status").textContent = resSave.success ? "✅ Đã lưu thành công!" : "❌ Lưu thất bại!";
 }
 
 loadData();

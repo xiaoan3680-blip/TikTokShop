@@ -13,7 +13,7 @@ const PORT = process.env.PORT || 3000;
 app.use(bodyParser.json());
 app.use(express.static(__dirname));
 
-// Log truy cập
+// Ghi log truy cập
 app.use((req, res, next) => {
     console.log(`[${new Date().toISOString()}] ${req.method} ${req.url}`);
     next();
@@ -29,25 +29,6 @@ app.get("/api/data", (req, res) => {
     } catch {
         res.status(500).json({ error: "Không thể đọc dữ liệu" });
     }
-});
-
-// --- API gửi tin nhắn ---
-app.post("/api/contact-form", (req, res) => {
-    try {
-        const { name, email, message } = req.body;
-        const data = getData();
-        data.messages.push({ name, email, message, time: new Date().toLocaleString() });
-        fs.writeFileSync(dataFile, JSON.stringify(data, null, 2));
-        res.json({ success: true });
-    } catch {
-        res.status(500).json({ success: false });
-    }
-});
-
-// --- API đăng nhập admin ---
-app.post("/api/admin/login", (req, res) => {
-    const { password } = req.body;
-    res.json({ success: password === "tiktok123" });
 });
 
 // --- API cập nhật dữ liệu ---

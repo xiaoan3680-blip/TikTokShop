@@ -6,6 +6,7 @@
         "tiktok": "https://tiktok.com/@tiktokshop888",
         "instagram": "https://instagram.com/tiktokshop888"
     },
+    "zalo_phone": "0123456789",
     "qrcodes": [
         {
             "label": "Zalo CSKH",
@@ -16,5 +17,6 @@
             "image": ""
         }
     ],
-    "messages": []
+    "messages": [],
+    "bills": []
 }

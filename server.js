@@ -1,37 +1,31 @@
-// --- Import các thư viện cần thiết ---
 import express from "express";
 import fs from "fs";
 import bodyParser from "body-parser";
 import path from "path";
 import { fileURLToPath } from "url";
 
-// --- Thiết lập đường dẫn ---
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// --- Khởi tạo ứng dụng Express ---
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// 🟢 --- Ghi log hoạt động ---
+// 🟢 Log hoạt động
 app.use((req, res, next) => {
     console.log(`[${new Date().toLocaleString()}] ${req.method} ${req.url}`);
     next();
 });
 
-// --- Cấu hình middleware ---
 app.use(bodyParser.json());
 app.use(express.static(__dirname));
 
-// --- File dữ liệu JSON ---
 const dataFile = path.join(__dirname, "data.json");
 
-// --- Hàm đọc dữ liệu từ file ---
 const getData = () => {
     try {
         return JSON.parse(fs.readFileSync(dataFile, "utf-8"));
     } catch {
-        return { messages: [], qrcodes: [] };
+        return { contact: {}, qrcodes: [], messages: [], bills: [], zalo_phone: "" };
     }
 };
 
@@ -53,6 +47,24 @@ app.post("/api/contact-form", (req, res) => {
             name,
             email,
             message,
+            time: new Date().toLocaleString(),
+        });
+        fs.writeFileSync(dataFile, JSON.stringify(data, null, 2));
+        res.status(200).json({ success: true });
+    } catch {
+        res.status(500).json({ success: false });
+    }
+});
+
+// --- API thêm bill ---
+app.post("/api/order", (req, res) => {
+    try {
+        const { name, product, total } = req.body;
+        const data = getData();
+        data.bills.push({
+            name,
+            product,
+            total,
             time: new Date().toLocaleString(),
         });
         fs.writeFileSync(dataFile, JSON.stringify(data, null, 2));

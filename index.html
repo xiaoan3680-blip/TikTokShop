@@ -1,320 +1,166 @@
 <!DOCTYPE html>
 <html lang="vi">
-
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>TikTokShop – Nền tảng bán hàng chuyên nghiệp 2025</title>
-    <link rel="stylesheet" href="admin.css">
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TiktokShop – Nền tảng bán hàng chuyên nghiệp</title>
+  <link rel="icon" href="https://swamediainc.storage.googleapis.com/swa.co.id/wp-content/uploads/2023/09/27121051/TikTok-Shop.jpg" type="image/jpeg">
+  <style>
+    body {margin:0; font-family:'Poppins',sans-serif; background-color:#0d0d0d; color:#fff;}
+    header {background:#000; display:flex; justify-content:space-between; align-items:center; padding:15px 40px; box-shadow:0 0 10px rgba(255,255,255,0.1);}
+    header img {height:45px;}
+    nav a {color:#fff; margin:0 15px; text-decoration:none; font-weight:500; transition:0.3s;}
+    nav a:hover {color:#25F4EE;}
+    section {padding:60px 20px; text-align:center;}
+    h2 {font-size:2em; background:linear-gradient(90deg,#25F4EE,#FE2C55); -webkit-background-clip:text; -webkit-text-fill-color:transparent;}
+    p {color:#ccc; max-width:700px; margin:0 auto;}
 
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #0d0d0d;
-            color: #fff;
-            margin: 0;
-            padding: 0;
-            line-height: 1.6;
-        }
+    /* Hero */
+    #hero {background:url('uploads/hero.jpg') center/cover no-repeat; padding:120px 20px; color:#fff; position:relative;}
+    #hero::before {content:''; position:absolute; inset:0; background:rgba(0,0,0,0.5);}
+    #hero .content {position:relative; z-index:2;}
+    #hero h1 {font-size:2.8em; margin-bottom:15px;}
+    #hero p {font-size:1.2em; color:#ddd; margin-bottom:30px;}
+    .cta-btn {padding:14px 30px; border:none; border-radius:30px; font-size:1.1em; background:linear-gradient(90deg,#FE2C55,#25F4EE,#FE2C55); background-size:200% auto; color:#fff; cursor:pointer; transition:0.5s;}
+    .cta-btn:hover {background-position:right center; transform:scale(1.05);}
 
-        /* HEADER */
-        header {
-            background: linear-gradient(90deg, #00f2ea, #ff0050);
-            color: white;
-            padding: 12px 25px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-        }
+    /* QR section */
+    .qr-section {display:flex; flex-wrap:wrap; justify-content:center; gap:40px; margin-top:30px;}
+    .qr-box {background:#121212; padding:20px; border-radius:15px; width:250px; text-align:center; box-shadow:0 0 10px rgba(255,255,255,0.1); transition:transform 0.3s ease;}
+    .qr-box img {width:100%; border-radius:10px; transition:transform 0.3s ease;}
+    .qr-box:hover {transform:translateY(-5px);}
+    .qr-box img:hover {transform:scale(1.08);}
+    .qr-box h4 {margin-top:10px;}
+    .qr-box button {margin-top:10px; background:linear-gradient(90deg,#25F4EE,#FE2C55); border:none; color:#fff; padding:10px 15px; border-radius:25px; cursor:pointer;}
 
-        header h1 {
-            font-size: 1.6rem;
-            margin: 0;
-            background: linear-gradient(90deg, #00f2ea, #ff0050);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
+    /* Notifications */
+    #notifications {background:#111; padding:15px; border-radius:10px; max-width:600px; margin:0 auto 40px;}
+    #notifications p {background:linear-gradient(90deg,#25F4EE,#FE2C55); -webkit-background-clip:text; -webkit-text-fill-color:transparent; font-weight:600;}
 
-        nav a {
-            color: white;
-            text-decoration: none;
-            margin: 0 12px;
-            font-weight: 600;
-        }
+    /* Contact form */
+    form input, form textarea {width:100%; padding:12px; margin:8px 0; border:none; border-radius:8px; background:#1e1e1e; color:#fff;}
+    form button {width:100%;padding:12px;background:linear-gradient(90deg,#FE2C55,#25F4EE);border:none;border-radius:25px;color:#fff;font-size:1.1em;cursor:pointer;transition:0.3s;}
+    form button:hover {transform:scale(1.05);}
+    #formStatus {margin-top:20px;font-weight:600;}
 
-        nav a:hover {
-            opacity: 0.8;
-            text-decoration: underline;
-        }
-
-        /* HERO */
-        .hero {
-            text-align: center;
-            padding: 80px 20px;
-            background: #111;
-            border-bottom: 2px solid #ff0050;
-        }
-
-        .hero h2 {
-            font-size: 2.5rem;
-            background: linear-gradient(90deg, #00f2ea, #ff0050);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 10px;
-        }
-
-        .hero p {
-            font-size: 1.1rem;
-            color: #ccc;
-            margin-bottom: 30px;
-        }
-
-        .btn {
-            background: linear-gradient(90deg, #ff0050, #00f2ea);
-            border: none;
-            color: white;
-            font-weight: 600;
-            border-radius: 25px;
-            padding: 12px 28px;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
-        .btn:hover {
-            opacity: 0.9;
-            transform: scale(1.05);
-        }
-
-        /* SECTIONS */
-        section {
-            padding: 60px 20px;
-            text-align: center;
-            max-width: 1100px;
-            margin: auto;
-        }
-
-        section h3 {
-            font-size: 1.9rem;
-            background: linear-gradient(90deg, #00f2ea, #ff0050);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 25px;
-        }
-
-        section p {
-            color: #ccc;
-            font-size: 1rem;
-        }
-
-        /* BENEFITS GRID */
-        .benefits {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            margin-top: 35px;
-        }
-
-        .benefit {
-            background: #141414;
-            border: 1px solid #222;
-            border-radius: 12px;
-            padding: 25px;
-            color: #fff;
-            box-shadow: 0 0 15px rgba(255, 0, 80, 0.2);
-        }
-
-        /* QR SECTION */
-        .qr-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 25px;
-            margin-top: 25px;
-        }
-
-        .qr-card {
-            background: #121212;
-            border-radius: 12px;
-            padding: 20px;
-            width: 230px;
-            text-align: center;
-            border: 1px solid #333;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-        }
-
-        .qr-card img {
-            width: 100%;
-            height: 220px;
-            object-fit: cover;
-            border-radius: 8px;
-            background: #1e1e1e;
-        }
-
-        .qr-card button {
-            margin-top: 12px;
-            background: linear-gradient(90deg, #ff0050, #00f2ea);
-            border: none;
-            color: white;
-            padding: 8px 16px;
-            border-radius: 20px;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
-        .qr-card button:hover {
-            opacity: 0.85;
-            transform: scale(1.03);
-        }
-
-        /* CONTACT */
-        form {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            max-width: 500px;
-            margin: auto;
-        }
-
-        form input,
-        form textarea {
-            width: 100%;
-            padding: 12px;
-            margin: 8px 0;
-            border-radius: 8px;
-            border: none;
-            background: #1a1a1a;
-            color: white;
-        }
-
-        form button {
-            background: linear-gradient(90deg, #ff0050, #00f2ea);
-            border: none;
-            color: white;
-            padding: 10px 25px;
-            border-radius: 25px;
-            cursor: pointer;
-            font-weight: 600;
-        }
-
-        /* FOOTER */
-        footer {
-            text-align: center;
-            padding: 25px;
-            background: #0d0d0d;
-            border-top: 1px solid #222;
-            font-size: 0.95rem;
-            color: #aaa;
-        }
-
-        footer a {
-            text-decoration: none;
-            font-weight: 500;
-        }
-
-        footer a:hover {
-            opacity: 0.8;
-        }
-
-        /* RESPONSIVE */
-        @media (max-width: 768px) {
-            header {
-                flex-direction: column;
-                text-align: center;
-            }
-
-            .hero h2 {
-                font-size: 1.8rem;
-            }
-        }
-    </style>
+    footer {background:#000; text-align:center; padding:30px; color:#aaa;}
+    footer a {color:#25F4EE; text-decoration:none; margin:0 10px;}
+    footer a:hover {color:#FE2C55;}
+  </style>
 </head>
-
 <body>
-    <!-- HEADER -->
-    <header>
-        <h1>TikTokShop</h1>
-        <nav>
-            <a href="#about">Giới thiệu</a>
-            <a href="#contact">Liên hệ</a>
-            <a href="#form">Gửi tin nhắn</a>
-        </nav>
-    </header>
+  <!-- HEADER -->
+  <header>
+    <img src="https://dreamagency.vn/wp-content/uploads/2022/08/Tiktok-Shop.jpg" alt="TikTokShop Logo">
+    <nav>
+      <a href="#hero">Trang chủ</a>
+      <a href="#about">Giới thiệu</a>
+      <a href="#qr">Liên kết</a>
+      <a href="#contact">Liên hệ</a>
+    </nav>
+  </header>
 
-    <!-- HERO -->
-    <section class="hero">
-        <h2>Nền tảng bán hàng chuyên nghiệp 2025</h2>
-        <p>Phát triển thương hiệu và tạo thu nhập cùng TikTok E-commerce.</p>
-        <button class="btn" onclick="window.location.href='https://tiktokshop88.net'">Bắt đầu ngay</button>
-    </section>
+  <!-- HERO -->
+  <section id="hero">
+    <div class="content">
+      <h1 id="heroTitle">Nền tảng bán hàng chuyên nghiệp 2025</h1>
+      <p id="heroSubtitle">Phát triển thương hiệu và tạo thu nhập cùng TikTok E-commerce.</p>
+      <button class="cta-btn" id="ctaBtn" onclick="window.open('https://zalo.me/+84523554811','_blank')">Bắt đầu ngay</button>
+    </div>
+  </section>
 
-    <!-- ABOUT -->
-    <section id="about">
-        <h3>Về TikTokShop</h3>
-        <p>
-            TikTokShop giúp bạn kết nối sản phẩm của mình với hàng triệu người dùng TikTok.
-            Với giao diện hiện đại, tính năng thông minh và công cụ bán hàng tự động,
-            nền tảng này giúp bạn kinh doanh dễ dàng hơn bao giờ hết.
-        </p>
-    </section>
+  <!-- NOTIFICATIONS -->
+  <div id="notifications">
+    <p>🎉 Chào mừng bạn đến với TikTokShop chính thức!</p>
+    <p>🔥 Hỗ trợ mở shop miễn phí, liên hệ ngay!</p>
+  </div>
 
-    <!-- BENEFITS -->
-    <section>
-        <h3>Lợi ích khi mở shop TikTok</h3>
-        <div class="benefits">
-            <div class="benefit">🚀 Tăng doanh thu tự nhiên nhờ video ngắn</div>
-            <div class="benefit">💸 Bán hàng 24/7 – nhận đơn tự động</div>
-            <div class="benefit">📦 Dễ dàng quản lý – phù hợp người mới bắt đầu</div>
-            <div class="benefit">🎯 Được chuyên viên hỗ trợ mở shop miễn phí</div>
-        </div>
-    </section>
+  <!-- QR SECTION -->
+  <section id="qr">
+    <h2>Kết nối nhanh qua Mã QR</h2>
+    <div class="qr-section">
+      <div class="qr-box">
+        <img src="uploads/qr_zalo.png" alt="QR Zalo CSKH">
+        <h4>Zalo CSKH</h4>
+        <button onclick="window.open('https://zalo.me/+84523554811','_blank')">Liên hệ ngay</button>
+      </div>
+      <div class="qr-box">
+        <img src="uploads/qr_tiktok.png" alt="QR TikTok Shop">
+        <h4>TikTok Shop</h4>
+        <button onclick="window.open('https://www.tiktok.com/@goccuaembong88','_blank')">Mở TikTok</button>
+      </div>
+    </div>
+  </section>
 
-    <!-- QR SECTION -->
-    <section>
-        <h3>Kết nối nhanh qua Mã QR</h3>
-        <div class="qr-container">
-            <div class="qr-card">
-                <img src="https://i.imgur.com/hRWK7M1.png" alt="Zalo CSKH">
-                <p>Zalo CSKH</p>
-                <button onclick="window.open('https://zalo.me', '_blank')">Quét để kết nối</button>
-            </div>
-            <div class="qr-card">
-                <img src="https://i.imgur.com/lrD4mIB.jpg" alt="TikTok Shop">
-                <p>TikTok Shop</p>
-                <button onclick="window.open('https://tiktokshop88.net', '_blank')">Quét để kết nối</button>
-            </div>
-        </div>
-    </section>
+  <!-- CONTACT FORM -->
+  <section id="contact">
+    <h2>Liên hệ với chúng tôi</h2>
+    <p>Hoặc nhắn trực tiếp qua Zalo để được hỗ trợ mở shop miễn phí.</p>
 
-    <!-- CONTACT -->
-    <section id="contact">
-        <h3>Liên hệ với chúng tôi</h3>
-        <p>Hoặc nhắn trực tiếp qua Zalo để được hỗ trợ mở shop miễn phí.</p>
-        <form id="form">
-            <input type="text" placeholder="Họ và tên" required />
-            <input type="email" placeholder="Email" required />
-            <textarea rows="4" placeholder="Tin nhắn của bạn..." required></textarea>
-            <button type="submit">Gửi tin nhắn</button>
-        </form>
-    </section>
+    <form id="contactForm">
+      <label>Họ và tên</label>
+      <input type="text" id="name" placeholder="Nhập họ tên" required>
+      <label>Số điện thoại</label>
+      <input type="tel" id="phone" placeholder="Nhập số điện thoại" required>
+      <label>Tin nhắn của bạn</label>
+      <textarea id="message" placeholder="Nhập nội dung cần hỗ trợ..." required></textarea>
+      <button type="submit">Gửi tin nhắn</button>
+    </form>
+    <div id="formStatus"></div>
+  </section>
 
-    <!-- FOOTER -->
-    <footer>
-        © 2025 TikTokShop – Nền tảng bán hàng chuyên nghiệp
-        <br>
-        <a href="https://tiktokshop88.net" target="_blank" style="color:#00f2ea;">Trang chính thức</a> |
-        <a href="https://facebook.com" target="_blank" style="color:#ff0050;">Facebook</a> |
-        <a href="https://zalo.me" target="_blank" style="color:#00f2ea;">Zalo</a> |
-        <a href="mailto:support@tiktokshop888.com" style="color:#ff0050;">Email</a>
-    </footer>
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2025 TikTokShop – Nền tảng bán hàng chuyên nghiệp</p>
+    <p>
+      <a href="https://www.tiktok.com/@goccuaembong88">TikTok</a> |
+      <a href="https://zalo.me/+84523554811">Zalo</a> |
+      <a href="mailto:contact@tiktokshop.vn">Email</a>
+    </p>
+  </footer>
 
-    <!-- CHATBOX -->
-    <script src="https://app.tudongchat.com/js/chatbox.js"></script>
-    <script>
-        const tudong_chatbox = new TuDongChat('Nd9qOWI0l8QwPObLIb9Dx');
-        tudong_chatbox.initial();
-    </script>
+  <!-- FORM SCRIPT -->
+  <script>
+    document.getElementById("contactForm").addEventListener("submit", async function(e) {
+      e.preventDefault();
+      const name = document.getElementById("name").value.trim();
+      const phone = document.getElementById("phone").value.trim();
+      const message = document.getElementById("message").value.trim();
+      const statusDiv = document.getElementById("formStatus");
+
+      if (!name || !phone || !message) {
+        statusDiv.style.color = "#FE2C55";
+        statusDiv.textContent = "⚠️ Vui lòng nhập đầy đủ thông tin.";
+        return;
+      }
+
+      try {
+        const res = await fetch("/api/sendMessage", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ name, phone, message })
+        });
+        const data = await res.json();
+        if (data.message) {
+          statusDiv.style.color = "#25F4EE";
+          statusDiv.textContent = "✅ " + data.message;
+          document.getElementById("contactForm").reset();
+        } else {
+          statusDiv.style.color = "#FE2C55";
+          statusDiv.textContent = "❌ Gửi thất bại, vui lòng thử lại.";
+        }
+      } catch (error) {
+        statusDiv.style.color = "#FE2C55";
+        statusDiv.textContent = "⚠️ Lỗi kết nối đến máy chủ!";
+      }
+    });
+  </script>
+
+  <!-- AUTO CHAT -->
+  <script src="https://app.tudongchat.com/js/chatbox.js"></script>
+  <script>
+    const tudong_chatbox = new TuDongChat('Nd9qOWI0l8QwPObLIb9Dx');
+    tudong_chatbox.initial();
+  </script>
 </body>
-
 </html>

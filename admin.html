@@ -4,34 +4,79 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quản trị TikTokShop</title>
+    <title>Bảng Quản Trị - TikTokShop</title>
+    <link rel="icon"
+        href="https://swamediainc.storage.googleapis.com/swa.co.id/wp-content/uploads/2023/09/27121051/TikTok-Shop.jpg"
+        type="image/jpeg">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="admin.css">
 </head>
 
 <body>
     <header>
-        <h1>Quản trị <span>TikTokShop</span></h1>
+        <h1>Trang Quản Trị TikTokShop</h1>
     </header>
 
-    <main>
-        <section>
-            <h2>Cấu hình trang chính</h2>
-            <input id="phone" placeholder="Số điện thoại">
-            <input id="email" placeholder="Email liên hệ">
-            <input id="facebook" placeholder="Facebook">
-            <input id="tiktok" placeholder="TikTok">
-            <input id="zalo" placeholder="Zalo">
-            <button id="saveData">💾 Lưu thay đổi</button>
-        </section>
+    <!-- Đăng nhập -->
+    <div id="loginBox" class="login-container">
+        <h2>Đăng nhập Quản trị viên</h2>
+        <input type="text" id="username" placeholder="Tài khoản" required>
+        <input type="password" id="password" placeholder="Mật khẩu" required>
+        <button onclick="login()">Đăng nhập</button>
+        <p id="errorMsg" class="error"></p>
+    </div>
 
-        <section>
-            <h2>Quản lý mã QR</h2>
-            <div id="qrList"></div>
-            <button id="addQR">+ Thêm mã QR</button>
+    <!-- Khu vực quản trị -->
+    <main id="adminPanel" style="display:none;">
+        <h2 id="welcomeText"></h2>
+        <div id="adminRole"></div>
+
+        <!-- Phần cập nhật dữ liệu -->
+        <form id="updateForm" enctype="multipart/form-data">
+            <h3>Cập nhật nội dung trang chủ</h3>
+
+            <label>Tiêu đề chính:</label>
+            <input type="text" id="heroTitle" name="heroTitle">
+
+            <label>Mô tả phụ:</label>
+            <input type="text" id="heroSubtitle" name="heroSubtitle">
+
+            <label>Nút CTA (văn bản):</label>
+            <input type="text" id="ctaText" name="ctaText">
+
+            <label>Liên kết CTA:</label>
+            <input type="text" id="ctaLink" name="ctaLink">
+
+            <label>Hình nền hero:</label>
+            <input type="file" id="heroImage" name="heroImage" accept="image/*">
+
+            <h3>Ảnh QR Liên hệ</h3>
+            <label>QR Zalo:</label>
+            <input type="file" id="zaloQR" name="zaloQR" accept="image/*">
+            <label>QR TikTok:</label>
+            <input type="file" id="tiktokQR" name="tiktokQR" accept="image/*">
+
+            <h3>Thông báo sự kiện</h3>
+            <div id="notifications"></div>
+            <button type="button" onclick="addNotification()">+ Thêm thông báo</button>
+
+            <h3>Liên hệ</h3>
+            <div id="contacts"></div>
+            <button type="button" onclick="addContact()">+ Thêm liên hệ</button>
+
+            <button type="button" onclick="saveData()">💾 Lưu thay đổi</button>
+        </form>
+
+        <!-- Tin nhắn khách hàng -->
+        <section id="messagesSection">
+            <h3>Tin nhắn khách hàng</h3>
+            <div id="messagesList">Đang tải...</div>
         </section>
     </main>
 
-    <footer>© 2025 TikTokShop Admin Panel</footer>
+    <footer>
+        <p>© 2025 TikTokShop – Hệ thống quản trị chuyên nghiệp.</p>
+    </footer>
 
     <script src="admin.js"></script>
 </body>

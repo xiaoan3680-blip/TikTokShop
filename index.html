@@ -2,17 +2,16 @@
 <html lang="vi">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>TiktokShop – Nền tảng bán hàng chuyên nghiệp</title>
     <link rel="icon"
         href="https://swamediainc.storage.googleapis.com/swa.co.id/wp-content/uploads/2023/09/27121051/TikTok-Shop.jpg"
-        type="image/jpeg">
-
+        type="image/jpeg" />
     <style>
         body {
             margin: 0;
-            font-family: 'Poppins', sans-serif;
+            font-family: "Poppins", sans-serif;
             background-color: #0d0d0d;
             color: #fff;
         }
@@ -39,7 +38,7 @@
         }
 
         nav a:hover {
-            color: #25F4EE;
+            color: #25f4ee;
         }
 
         section {
@@ -49,7 +48,7 @@
 
         h2 {
             font-size: 2em;
-            background: linear-gradient(90deg, #25F4EE, #FE2C55);
+            background: linear-gradient(90deg, #25f4ee, #fe2c55);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
@@ -60,24 +59,11 @@
             margin: 0 auto;
         }
 
-        /* Hero */
         #hero {
-            background: url('uploads/hero.jpg') center/cover no-repeat;
+            background: #000;
             padding: 120px 20px;
             color: #fff;
             position: relative;
-        }
-
-        #hero::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.5);
-        }
-
-        #hero .content {
-            position: relative;
-            z-index: 2;
         }
 
         #hero h1 {
@@ -96,7 +82,7 @@
             border: none;
             border-radius: 30px;
             font-size: 1.1em;
-            background: linear-gradient(90deg, #FE2C55, #25F4EE, #FE2C55);
+            background: linear-gradient(90deg, #fe2c55, #25f4ee, #fe2c55);
             background-size: 200% auto;
             color: #fff;
             cursor: pointer;
@@ -108,7 +94,6 @@
             transform: scale(1.05);
         }
 
-        /* QR section */
         .qr-section {
             display: flex;
             flex-wrap: wrap;
@@ -147,7 +132,7 @@
 
         .qr-box button {
             margin-top: 10px;
-            background: linear-gradient(90deg, #25F4EE, #FE2C55);
+            background: linear-gradient(90deg, #25f4ee, #fe2c55);
             border: none;
             color: #fff;
             padding: 10px 15px;
@@ -155,7 +140,6 @@
             cursor: pointer;
         }
 
-        /* Notifications */
         #notifications {
             background: #111;
             padding: 15px;
@@ -165,13 +149,12 @@
         }
 
         #notifications p {
-            background: linear-gradient(90deg, #25F4EE, #FE2C55);
+            background: linear-gradient(90deg, #25f4ee, #fe2c55);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             font-weight: 600;
         }
 
-        /* Contact form */
         form input,
         form textarea {
             width: 100%;
@@ -186,7 +169,7 @@
         form button {
             width: 100%;
             padding: 12px;
-            background: linear-gradient(90deg, #FE2C55, #25F4EE);
+            background: linear-gradient(90deg, #fe2c55, #25f4ee);
             border: none;
             border-radius: 25px;
             color: #fff;
@@ -212,21 +195,20 @@
         }
 
         footer a {
-            color: #25F4EE;
+            color: #25f4ee;
             text-decoration: none;
             margin: 0 10px;
         }
 
         footer a:hover {
-            color: #FE2C55;
+            color: #fe2c55;
         }
     </style>
 </head>
 
 <body>
-    <!-- HEADER -->
     <header>
-        <img src="https://dreamagency.vn/wp-content/uploads/2022/08/Tiktok-Shop.jpg" alt="TikTokShop Logo">
+        <img src="https://dreamagency.vn/wp-content/uploads/2022/08/Tiktok-Shop.jpg" alt="TikTokShop Logo" />
         <nav>
             <a href="#hero">Trang chủ</a>
             <a href="#about">Giới thiệu</a>
@@ -235,49 +217,50 @@
         </nav>
     </header>
 
-    <!-- HERO -->
     <section id="hero">
-        <div class="content">
-            <h1 id="heroTitle">Nền tảng bán hàng chuyên nghiệp 2025</h1>
-            <p id="heroSubtitle">Phát triển thương hiệu và tạo thu nhập cùng TikTok E-commerce.</p>
-            <button class="cta-btn" id="ctaBtn" onclick="window.open('https://zalo.me/+84523554811','_blank')">Bắt đầu
-                ngay</button>
-        </div>
+        <h1 id="heroTitle">Nền tảng bán hàng chuyên nghiệp 2025</h1>
+        <p id="heroSubtitle">
+            Phát triển thương hiệu và tạo thu nhập cùng TikTok E-commerce.
+        </p>
+        <button class="cta-btn" id="ctaBtn" onclick="window.open('https://zalo.me/+84523554811','_blank')">
+            Bắt đầu ngay
+        </button>
     </section>
 
-    <!-- NOTIFICATIONS -->
     <div id="notifications">
         <p>🎉 Chào mừng bạn đến với TikTokShop chính thức!</p>
         <p>🔥 Hỗ trợ mở shop miễn phí, liên hệ ngay!</p>
     </div>
 
-    <!-- QR SECTION -->
     <section id="qr">
         <h2>Kết nối nhanh qua Mã QR</h2>
         <div class="qr-section">
             <div class="qr-box">
-                <img src="uploads/qr_zalo.png" alt="QR Zalo CSKH">
+                <img src="uploads/qr_zalo.png" alt="QR Zalo CSKH" onerror="this.style.display='none'" />
                 <h4>Zalo CSKH</h4>
-                <button onclick="window.open('https://zalo.me/+84523554811','_blank')">Liên hệ ngay</button>
+                <button onclick="window.open('https://zalo.me/+84523554811','_blank')">
+                    Liên hệ ngay
+                </button>
             </div>
             <div class="qr-box">
-                <img src="uploads/qr_tiktok.png" alt="QR TikTok Shop">
+                <img src="uploads/qr_tiktok.png" alt="QR TikTok Shop" onerror="this.style.display='none'" />
                 <h4>TikTok Shop</h4>
-                <button onclick="window.open('https://www.tiktok.com/@goccuaembong88','_blank')">Mở TikTok</button>
+                <button onclick="window.open('https://www.tiktok.com/@goccuaembong88','_blank')">
+                    Mở TikTok
+                </button>
             </div>
         </div>
     </section>
 
-    <!-- CONTACT FORM -->
     <section id="contact">
         <h2>Liên hệ với chúng tôi</h2>
         <p>Hoặc nhắn trực tiếp qua Zalo để được hỗ trợ mở shop miễn phí.</p>
 
         <form id="contactForm">
             <label>Họ và tên</label>
-            <input type="text" id="name" placeholder="Nhập họ tên" required>
+            <input type="text" id="name" placeholder="Nhập họ tên" required />
             <label>Số điện thoại</label>
-            <input type="tel" id="phone" placeholder="Nhập số điện thoại" required>
+            <input type="tel" id="phone" placeholder="Nhập số điện thoại" required />
             <label>Tin nhắn của bạn</label>
             <textarea id="message" placeholder="Nhập nội dung cần hỗ trợ..." required></textarea>
             <button type="submit">Gửi tin nhắn</button>
@@ -285,7 +268,6 @@
         <div id="formStatus"></div>
     </section>
 
-    <!-- FOOTER -->
     <footer>
         <p>© 2025 TikTokShop – Nền tảng bán hàng chuyên nghiệp</p>
         <p>
@@ -294,90 +276,77 @@
         </p>
     </footer>
 
-    <!-- FORM SCRIPT -->
     <script>
-        document.getElementById("contactForm").addEventListener("submit", async function (e) {
-            e.preventDefault();
-            const name = document.getElementById("name").value.trim();
-            const phone = document.getElementById("phone").value.trim();
-            const message = document.getElementById("message").value.trim();
-            const statusDiv = document.getElementById("formStatus");
+        document
+            .getElementById("contactForm")
+            .addEventListener("submit", async function (e) {
+                e.preventDefault();
+                const name = document.getElementById("name").value.trim();
+                const phone = document.getElementById("phone").value.trim();
+                const message = document.getElementById("message").value.trim();
+                const statusDiv = document.getElementById("formStatus");
 
-            if (!name || !phone || !message) {
-                statusDiv.style.color = "#FE2C55";
-                statusDiv.textContent = "⚠️ Vui lòng nhập đầy đủ thông tin.";
-                return;
-            }
-
-            try {
-                const res = await fetch("/api/sendMessage", {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ name, phone, message })
-                });
-                const data = await res.json();
-                if (data.message) {
-                    statusDiv.style.color = "#25F4EE";
-                    statusDiv.textContent = "✅ " + data.message;
-                    document.getElementById("contactForm").reset();
-                } else {
+                if (!name || !phone || !message) {
                     statusDiv.style.color = "#FE2C55";
-                    statusDiv.textContent = "❌ Gửi thất bại, vui lòng thử lại.";
+                    statusDiv.textContent = "⚠️ Vui lòng nhập đầy đủ thông tin.";
+                    return;
                 }
-            } catch (error) {
-                statusDiv.style.color = "#FE2C55";
-                statusDiv.textContent = "⚠️ Lỗi kết nối đến máy chủ!";
-            }
-        });
 
-        // === CẬP NHẬT DỮ LIỆU ĐỘNG (QR, THÔNG BÁO, LIÊN HỆ) ===
+                try {
+                    const res = await fetch("/api/sendMessage", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ name, phone, message }),
+                    });
+                    const data = await res.json();
+                    if (data.message) {
+                        statusDiv.style.color = "#25F4EE";
+                        statusDiv.textContent = "✅ " + data.message;
+                        document.getElementById("contactForm").reset();
+                    } else {
+                        statusDiv.style.color = "#FE2C55";
+                        statusDiv.textContent = "❌ Gửi thất bại, vui lòng thử lại.";
+                    }
+                } catch (error) {
+                    statusDiv.style.color = "#FE2C55";
+                    statusDiv.textContent = "⚠️ Lỗi kết nối đến máy chủ!";
+                }
+            });
+
         async function loadDynamicData() {
             try {
-                const res = await fetch('/api/getData');
+                const res = await fetch("/api/getData");
                 const data = await res.json();
 
-                if (data.qr_zalo) document.querySelector('#qr img[alt="QR Zalo CSKH"]').src = data.qr_zalo;
-                if (data.qr_tiktok) document.querySelector('#qr img[alt="QR TikTok Shop"]').src = data.qr_tiktok;
+                if (data.qr_zalo)
+                    document.querySelector(
+                        '#qr img[alt="QR Zalo CSKH"]'
+                    ).src = data.qr_zalo;
+                if (data.qr_tiktok)
+                    document.querySelector(
+                        '#qr img[alt="QR TikTok Shop"]'
+                    ).src = data.qr_tiktok;
 
-                const notiBox = document.getElementById('notifications');
+                const notiBox = document.getElementById("notifications");
                 if (data.notifications && data.notifications.length > 0) {
-                    notiBox.innerHTML = '';
-                    data.notifications.forEach(n => {
-                        const p = document.createElement('p');
+                    notiBox.innerHTML = "";
+                    data.notifications.forEach((n) => {
+                        const p = document.createElement("p");
                         p.textContent = n;
                         notiBox.appendChild(p);
                     });
                 }
-
-                const contactSection = document.getElementById('qr');
-                if (data.contacts && data.contacts.length > 0) {
-                    const dynamicBox = document.createElement('div');
-                    dynamicBox.className = 'qr-section';
-                    data.contacts.forEach(c => {
-                        const div = document.createElement('div');
-                        div.className = 'qr-box';
-                        div.innerHTML = `
-              <h4>${c.type}</h4>
-              <a href="${c.link}" target="_blank">
-                <button>Liên hệ ngay</button>
-              </a>
-            `;
-                        dynamicBox.appendChild(div);
-                    });
-                    contactSection.appendChild(dynamicBox);
-                }
             } catch (err) {
-                console.error('Không thể tải dữ liệu động:', err);
+                console.error("Không thể tải dữ liệu động:", err);
             }
         }
 
         loadDynamicData();
     </script>
 
-    <!-- AUTO CHAT -->
     <script src="https://app.tudongchat.com/js/chatbox.js"></script>
     <script>
-        const tudong_chatbox = new TuDongChat('Nd9qOWI0l8QwPObLIb9Dx');
+        const tudong_chatbox = new TuDongChat("Nd9qOWI0l8QwPObLIb9Dx");
         tudong_chatbox.initial();
     </script>
 </body>

@@ -1,8 +1,6 @@
 {
-    "heroTitle": "Nền tảng bán hàng chuyên nghiệp 2025",
-    "heroSubtitle": "Phát triển thương hiệu và tạo thu nhập cùng TikTok E-commerce.",
-    "ctaText": "Bắt đầu ngay",
-    "ctaLink": "https://zalo.me/+84523554811",
+    "qr_zalo": "uploads/qr_zalo.png",
+    "qr_tiktok": "uploads/qr_tiktok.png",
     "notifications": [
         "🎉 Chào mừng bạn đến với TikTokShop chính thức!",
         "🔥 Hỗ trợ mở shop miễn phí, liên hệ ngay!"
@@ -11,13 +9,6 @@
         {
             "type": "Zalo CSKH",
             "link": "https://zalo.me/+84523554811"
-        },
-        {
-            "type": "TikTok",
-            "link": "https://www.tiktok.com/@goccuaembong88"
         }
-    ],
-    "zaloQR": "uploads/qr_zalo.png",
-    "tiktokQR": "uploads/qr_tiktok.png",
-    "heroImage": "uploads/hero.jpg"
+    ]
 }

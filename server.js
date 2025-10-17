@@ -1,118 +1,145 @@
-// ====== TIKTOKSHOP SERVER (Express + File Storage) ======
-
-const express = require("express");
-const cors = require("cors");
-const fs = require("fs");
-const path = require("path");
-const multer = require("multer");
-const bodyParser = require("body-parser");
+// =============================
+// 📦 TIKTOKSHOP SERVER
+// =============================
+import express from "express";
+import multer from "multer";
+import fs from "fs";
+import path from "path";
+import bodyParser from "body-parser";
 
 const app = express();
-app.use(cors());
+const PORT = process.env.PORT || 3000;
+
+// =============================
+// 📁 CẤU HÌNH THƯ MỤC
+// =============================
+const __dirname = path.resolve();
+app.use(express.static("public"));
+app.use(express.static("uploads"));
 app.use(bodyParser.json());
-app.use(express.static(__dirname)); // Cho phép phục vụ file tĩnh (HTML, CSS, ảnh...)
 
-// === Cấu hình thư mục uploads ===
-const upload = multer({ dest: "uploads/" });
-
-// === Đường dẫn file dữ liệu ===
-const DATA_FILE = path.join(__dirname, "data.json");
-const MSG_FILE = path.join(__dirname, "messages.json");
-
-// ======== API LẤY DỮ LIỆU TRANG CHỦ ========
-app.get("/api/getData", (req, res) => {
-    fs.readFile(DATA_FILE, "utf8", (err, data) => {
-        if (err) return res.status(500).json({ error: "Không đọc được dữ liệu" });
-        res.json(JSON.parse(data || "{}"));
-    });
+// =============================
+// 💾 CẤU HÌNH LƯU FILE QR
+// =============================
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, "uploads/");
+    },
+    filename: function (req, file, cb) {
+        if (file.fieldname === "qrZalo") cb(null, "qr_zalo.png");
+        else if (file.fieldname === "qrTiktok") cb(null, "qr_tiktok.png");
+    },
 });
+const upload = multer({ storage: storage });
 
-// ======== API CẬP NHẬT DỮ LIỆU TỪ ADMIN ========
-app.post(
-    "/api/updateData",
-    upload.fields([
-        { name: "zaloQR" },
-        { name: "tiktokQR" },
-        { name: "heroImage" },
-    ]),
-    (req, res) => {
-        fs.readFile(DATA_FILE, "utf8", (err, data) => {
-            const content = JSON.parse(data || "{}");
+// =============================
+// 📄 ĐỌC / GHI DỮ LIỆU JSON
+// =============================
+const dataPath = "./data.json";
+const messagePath = "./messages.json";
 
-            // Cập nhật nội dung cơ bản
-            content.heroTitle = req.body.heroTitle || content.heroTitle;
-            content.heroSubtitle = req.body.heroSubtitle || content.heroSubtitle;
-            content.ctaText = req.body.ctaText || content.ctaText;
-            content.ctaLink = req.body.ctaLink || content.ctaLink;
+// Tạo file JSON nếu chưa tồn tại
+if (!fs.existsSync(dataPath)) {
+    fs.writeFileSync(
+        dataPath,
+        JSON.stringify({ notifications: [], contacts: [] }, null, 2)
+    );
+}
+if (!fs.existsSync(messagePath)) {
+    fs.writeFileSync(messagePath, JSON.stringify([], null, 2));
+}
 
-            // Cập nhật danh sách thông báo và liên hệ
-            if (req.body.notifications)
-                content.notifications = JSON.parse(req.body.notifications);
-            if (req.body.contacts)
-                content.contacts = JSON.parse(req.body.contacts);
-
-            // Cập nhật ảnh (QR / hero)
-            if (req.files["zaloQR"])
-                content.zaloQR = req.files["zaloQR"][0].path;
-            if (req.files["tiktokQR"])
-                content.tiktokQR = req.files["tiktokQR"][0].path;
-            if (req.files["heroImage"])
-                content.heroImage = req.files["heroImage"][0].path;
-
-            // Ghi dữ liệu lại file JSON
-            fs.writeFile(DATA_FILE, JSON.stringify(content, null, 2), (err2) => {
-                if (err2)
-                    return res.status(500).json({ error: "Không lưu được dữ liệu" });
-                res.json({ message: "✅ Dữ liệu đã được cập nhật thành công!" });
-            });
-        });
-    }
-);
-
-// ======== API GỬI TIN NHẮN KHÁCH HÀNG ========
-app.post("/api/sendMessage", (req, res) => {
-    const { name, phone, message } = req.body;
-    const newMsg = {
-        name,
-        phone,
-        message,
-        time: new Date().toLocaleString(),
-    };
-
-    fs.readFile(MSG_FILE, "utf8", (err, data) => {
-        const messages = data ? JSON.parse(data) : [];
-        messages.push(newMsg);
-        fs.writeFile(MSG_FILE, JSON.stringify(messages, null, 2), (err2) => {
-            if (err2)
-                return res.status(500).json({ error: "Không lưu được tin nhắn" });
-            res.json({ message: "Tin nhắn đã được gửi thành công!" });
-        });
-    });
-});
-
-// ======== API LẤY DANH SÁCH TIN NHẮN ========
-app.get("/api/getMessages", (req, res) => {
-    fs.readFile(MSG_FILE, "utf8", (err, data) => {
-        if (err) return res.json([]);
-        res.json(JSON.parse(data || "[]"));
-    });
-});
-
-// ======== ROUTE TRANG CHỦ & TRANG ADMIN ========
-
-// Trang chủ
+// =============================
+// 🌐 TRANG CHỦ & TRANG QUẢN TRỊ
+// =============================
 app.get("/", (req, res) => {
     res.sendFile(path.join(__dirname, "index.html"));
 });
-
-// Trang quản trị
 app.get("/admin", (req, res) => {
     res.sendFile(path.join(__dirname, "admin.html"));
 });
 
-// ======== KHỞI ĐỘNG SERVER ========
-const PORT = process.env.PORT || 3000;
+// =============================
+// 📥 API LẤY DỮ LIỆU
+// =============================
+app.get("/api/getData", (req, res) => {
+    try {
+        const data = JSON.parse(fs.readFileSync(dataPath));
+        const zaloQR = fs.existsSync("uploads/qr_zalo.png")
+            ? "uploads/qr_zalo.png"
+            : null;
+        const tiktokQR = fs.existsSync("uploads/qr_tiktok.png")
+            ? "uploads/qr_tiktok.png"
+            : null;
+        res.json({ ...data, qr_zalo: zaloQR, qr_tiktok: tiktokQR });
+    } catch (err) {
+        res.status(500).json({ error: "Lỗi đọc dữ liệu!" });
+    }
+});
+
+// =============================
+// 💾 API LƯU DỮ LIỆU
+// =============================
+app.post("/api/saveData", (req, res) => {
+    try {
+        fs.writeFileSync(dataPath, JSON.stringify(req.body, null, 2));
+        res.json({ message: "Đã lưu dữ liệu thành công!" });
+    } catch (err) {
+        res.status(500).json({ error: "Lỗi khi lưu dữ liệu!" });
+    }
+});
+
+// =============================
+// 📤 API UPLOAD ẢNH QR
+// =============================
+app.post(
+    "/api/uploadQR",
+    upload.fields([
+        { name: "qrZalo", maxCount: 1 },
+        { name: "qrTiktok", maxCount: 1 },
+    ]),
+    (req, res) => {
+        res.json({ message: "Upload thành công!" });
+    }
+);
+
+// =============================
+// 📬 API GỬI TIN NHẮN LIÊN HỆ
+// =============================
+app.post("/api/sendMessage", (req, res) => {
+    try {
+        const { name, phone, message } = req.body;
+        if (!name || !phone || !message)
+            return res.status(400).json({ error: "Thiếu thông tin!" });
+        const allMessages = JSON.parse(fs.readFileSync(messagePath));
+        allMessages.push({
+            name,
+            phone,
+            message,
+            time: new Date().toLocaleString("vi-VN"),
+        });
+        fs.writeFileSync(messagePath, JSON.stringify(allMessages, null, 2));
+        res.json({ message: "Tin nhắn của bạn đã được gửi thành công!" });
+    } catch (err) {
+        res.status(500).json({ error: "Không thể gửi tin nhắn!" });
+    }
+});
+
+// =============================
+// 📩 API LẤY TIN NHẮN CHO ADMIN
+// =============================
+app.get("/api/getMessages", (req, res) => {
+    try {
+        const msgs = JSON.parse(fs.readFileSync(messagePath));
+        res.json(msgs);
+    } catch (err) {
+        res.status(500).json({ error: "Không đọc được tin nhắn!" });
+    }
+});
+
+// =============================
+// 🚀 KHỞI CHẠY SERVER
+// =============================
 app.listen(PORT, () => {
-    console.log(`🚀 TikTokShop Server đang chạy tại: http://localhost:${PORT}`);
-    console.log(`🔐 Trang quản trị: http://localhost:${PORT}/admin`);
+    console.log(`🚀 Server TikTokShop đang chạy tại http://localhost:${PORT}`);
 });

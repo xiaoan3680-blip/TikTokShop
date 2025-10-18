@@ -15,11 +15,12 @@ const PORT = process.env.PORT || 3000;
 // =============================
 const __dirname = path.resolve();
 
-// 👉 Thêm dòng dưới để cho phép truy cập file tĩnh trong thư mục gốc
-app.use(express.static(__dirname)); // ✅ Cho phép truy cập file xác minh Zalo
+// Cho phép truy cập file tĩnh (để Zalo xác minh domain và file public)
+app.use(express.static(__dirname)); // ✅ File gốc như zalo_verifier.html
 app.use(express.static("public"));
 app.use(express.static("uploads"));
 app.use(bodyParser.json());
+app.use(express.urlencoded({ extended: true }));
 
 // =============================
 // 💾 CẤU HÌNH LƯU FILE QR
@@ -41,7 +42,7 @@ const upload = multer({ storage: storage });
 const dataPath = "./data.json";
 const messagePath = "./messages.json";
 
-// Tạo file JSON nếu chưa tồn tại
+// Tạo file JSON nếu chưa có
 if (!fs.existsSync(dataPath)) {
     fs.writeFileSync(
         dataPath,
@@ -58,6 +59,7 @@ if (!fs.existsSync(messagePath)) {
 app.get("/", (req, res) => {
     res.sendFile(path.join(__dirname, "index.html"));
 });
+
 app.get("/admin", (req, res) => {
     res.sendFile(path.join(__dirname, "admin.html"));
 });
@@ -114,6 +116,7 @@ app.post("/api/sendMessage", (req, res) => {
         const { name, phone, message } = req.body;
         if (!name || !phone || !message)
             return res.status(400).json({ error: "Thiếu thông tin!" });
+
         const allMessages = JSON.parse(fs.readFileSync(messagePath));
         allMessages.push({
             name,
@@ -138,6 +141,15 @@ app.get("/api/getMessages", (req, res) => {
     } catch (err) {
         res.status(500).json({ error: "Không đọc được tin nhắn!" });
     }
+});
+
+// =============================
+// 🔔 WEBHOOK NHẬN CALLBACK TỪ ZALO
+// =============================
+// Zalo sẽ gửi dữ liệu về khi có sự kiện (tin nhắn, người quan tâm, v.v.)
+app.post("/zalo-callback", (req, res) => {
+    console.log("📩 Nhận callback từ Zalo:", req.body);
+    res.status(200).send("OK");
 });
 
 // =============================

@@ -2,9 +2,9 @@
 <html lang="vi">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>TikTokShop - Nền tảng bán hàng chuyên nghiệp 2025</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TikTokShop - Trang chính</title>
     <link rel="icon"
         href="https://product.hstatic.net/200000376071/product/tiktok-shop_c25424051528441eaa7680b85eb94fdf.jpg">
     <script src="https://cdn.tailwindcss.com"></script>
@@ -12,65 +12,76 @@
 
 <body class="bg-gray-900 text-gray-100">
 
-    <!-- Header -->
-    <header class="bg-black text-white p-4 text-center text-3xl font-bold">
+    <header class="bg-black text-center text-3xl font-bold py-4">
         TikTokShop - Bán hàng chuyên nghiệp 2025
     </header>
 
-    <!-- Hero -->
-    <section class="text-center py-12">
-        <h1 class="text-5xl font-bold mb-6">Phát triển kinh doanh cùng <span class="text-[#25F4EE]">TikTokShop</span>
-        </h1>
-        <p class="text-lg text-gray-300 max-w-2xl mx-auto">Kết nối sản phẩm với hàng triệu người dùng TikTok. Tăng
-            trưởng tự nhiên, dễ quản lý, và tự động hóa bán hàng.</p>
-    </section>
+    <main class="text-center py-10">
+        <h1 class="text-4xl font-bold text-[#25F4EE] mb-6">Kết nối và bán hàng cùng TikTokShop</h1>
+        <p class="text-gray-300 mb-12">Tăng trưởng tự nhiên, dễ quản lý và tự động hóa bán hàng hiệu quả.</p>
 
-    <!-- Form Liên hệ -->
-    <section class="py-12 bg-gray-800">
-        <div class="container mx-auto px-4 max-w-2xl text-center">
-            <h2 class="text-3xl font-bold mb-6 text-white">Liên hệ tư vấn mở shop</h2>
-            <form id="contactForm" class="space-y-4 bg-gray-900 p-6 rounded-lg border border-gray-700 shadow-lg">
+        <!-- QR động -->
+        <div id="qrSection" class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto px-6 mb-16"></div>
+
+        <!-- Form liên hệ -->
+        <section id="contact" class="max-w-2xl mx-auto bg-gray-800 p-6 rounded-xl border border-gray-700">
+            <h2 class="text-3xl font-bold mb-6">Liên hệ tư vấn mở shop</h2>
+            <form id="contactForm" class="space-y-4">
                 <input type="text" name="name" placeholder="Họ và tên" required
-                    class="w-full p-3 rounded bg-gray-800 border border-gray-700 focus:border-[#25F4EE] outline-none" />
+                    class="w-full p-3 rounded bg-gray-900 border border-gray-700" />
                 <input type="tel" name="phone" placeholder="Số điện thoại" required pattern="[0-9]{9,11}"
-                    class="w-full p-3 rounded bg-gray-800 border border-gray-700 focus:border-[#FE2C55] outline-none" />
+                    class="w-full p-3 rounded bg-gray-900 border border-gray-700" />
                 <textarea name="message" rows="4" placeholder="Nội dung cần hỗ trợ..." required
-                    class="w-full p-3 rounded bg-gray-800 border border-gray-700 focus:border-[#25F4EE] outline-none"></textarea>
+                    class="w-full p-3 rounded bg-gray-900 border border-gray-700"></textarea>
                 <button type="submit"
-                    class="w-full py-3 bg-gradient-to-r from-[#25F4EE] to-[#FE2C55] text-white font-semibold rounded-lg transition hover:opacity-90">Gửi
+                    class="w-full py-3 bg-gradient-to-r from-[#25F4EE] to-[#FE2C55] text-white font-semibold rounded-lg hover:opacity-90 transition">Gửi
                     liên hệ</button>
             </form>
-        </div>
+        </section>
+    </main>
 
-        <!-- Khu vực hiển thị danh bạ -->
-        <div id="contact-info" class="mt-12 text-center text-gray-300 text-lg"></div>
-    </section>
-
-    <footer class="bg-black text-center text-gray-400 py-6 border-t border-gray-700">
+    <footer class="bg-black text-center text-gray-400 py-8 border-t border-gray-700">
         © 2025 TikTokShop. All rights reserved.
     </footer>
 
     <script>
-        // Gửi tin nhắn liên hệ
+        // Gửi form liên hệ
         document.getElementById('contactForm').addEventListener('submit', async (e) => {
             e.preventDefault();
-            const form = e.target;
-            const data = { name: form.name.value, phone: form.phone.value, message: form.message.value };
+            const f = e.target;
+            const data = { name: f.name.value, phone: f.phone.value, message: f.message.value };
             const res = await fetch('/api/message', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) });
-            alert(res.ok ? '✅ Gửi thành công! Chúng tôi sẽ liên hệ lại sớm.' : '❌ Gửi thất bại. Vui lòng thử lại.');
-            if (res.ok) form.reset();
+            alert(res.ok ? '✅ Gửi thành công!' : '❌ Lỗi, thử lại sau.');
+            if (res.ok) f.reset();
         });
 
-        // Tải danh bạ từ data.json
+        // Tải thông tin & QR từ data.json
         async function loadContacts() {
             const res = await fetch('/api/data');
             const data = await res.json();
             const c = data.contacts || {};
-            const html = Object.keys(c).map(key => {
-                const value = c[key];
-                return `<p>📍 <b class="capitalize">${key}:</b> <a href="${value}" target="_blank" class="text-[#25F4EE] hover:underline">${value}</a></p>`;
-            }).join('');
-            document.getElementById('contact-info').innerHTML = `<div class="space-y-2">${html}</div>`;
+            let html = '';
+
+            for (let key of ['zalo', 'tiktok', 'lotus']) {
+                if (c[key]) {
+                    html += `
+        <div class="bg-gray-800 p-6 rounded-lg border border-gray-700">
+          <h3 class="text-2xl font-bold mb-4 capitalize">${key}</h3>
+          <img src="${c[key].qr}" alt="QR ${key}" class="mx-auto w-40 h-40 rounded border border-gray-600 mb-4">
+          <a href="${c[key].link}" target="_blank" class="inline-block px-6 py-2 bg-[#25F4EE] text-black font-semibold rounded-full hover:bg-[#FE2C55] hover:text-white transition">
+            Kết nối ${key}
+          </a>
+        </div>`;
+                }
+            }
+
+            html += `
+      <div class="col-span-3 mt-8">
+        <p class="text-lg text-gray-300">📞 Hotline: <b class="text-[#25F4EE]">${c.hotline || 'Chưa có số điện thoại'}</b></p>
+      </div>
+    `;
+
+            document.getElementById('qrSection').innerHTML = html;
         }
         loadContacts();
     </script>

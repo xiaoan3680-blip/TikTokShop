@@ -2,8 +2,8 @@
 <html lang="vi">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin - TikTokShop</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
@@ -12,19 +12,20 @@
     <header class="bg-black p-4 text-center text-2xl font-bold">Admin TikTokShop</header>
 
     <main class="p-6 max-w-5xl mx-auto">
-        <h2 class="text-3xl font-bold mb-6 text-center">📞 Quản lý thông tin liên hệ</h2>
-
-        <div id="contacts" class="space-y-4 mb-12"></div>
-        <button onclick="addContact()" class="bg-[#25F4EE] text-black px-4 py-2 rounded font-semibold">+ Thêm liên hệ
-            mới</button>
-        <button onclick="saveContacts()" class="bg-[#FE2C55] text-white px-4 py-2 rounded font-semibold ml-2">💾 Lưu
-            thay đổi</button>
+        <h2 class="text-3xl font-bold mb-8 text-center">⚙️ Cập nhật thông tin & mã QR</h2>
+        <div id="contactsForm" class="space-y-6"></div>
+        <button onclick="saveContacts()"
+            class="bg-[#25F4EE] text-black px-6 py-3 rounded font-semibold hover:bg-[#FE2C55] hover:text-white transition">
+            💾 Lưu thay đổi
+        </button>
 
         <h2 class="text-3xl font-bold mt-12 mb-6 text-center">💬 Tin nhắn khách hàng</h2>
         <div id="messageList" class="space-y-4"></div>
     </main>
 
-    <footer class="text-center text-gray-500 py-4 border-t border-gray-700">© 2025 TikTokShop Admin</footer>
+    <footer class="text-center text-gray-500 py-4 border-t border-gray-700">
+        © 2025 TikTokShop Admin
+    </footer>
 
     <script>
         let contacts = {};
@@ -37,55 +38,59 @@
 
             const msgs = await fetch('/api/messages').then(r => r.json());
             document.getElementById('messageList').innerHTML =
-                msgs.length === 0 ? "<p class='text-gray-400 text-center'>Chưa có tin nhắn nào.</p>" :
+                msgs.length === 0 ? "<p class='text-center text-gray-400'>Chưa có tin nhắn nào.</p>" :
                     msgs.reverse().map(m => `
           <div class="bg-gray-800 p-4 rounded-lg border border-gray-700">
-            <p><b>👤 ${m.name}</b> (${m.phone})</p>
-            <p>💬 ${m.message}</p>
+            <p><b>${m.name}</b> (${m.phone})</p>
+            <p>${m.message}</p>
             <small class="text-gray-400">${m.time}</small>
           </div>`).join('');
         }
 
         function renderContacts() {
-            const html = Object.keys(contacts).map(key => `
-        <div class="bg-gray-800 p-4 rounded-lg border border-gray-700 flex items-center justify-between">
-          <input value="${key}" class="key bg-gray-900 text-white p-2 rounded w-1/4 border border-gray-700" />
-          <input value="${contacts[key]}" class="val bg-gray-900 text-white p-2 rounded w-2/3 border border-gray-700" />
-          <button onclick="removeContact('${key}')" class="text-[#FE2C55] font-bold text-lg">×</button>
-        </div>`).join('');
-            document.getElementById('contacts').innerHTML = html;
-        }
-
-        function addContact() {
-            contacts[`custom_${Date.now()}`] = "";
-            renderContacts();
-        }
-
-        function removeContact(k) {
-            delete contacts[k];
-            renderContacts();
+            const c = contacts;
+            document.getElementById('contactsForm').innerHTML = `
+        ${['zalo', 'tiktok', 'lotus'].map(k => `
+          <div class="bg-gray-800 p-4 rounded-lg border border-gray-700">
+            <h3 class="text-xl font-bold mb-2 capitalize">${k}</h3>
+            <label>Link:</label>
+            <input id="${k}_link" value="${c[k]?.link || ''}" class="w-full p-2 mb-2 bg-gray-900 border border-gray-700 rounded"/>
+            <label>Ảnh QR:</label>
+            <input id="${k}_qr" value="${c[k]?.qr || ''}" class="w-full p-2 bg-gray-900 border border-gray-700 rounded"/>
+          </div>
+        `).join('')}
+        <div class="bg-gray-800 p-4 rounded-lg border border-gray-700">
+          <h3 class="text-xl font-bold mb-2">Hotline</h3>
+          <input id="hotline" value="${c.hotline || ''}" class="w-full p-2 bg-gray-900 border border-gray-700 rounded"/>
+        </div>
+      `;
         }
 
         async function saveContacts() {
-            const keys = document.querySelectorAll('.key');
-            const vals = document.querySelectorAll('.val');
-            const newContacts = {};
-            keys.forEach((k, i) => { newContacts[k.value] = vals[i].value; });
+            const newContacts = {
+                zalo: { link: zalo_link.value, qr: zalo_qr.value },
+                tiktok: { link: tiktok_link.value, qr: tiktok_qr.value },
+                lotus: { link: lotus_link.value, qr: lotus_qr.value },
+                hotline: hotline.value
+            };
+
             const res = await fetch('/api/data');
             const data = await res.json();
             data.contacts = newContacts;
+
             await fetch('/api/update', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(data)
             });
-            alert('✅ Đã lưu thay đổi liên hệ!');
+
+            alert('✅ Lưu thành công!');
         }
 
         loadData();
     </script>
 
-    <!-- Chat tự động -->
+    <!-- Chat -->
     <script src="https://app.tudongchat.com/js/chatbox.js"></script>
     <script>
         const tudong_chatbox = new TuDongChat('Nd9qOWI0l8QwPObLIb9Dx');

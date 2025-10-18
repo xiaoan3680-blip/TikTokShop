@@ -1,9 +1,17 @@
 {
     "contacts": {
-        "zalo": "https://zalo.me/84994143176",
-        "tiktok": "https://www.tiktok.com/@tiktokshop888",
-        "facebook": "https://www.facebook.com/",
-        "email": "support@tiktokshop888.com",
+        "zalo": {
+            "link": "https://zalo.me/84994143176",
+            "qr": "https://i.imgur.com/abc123.png"
+        },
+        "tiktok": {
+            "link": "https://www.tiktok.com/@tiktokshop888",
+            "qr": "https://i.imgur.com/xyz456.png"
+        },
+        "lotus": {
+            "link": "https://lotus.vn/u/tiktokshop888",
+            "qr": "https://i.imgur.com/lmn789.png"
+        },
         "hotline": "0994143176"
     },
     "messages": []

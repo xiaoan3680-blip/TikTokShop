@@ -1,121 +1,58 @@
-/* ====== TIKTOKSHOP ADMIN PANEL THEME ====== */
 body {
-    margin: 0;
-    font-family: 'Poppins', sans-serif;
+    font-family: "Poppins", sans-serif;
     background: #0d0d0d;
     color: #fff;
-    line-height: 1.6;
+    margin: 0;
+    padding: 0;
 }
 
 header {
+    background: #000;
+    padding: 15px;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+}
+
+h1 {
     background: linear-gradient(90deg, #25F4EE, #FE2C55);
-    padding: 20px;
-    text-align: center;
-    box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
-header h1 {
-    color: #000;
-    font-weight: 700;
-    font-size: 1.8em;
-}
-
-/* ===== Đăng nhập ===== */
-.login-container {
-    max-width: 400px;
-    margin: 100px auto;
-    background: #121212;
-    padding: 40px;
-    border-radius: 15px;
-    text-align: center;
-    box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
-}
-
-.login-container h2 {
-    color: #25F4EE;
-    margin-bottom: 15px;
-}
-
-.login-container input {
-    width: 100%;
-    padding: 12px;
-    margin: 10px 0;
-    border: none;
-    border-radius: 8px;
-    background: #1c1c1c;
-    color: #fff;
-}
-
-.login-container button {
-    width: 100%;
-    background: linear-gradient(90deg, #FE2C55, #25F4EE);
-    color: #fff;
-    border: none;
-    padding: 12px;
-    border-radius: 30px;
-    font-size: 1em;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.login-container button:hover {
-    background-position: right;
-    transform: scale(1.05);
-}
-
-.error {
-    color: #FE2C55;
-    margin-top: 10px;
-}
-
-/* ===== Bảng quản trị ===== */
 main {
     max-width: 900px;
     margin: 40px auto;
     background: #121212;
     padding: 30px;
     border-radius: 15px;
-    box-shadow: 0 0 20px rgba(255, 255, 255, 0.05);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
 }
 
 h2 {
-    text-align: center;
-    color: #25F4EE;
-    margin-bottom: 20px;
-}
-
-h3 {
-    color: #FE2C55;
-    border-left: 5px solid #25F4EE;
-    padding-left: 10px;
-    margin-top: 40px;
-}
-
-label {
-    font-weight: 600;
-    color: #ccc;
-    display: block;
-    margin-top: 15px;
+    background: linear-gradient(90deg, #25F4EE, #FE2C55);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 input,
 textarea {
     width: 100%;
     padding: 10px;
-    margin-top: 5px;
-    border-radius: 8px;
+    margin: 8px 0;
     border: none;
-    background: #1a1a1a;
+    border-radius: 8px;
+    background: #1e1e1e;
     color: #fff;
 }
 
 button {
-    background: linear-gradient(90deg, #FE2C55, #25F4EE);
-    border: none;
-    color: #fff;
     padding: 10px 18px;
+    border: none;
     border-radius: 25px;
+    background: linear-gradient(90deg, #FE2C55, #25F4EE);
+    color: #fff;
     cursor: pointer;
+    margin-top: 10px;
     transition: 0.3s;
 }
 
@@ -123,63 +60,27 @@ button:hover {
     transform: scale(1.05);
 }
 
-#updateForm {
+.section {
+    margin-top: 30px;
+    padding: 20px;
+    background: #1a1a1a;
+    border-radius: 10px;
+}
+
+.item {
     display: flex;
-    flex-direction: column;
     gap: 10px;
+    margin-bottom: 10px;
+    align-items: center;
 }
 
-#notifications div,
-#contacts div,
-#messagesList div {
-    background: #1e1e1e;
+.item input {
+    flex: 1;
+}
+
+.message-box {
+    background: #111;
     padding: 10px;
-    border-radius: 10px;
-    margin: 8px 0;
-}
-
-#notifications input,
-#contacts input {
-    background: #222;
-    border: none;
-    color: #fff;
     border-radius: 8px;
-    padding: 8px;
-    margin-right: 5px;
-}
-
-#messagesList {
-    background: #101010;
-    border-radius: 10px;
-    padding: 10px;
-    max-height: 400px;
-    overflow-y: auto;
-}
-
-#messagesList div {
-    border-left: 3px solid #25F4EE;
-}
-
-footer {
-    text-align: center;
-    color: #aaa;
-    padding: 30px;
-    background: #000;
-    margin-top: 50px;
-}
-
-footer p {
-    margin: 0;
-}
-
-/* ===== Responsive ===== */
-@media (max-width: 768px) {
-    main {
-        width: 90%;
-        padding: 20px;
-    }
-
-    .login-container {
-        width: 90%;
-    }
+    margin-bottom: 10px;
 }

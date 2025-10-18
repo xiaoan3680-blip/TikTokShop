@@ -11,66 +11,87 @@
     <style>
         body {
             margin: 0;
-            font-family: 'Poppins', sans-serif;
-            background: #0d0d0d;
-            color: #fff
+            font-family: "Poppins", sans-serif;
+            background-color: #0d0d0d;
+            color: #fff;
         }
 
         header {
             background: #000;
-            padding: 15px 40px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 0 10px rgba(255, 255, 255, .1)
+            padding: 15px 40px;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
         }
 
         header img {
-            height: 45px
+            height: 45px;
         }
 
         nav a {
             color: #fff;
             margin: 0 15px;
             text-decoration: none;
-            transition: .3s
+            font-weight: 500;
+            transition: 0.3s;
         }
 
         nav a:hover {
-            color: #25f4ee
-        }
-
-        h2 {
-            background: linear-gradient(90deg, #25f4ee, #fe2c55);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent
+            color: #25f4ee;
         }
 
         section {
             padding: 60px 20px;
-            text-align: center
+            text-align: center;
+        }
+
+        h2 {
+            font-size: 2em;
+            background: linear-gradient(90deg, #25f4ee, #fe2c55);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        p {
+            color: #ccc;
+            max-width: 700px;
+            margin: 0 auto;
         }
 
         #hero {
             background: #000;
             padding: 120px 20px;
-            color: #fff
+            color: #fff;
+            position: relative;
+        }
+
+        #hero h1 {
+            font-size: 2.8em;
+            margin-bottom: 15px;
+        }
+
+        #hero p {
+            font-size: 1.2em;
+            color: #ddd;
+            margin-bottom: 30px;
         }
 
         .cta-btn {
             padding: 14px 30px;
             border: none;
             border-radius: 30px;
+            font-size: 1.1em;
             background: linear-gradient(90deg, #fe2c55, #25f4ee, #fe2c55);
             background-size: 200% auto;
             color: #fff;
             cursor: pointer;
-            transition: .5s
+            transition: 0.5s;
         }
 
         .cta-btn:hover {
             background-position: right center;
-            transform: scale(1.05)
+            transform: scale(1.05);
         }
 
         .qr-section {
@@ -78,7 +99,7 @@
             flex-wrap: wrap;
             justify-content: center;
             gap: 40px;
-            margin-top: 30px
+            margin-top: 30px;
         }
 
         .qr-box {
@@ -87,7 +108,37 @@
             border-radius: 15px;
             width: 250px;
             text-align: center;
-            box-shadow: 0 0 10px rgba(255, 255, 255, .1)
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .qr-box img {
+            width: 100%;
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .qr-box:hover {
+            transform: translateY(-5px);
+        }
+
+        .qr-box img:hover {
+            transform: scale(1.08);
+        }
+
+        #notifications {
+            background: #111;
+            padding: 15px;
+            border-radius: 10px;
+            max-width: 600px;
+            margin: 20px auto;
+        }
+
+        #notifications p {
+            background: linear-gradient(90deg, #25f4ee, #fe2c55);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 600;
         }
 
         form input,
@@ -98,21 +149,39 @@
             border: none;
             border-radius: 8px;
             background: #1e1e1e;
-            color: #fff
+            color: #fff;
+        }
+
+        form button {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(90deg, #fe2c55, #25f4ee);
+            border: none;
+            border-radius: 25px;
+            color: #fff;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: 0.3s;
         }
 
         footer {
             background: #000;
             text-align: center;
             padding: 30px;
-            color: #aaa
+            color: #aaa;
+        }
+
+        footer a {
+            color: #25f4ee;
+            text-decoration: none;
+            margin: 0 10px;
         }
     </style>
 </head>
 
 <body>
     <header>
-        <img src="https://dreamagency.vn/wp-content/uploads/2022/08/Tiktok-Shop.jpg" alt="TikTokShop Logo">
+        <img src="https://dreamagency.vn/wp-content/uploads/2022/08/Tiktok-Shop.jpg" alt="TikTokShop Logo" />
         <nav>
             <a href="#hero">Trang chủ</a>
             <a href="#qr">Liên kết</a>
@@ -126,49 +195,75 @@
         <button class="cta-btn" onclick="window.open('https://zalo.me/+84523554811','_blank')">Bắt đầu ngay</button>
     </section>
 
+    <div id="notifications"></div>
+
     <section id="qr">
         <h2>Kết nối nhanh qua Mã QR</h2>
-        <div class="qr-section" id="qrSection"></div>
+        <div class="qr-section">
+            <div class="qr-box">
+                <img src="/uploads/qr_zalo.png" alt="QR Zalo CSKH" />
+                <h4>Zalo CSKH</h4>
+                <button onclick="window.open('https://zalo.me/+84523554811','_blank')">Liên hệ ngay</button>
+            </div>
+            <div class="qr-box">
+                <img src="/uploads/qr_tiktok.png" alt="QR TikTok Shop" />
+                <h4>TikTok Shop</h4>
+                <button onclick="window.open('https://www.tiktok.com/@goccuaembong88','_blank')">Mở TikTok</button>
+            </div>
+        </div>
     </section>
 
     <section id="contact">
         <h2>Liên hệ với chúng tôi</h2>
+        <p>Hoặc nhắn trực tiếp qua Zalo để được hỗ trợ mở shop miễn phí.</p>
+
         <form id="contactForm">
-            <input type="text" id="name" placeholder="Họ và tên" required>
-            <input type="tel" id="phone" placeholder="Số điện thoại" required>
-            <textarea id="message" placeholder="Nội dung cần hỗ trợ..." required></textarea>
+            <input type="text" id="name" placeholder="Họ và tên" required />
+            <input type="tel" id="phone" placeholder="Số điện thoại" required />
+            <textarea id="message" placeholder="Tin nhắn của bạn..." required></textarea>
             <button type="submit">Gửi tin nhắn</button>
         </form>
         <div id="formStatus"></div>
     </section>
 
     <footer>
-        © 2025 TikTokShop – Liên hệ qua
-        <a href="https://zalo.me/+84523554811">Zalo</a> |
-        <a href="https://www.tiktok.com/">TikTok</a>
+        <p>© 2025 TikTokShop – Nền tảng bán hàng chuyên nghiệp</p>
+        <p><a href="https://www.tiktok.com/@goccuaembong88">TikTok</a> | <a href="https://zalo.me/+84523554811">Zalo</a>
+        </p>
     </footer>
 
     <script>
-        async function loadData() {
-            const res = await fetch('/api/getData'); const data = await res.json();
-            const qr = document.getElementById('qrSection'); qr.innerHTML = '';
-            if (data.contacts) {
-                data.contacts.forEach(c => {
-                    const box = document.createElement('div');
-                    box.className = 'qr-box';
-                    box.innerHTML = `<h4>${c.type}</h4><button onclick="window.open('${c.link}','_blank')">Mở liên kết</button>`;
-                    qr.appendChild(box);
-                });
-            }
+        // Hiển thị thông báo động
+        async function loadDynamicData() {
+            const res = await fetch("/api/getData");
+            const data = await res.json();
+            const notiBox = document.getElementById("notifications");
+            notiBox.innerHTML = "";
+            data.notifications.forEach(n => {
+                const p = document.createElement("p");
+                p.textContent = n;
+                notiBox.appendChild(p);
+            });
         }
-    }
-        loadData();
+        loadDynamicData();
 
-        document.getElementById('contactForm').addEventListener('submit', async e => {
+        // Gửi tin nhắn
+        document.getElementById("contactForm").addEventListener("submit", async (e) => {
             e.preventDefault();
-            const name = nameInput.value, phone = phoneInput.value, message = messageInput.value;
-            const res = await fetch('/api/sendMessage', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name, phone, message }) });
-            const d = await res.json(); formStatus.textContent = d.message || 'Lỗi gửi!';
+            const name = document.getElementById("name").value;
+            const phone = document.getElementById("phone").value;
+            const message = document.getElementById("message").value;
+            const statusDiv = document.getElementById("formStatus");
+
+            const res = await fetch("/api/sendMessage", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ name, phone, message })
+            });
+            const data = await res.json();
+            statusDiv.textContent = data.message;
+            statusDiv.style.color = "#25f4ee";
+            document.getElementById("contactForm").reset();
         });
     </script>
 </body>

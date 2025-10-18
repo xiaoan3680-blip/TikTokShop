@@ -1,7 +1,7 @@
 {
     "notifications": [
-        "Chào mừng bạn đến với TikTokShop!",
-        "Liên hệ để được hỗ trợ mở shop miễn phí!"
+        "🎉 Chào mừng bạn đến với TikTokShop!",
+        "🚀 Hỗ trợ mở shop và chăm sóc khách hàng tự động!"
     ],
     "contacts": [
         {
@@ -9,8 +9,8 @@
             "link": "https://zalo.me/+84523554811"
         },
         {
-            "type": "TikTok Shop",
-            "link": "https://www.tiktok.com/"
+            "type": "TikTok",
+            "link": "https://www.tiktok.com/@goccuaembong88"
         }
     ]
 }

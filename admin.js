@@ -1,151 +1,94 @@
-// ===== TikTokShop Admin Script =====
-
 const admins = [
-    { user: "superadmin", pass: "tkshop0", role: "super", name: "Quản trị cấp cao" },
-    { user: "admin1", pass: "tkshop1", role: "normal", name: "Nguyễn Văn A" },
-    { user: "admin2", pass: "tkshop2", role: "normal", name: "Trần Thị B" },
-    { user: "admin3", pass: "tkshop3", role: "normal", name: "Lê Văn C" },
-    { user: "admin4", pass: "tkshop4", role: "normal", name: "Phạm Thị D" },
-    { user: "admin5", pass: "tkshop5", role: "normal", name: "Vũ Văn E" }
+    { user: "admin1", pass: "tkshop1" },
+    { user: "admin2", pass: "tkshop2" },
+    { user: "admin3", pass: "tkshop3" },
+    { user: "admin4", pass: "tkshop4" },
+    { user: "admin5", pass: "tkshop5" },
 ];
 
-let currentAdmin = null;
-
-// ===== Đăng nhập =====
 function login() {
-    const user = document.getElementById("username").value.trim();
-    const pass = document.getElementById("password").value.trim();
-    const admin = admins.find(a => a.user === user && a.pass === pass);
-
-    if (!admin) {
-        document.getElementById("errorMsg").textContent = "Sai tài khoản hoặc mật khẩu!";
-        return;
+    const u = document.getElementById("username").value.trim();
+    const p = document.getElementById("password").value.trim();
+    const err = document.getElementById("loginError");
+    const valid = admins.find(a => a.user === u && a.pass === p);
+    if (valid) {
+        document.querySelector("section").style.display = "none";
+        document.getElementById("adminPanel").style.display = "block";
+        fetchData();
+        loadMessages();
+    } else {
+        err.textContent = "❌ Sai tài khoản hoặc mật khẩu!";
     }
-
-    currentAdmin = admin;
-    document.getElementById("loginBox").style.display = "none";
-    document.getElementById("adminPanel").style.display = "block";
-    document.getElementById("welcomeText").innerHTML = `Xin chào <b>${admin.name}</b> 👋`;
-    document.getElementById("adminRole").innerHTML = `Quyền hạn: <b>${admin.role === "super" ? "Toàn quyền (Super Admin)" : "Giới hạn (chỉ chỉnh liên hệ + thông báo)"}</b>`;
-
-    loadData();
-    loadMessages();
 }
 
-// ===== Tải dữ liệu =====
-async function loadData() {
+function addNotification() {
+    const div = document.createElement("div");
+    div.className = "item";
+    div.innerHTML = `<input type="text" placeholder="Nội dung thông báo"><button onclick="this.parentElement.remove()">Xóa</button>`;
+    document.getElementById("notificationsList").appendChild(div);
+}
+
+function addContact() {
+    const div = document.createElement("div");
+    div.className = "item";
+    div.innerHTML = `<input type="text" placeholder="Loại liên hệ"><input type="text" placeholder="Liên kết"><button onclick="this.parentElement.remove()">Xóa</button>`;
+    document.getElementById("contactsList").appendChild(div);
+}
+
+async function fetchData() {
     const res = await fetch("/api/getData");
     const data = await res.json();
-
-    document.getElementById("heroTitle").value = data.heroTitle || "";
-    document.getElementById("heroSubtitle").value = data.heroSubtitle || "";
-    document.getElementById("ctaText").value = data.ctaText || "";
-    document.getElementById("ctaLink").value = data.ctaLink || "";
-
-    const notiDiv = document.getElementById("notifications");
-    notiDiv.innerHTML = "";
-    (data.notifications || []).forEach(n => addNotification(n));
-
-    const contactDiv = document.getElementById("contacts");
-    contactDiv.innerHTML = "";
-    (data.contacts || []).forEach(c => addContact(c.type, c.link));
-
-    if (currentAdmin.role !== "super") {
-        document.querySelectorAll("#heroTitle,#heroSubtitle,#ctaText,#ctaLink,#heroImage,#zaloQR,#tiktokQR")
-            .forEach(e => e.disabled = true);
-    }
+    const notiList = document.getElementById("notificationsList");
+    notiList.innerHTML = "";
+    data.notifications.forEach(n => {
+        const div = document.createElement("div");
+        div.className = "item";
+        div.innerHTML = `<input type="text" value="${n}"><button onclick="this.parentElement.remove()">Xóa</button>`;
+        notiList.appendChild(div);
+    });
+    const cList = document.getElementById("contactsList");
+    cList.innerHTML = "";
+    data.contacts.forEach(c => {
+        const div = document.createElement("div");
+        div.className = "item";
+        div.innerHTML = `<input type="text" value="${c.type}"><input type="text" value="${c.link}"><button onclick="this.parentElement.remove()">Xóa</button>`;
+        cList.appendChild(div);
+    });
 }
 
-// ===== Thêm thông báo =====
-function addNotification(text = "") {
-    const div = document.createElement("div");
-    div.innerHTML = `
-    <input type="text" value="${text}" placeholder="Nội dung thông báo" style="width:80%;">
-    <button type="button" onclick="this.parentElement.remove()">Xóa</button>`;
-    document.getElementById("notifications").appendChild(div);
-}
-
-// ===== Thêm liên hệ =====
-function addContact(type = "", link = "") {
-    const div = document.createElement("div");
-    div.innerHTML = `
-    <input type="text" value="${type}" placeholder="Loại liên hệ (VD: Zalo, TikTok...)" style="width:30%;">
-    <input type="text" value="${link}" placeholder="Liên kết hoặc số điện thoại" style="width:50%;">
-    <button type="button" onclick="this.parentElement.remove()">Xóa</button>`;
-    document.getElementById("contacts").appendChild(div);
-}
-
-// ===== Lưu dữ liệu =====
-async function saveData() {
+async function uploadQRCodes() {
     const formData = new FormData();
-
-    if (currentAdmin.role === "super") {
-        formData.append("heroTitle", document.getElementById("heroTitle").value);
-        formData.append("heroSubtitle", document.getElementById("heroSubtitle").value);
-        formData.append("ctaText", document.getElementById("ctaText").value);
-        formData.append("ctaLink", document.getElementById("ctaLink").value);
-
-        const heroImage = document.getElementById("heroImage").files[0];
-        const zaloQR = document.getElementById("zaloQR").files[0];
-        const tiktokQR = document.getElementById("tiktokQR").files[0];
-        if (heroImage) formData.append("heroImage", heroImage);
-        if (zaloQR) formData.append("zaloQR", zaloQR);
-        if (tiktokQR) formData.append("tiktokQR", tiktokQR);
-    }
-
-    // Danh sách thông báo
-    const notifications = [];
-    document.querySelectorAll('#notifications input').forEach(i => {
-        if (i.value.trim()) notifications.push(i.value.trim());
-    });
-    formData.append("notifications", JSON.stringify(notifications));
-
-    // Danh sách liên hệ
-    const contacts = [];
-    document.querySelectorAll('#contacts div').forEach(div => {
-        const inputs = div.querySelectorAll('input');
-        if (inputs[0].value && inputs[1].value) {
-            contacts.push({ type: inputs[0].value, link: inputs[1].value });
-        }
-    });
-    formData.append("contacts", JSON.stringify(contacts));
-
-    try {
-        const res = await fetch("/api/updateData", {
-            method: "POST",
-            body: formData
-        });
-
-        const data = await res.json();
-        if (data.message) {
-            alert("✅ " + data.message);
-        } else {
-            alert("❌ Lưu thất bại, vui lòng thử lại!");
-        }
-    } catch (error) {
-        alert("⚠️ Lỗi kết nối tới máy chủ: " + error.message);
-    }
+    const zalo = document.getElementById("qrZalo").files[0];
+    const tiktok = document.getElementById("qrTiktok").files[0];
+    if (zalo) formData.append("qrZalo", zalo);
+    if (tiktok) formData.append("qrTiktok", tiktok);
+    await fetch("/api/uploadQR", { method: "POST", body: formData });
+    alert("✅ Đã tải ảnh QR lên!");
 }
 
-// ===== Tải tin nhắn khách hàng =====
+async function saveData() {
+    const notifications = Array.from(document.querySelectorAll("#notificationsList input")).map(i => i.value.trim()).filter(Boolean);
+    const contacts = Array.from(document.querySelectorAll("#contactsList .item")).map(div => ({
+        type: div.children[0].value,
+        link: div.children[1].value,
+    }));
+    await fetch("/api/saveData", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ notifications, contacts }),
+    });
+    alert("✅ Đã lưu thay đổi!");
+}
+
 async function loadMessages() {
     const res = await fetch("/api/getMessages");
     const msgs = await res.json();
-    const list = document.getElementById("messagesList");
-    list.innerHTML = "";
-
-    if (msgs.length === 0) {
-        list.textContent = "Chưa có tin nhắn nào.";
-        return;
-    }
-
+    const box = document.getElementById("messagesList");
+    box.innerHTML = "";
     msgs.forEach(m => {
         const div = document.createElement("div");
-        div.style.background = "#1a1a1a";
-        div.style.margin = "10px";
-        div.style.padding = "10px";
-        div.style.borderRadius = "8px";
-        div.innerHTML = `<b>${m.name}</b> (${m.phone})<br>${m.message}<br><small>${m.time}</small>`;
-        list.appendChild(div);
+        div.className = "message-box";
+        div.innerHTML = `<strong>${m.name}</strong> (${m.phone})<br>${m.message}<br><small>${m.time}</small>`;
+        box.appendChild(div);
     });
 }

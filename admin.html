@@ -2,15 +2,12 @@
 <html lang="vi">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Trang Quản Trị TikTokShop</title>
-    <link rel="icon"
-        href="https://swamediainc.storage.googleapis.com/swa.co.id/wp-content/uploads/2023/09/27121051/TikTok-Shop.jpg"
-        type="image/jpeg" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản trị TikTokShop</title>
     <style>
         body {
-            font-family: 'Poppins', sans-serif;
+            font-family: Poppins, sans-serif;
             background: #0d0d0d;
             color: #fff;
             margin: 0;
@@ -18,129 +15,88 @@
 
         header {
             background: #000;
-            padding: 15px 30px;
+            padding: 15px;
             text-align: center;
-            box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
         }
 
-        header h1 {
+        h1 {
             background: linear-gradient(90deg, #25F4EE, #FE2C55);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
-        main {
+        .container {
             max-width: 900px;
-            margin: 40px auto;
+            margin: 20px auto;
             background: #121212;
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
-        }
-
-        h2 {
-            background: linear-gradient(90deg, #25F4EE, #FE2C55);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            padding: 20px;
+            border-radius: 10px;
         }
 
         input,
         textarea {
             width: 100%;
             padding: 10px;
-            margin-top: 5px;
+            margin: 5px 0;
             border: none;
-            border-radius: 8px;
+            border-radius: 5px;
             background: #1e1e1e;
             color: #fff;
         }
 
         button {
-            padding: 10px 18px;
+            background: linear-gradient(90deg, #FE2C55, #25F4EE);
             border: none;
             border-radius: 25px;
-            background: linear-gradient(90deg, #FE2C55, #25F4EE);
-            color: #fff;
+            padding: 10px 15px;
             cursor: pointer;
             margin-top: 10px;
-            transition: .3s;
-        }
-
-        button:hover {
-            transform: scale(1.05);
-        }
-
-        .section {
-            margin-top: 30px;
-            padding: 20px;
-            background: #1a1a1a;
-            border-radius: 10px;
+            color: #fff;
         }
 
         .item {
             display: flex;
             gap: 10px;
             margin-bottom: 10px;
-            align-items: center;
         }
 
         .item input {
             flex: 1;
-        }
-
-        .message-box {
-            background: #111;
-            padding: 10px;
-            border-radius: 8px;
-            margin-bottom: 10px;
         }
     </style>
 </head>
 
 <body>
     <header>
-        <h1>🎛️ Quản Trị Hệ Thống TikTokShop</h1>
+        <h1>Trang Quản Trị TikTokShop</h1>
     </header>
-    <main>
-        <!-- Form đăng nhập -->
-        <section id="loginSection">
-            <h2>Đăng nhập quản trị viên</h2>
-            <input type="text" id="username" placeholder="Tên đăng nhập (admin1 - admin5)">
-            <input type="password" id="password" placeholder="Mật khẩu">
-            <button onclick="login()">Đăng nhập</button>
-            <p id="loginError" style="color:#FE2C55;"></p>
-        </section>
 
-        <!-- Giao diện quản trị -->
-        <section id="adminPanel" style="display:none;">
-            <div class="section">
-                <h2>Ảnh QR Liên hệ</h2>
-                <label>QR Zalo:</label>
-                <input type="file" id="qrZalo" accept="image/*">
-                <label>QR TikTok:</label>
-                <input type="file" id="qrTiktok" accept="image/*">
-                <button onclick="uploadQRCodes()">📤 Tải ảnh lên</button>
-            </div>
+    <div class="container">
+        <h2>Đăng nhập</h2>
+        <input id="username" placeholder="Tên đăng nhập (admin1-admin5)">
+        <input id="password" type="password" placeholder="Mật khẩu">
+        <button onclick="login()">Đăng nhập</button>
+        <p id="loginError" style="color:#FE2C55;"></p>
+    </div>
 
-            <div class="section">
-                <h2>Danh sách thông báo</h2>
-                <div id="notificationsList"></div>
-                <button onclick="addNotification()">+ Thêm thông báo</button>
-                <button onclick="saveData()">💾 Lưu thay đổi</button>
-            </div>
+    <div class="container" id="panel" style="display:none;">
+        <h2>📸 Ảnh QR</h2>
+        <input type="file" id="qrZalo" accept="image/*">
+        <input type="file" id="qrTiktok" accept="image/*">
+        <button onclick="uploadQR()">Tải lên</button>
 
-            <div class="section">
-                <h2>Liên hệ (Hiển thị ở Trang chủ)</h2>
-                <div id="contactsList"></div>
-                <button onclick="addContact()">+ Thêm liên hệ</button>
-            </div>
+        <h2>🔔 Thông báo</h2>
+        <div id="notifications"></div>
+        <button onclick="addNoti()">+ Thêm</button>
 
-            <div class="section">
-                <h2>Tin nhắn khách hàng</h2>
-                <div id="messagesList"></div>
-            </div>
-        </section>
-    </main>
+        <h2>📞 Liên hệ</h2>
+        <div id="contacts"></div>
+        <button onclick="addContact()">+ Thêm</button>
+        <button onclick="saveData()">💾 Lưu</button>
+
+        <h2>💬 Tin nhắn khách hàng</h2>
+        <div id="messages"></div>
+    </div>
 
     <script>
         const admins = [
@@ -151,95 +107,78 @@
             { user: "admin5", pass: "tkshop5" },
         ];
 
-        function login() {
-            const u = document.getElementById("username").value.trim();
-            const p = document.getElementById("password").value.trim();
-            const err = document.getElementById("loginError");
-            const valid = admins.find(a => a.user === u && a.pass === p);
-            if (valid) {
-                document.getElementById("loginSection").style.display = "none";
-                document.getElementById("adminPanel").style.display = "block";
-                fetchData();
-                loadMessages();
-            } else {
-                err.textContent = "❌ Sai tài khoản hoặc mật khẩu!";
-            }
+        async function login() {
+            const u = username.value, p = password.value;
+            const ok = admins.find(a => a.user === u && a.pass === p);
+            if (!ok) return loginError.textContent = "Sai thông tin!";
+            document.querySelector(".container").style.display = "none";
+            panel.style.display = "block";
+            loadData(); loadMessages();
         }
 
-        function addNotification() {
+        async function uploadQR() {
+            const fd = new FormData();
+            if (qrZalo.files[0]) fd.append("qrZalo", qrZalo.files[0]);
+            if (qrTiktok.files[0]) fd.append("qrTiktok", qrTiktok.files[0]);
+            await fetch("/api/uploadQR", { method: "POST", body: fd });
+            alert("✅ Đã tải ảnh QR thành công!");
+        }
+
+        function addNoti() {
             const div = document.createElement("div");
             div.className = "item";
-            div.innerHTML = `<input type="text" placeholder="Nội dung thông báo"><button onclick="this.parentElement.remove()">Xóa</button>`;
-            document.getElementById("notificationsList").appendChild(div);
+            div.innerHTML = `<input placeholder="Nội dung thông báo"><button onclick="this.parentElement.remove()">Xóa</button>`;
+            notifications.appendChild(div);
         }
 
         function addContact() {
             const div = document.createElement("div");
             div.className = "item";
-            div.innerHTML = `<input type="text" placeholder="Loại liên hệ"><input type="text" placeholder="Liên kết"><button onclick="this.parentElement.remove()">Xóa</button>`;
-            document.getElementById("contactsList").appendChild(div);
+            div.innerHTML = `<input placeholder="Loại liên hệ"><input placeholder="Liên kết"><button onclick="this.parentElement.remove()">Xóa</button>`;
+            contacts.appendChild(div);
         }
 
-        async function fetchData() {
+        async function loadData() {
             const res = await fetch("/api/getData");
             const data = await res.json();
-
-            // Notifications
-            const notiList = document.getElementById("notificationsList");
-            notiList.innerHTML = "";
+            notifications.innerHTML = "";
             data.notifications.forEach(n => {
                 const div = document.createElement("div");
                 div.className = "item";
-                div.innerHTML = `<input type="text" value="${n}"><button onclick="this.parentElement.remove()">Xóa</button>`;
-                notiList.appendChild(div);
+                div.innerHTML = `<input value="${n}"><button onclick="this.parentElement.remove()">Xóa</button>`;
+                notifications.appendChild(div);
             });
-
-            // Contacts
-            const cList = document.getElementById("contactsList");
-            cList.innerHTML = "";
+            contacts.innerHTML = "";
             data.contacts.forEach(c => {
                 const div = document.createElement("div");
                 div.className = "item";
-                div.innerHTML = `<input type="text" value="${c.type}"><input type="text" value="${c.link}"><button onclick="this.parentElement.remove()">Xóa</button>`;
-                cList.appendChild(div);
+                div.innerHTML = `<input value="${c.type}"><input value="${c.link}"><button onclick="this.parentElement.remove()">Xóa</button>`;
+                contacts.appendChild(div);
             });
         }
 
-        async function uploadQRCodes() {
-            const formData = new FormData();
-            const zalo = document.getElementById("qrZalo").files[0];
-            const tiktok = document.getElementById("qrTiktok").files[0];
-            if (zalo) formData.append("qrZalo", zalo);
-            if (tiktok) formData.append("qrTiktok", tiktok);
-            await fetch("/api/uploadQR", { method: "POST", body: formData });
-            alert("✅ Ảnh QR đã được tải lên!");
-        }
-
         async function saveData() {
-            const notifications = Array.from(document.querySelectorAll("#notificationsList input")).map(i => i.value.trim()).filter(Boolean);
-            const contacts = Array.from(document.querySelectorAll("#contactsList .item")).map(div => ({
-                type: div.children[0].value,
-                link: div.children[1].value,
+            const notificationsArr = Array.from(notifications.querySelectorAll("input")).map(i => i.value.trim()).filter(Boolean);
+            const contactDivs = contacts.querySelectorAll(".item");
+            const contactsArr = Array.from(contactDivs).map(d => ({
+                type: d.children[0].value.trim(),
+                link: d.children[1].value.trim()
             }));
             await fetch("/api/saveData", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ notifications, contacts }),
+                body: JSON.stringify({ notifications: notificationsArr, contacts: contactsArr })
             });
-            alert("✅ Đã lưu thay đổi thành công!");
+            alert("✅ Đã lưu thay đổi!");
         }
 
         async function loadMessages() {
             const res = await fetch("/api/getMessages");
             const msgs = await res.json();
-            const box = document.getElementById("messagesList");
-            box.innerHTML = "";
-            msgs.forEach(m => {
-                const div = document.createElement("div");
-                div.className = "message-box";
-                div.innerHTML = `<strong>${m.name}</strong> (${m.phone})<br>${m.message}<br><small>${m.time}</small>`;
-                box.appendChild(div);
-            });
+            messages.innerHTML = msgs.map(m => `
+        <div style="background:#1a1a1a;padding:10px;border-radius:8px;margin-bottom:5px;">
+          <b>${m.name}</b> (${m.phone})<br>${m.message}<br><small>${m.time}</small>
+        </div>`).join("");
         }
     </script>
 </body>

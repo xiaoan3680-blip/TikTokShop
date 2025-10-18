@@ -14,6 +14,9 @@ const PORT = process.env.PORT || 3000;
 // 📁 CẤU HÌNH THƯ MỤC
 // =============================
 const __dirname = path.resolve();
+
+// 👉 Thêm dòng dưới để cho phép truy cập file tĩnh trong thư mục gốc
+app.use(express.static(__dirname)); // ✅ Cho phép truy cập file xác minh Zalo
 app.use(express.static("public"));
 app.use(express.static("uploads"));
 app.use(bodyParser.json());

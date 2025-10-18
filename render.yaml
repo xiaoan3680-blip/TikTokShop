@@ -2,7 +2,12 @@ services:
   - type: web
     name: tiktokshop-admin
     env: node
-    buildCommand: npm install
-    startCommand: npm start
     plan: free
+    buildCommand: npm install
+    startCommand: node server.js
     autoDeploy: true
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000

@@ -1,163 +1,98 @@
 import express from "express";
+import bodyParser from "body-parser";
+import cors from "cors";
 import multer from "multer";
 import fs from "fs";
-import path from "path";
-import bodyParser from "body-parser";
 import dotenv from "dotenv";
 
-dotenv.config(); // 🔹 Đọc file .env
+dotenv.config();
 
 const app = express();
-const PORT = process.env.PORT || 3000;
-const __dirname = path.resolve();
-
-// =============================
-// 📁 CẤU HÌNH THƯ MỤC
-// =============================
-app.use(express.static(__dirname));
-app.use("/uploads", express.static(path.join(__dirname, "uploads")));
+app.use(cors());
 app.use(bodyParser.json());
+app.use(express.urlencoded({ extended: true }));
 
-// =============================
-// 💾 CẤU HÌNH LƯU FILE QR
-// =============================
+// ✅ Cho phép truy cập ảnh trong thư mục uploads
+app.use("/uploads", express.static("uploads"));
+
+// Đường dẫn lưu file
+const DATA_FILE = process.env.DATA_FILE || "./data.json";
+const MESSAGE_FILE = process.env.MESSAGE_FILE || "./messages.json";
+const UPLOAD_DIR = process.env.UPLOAD_DIR || "./uploads";
+
+// ⚙️ Cấu hình Multer (upload ảnh QR)
 const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        cb(null, "uploads/");
-    },
-    filename: function (req, file, cb) {
-        if (file.fieldname === "qrZalo") cb(null, "qr_zalo.png");
-        else if (file.fieldname === "qrTiktok") cb(null, "qr_tiktok.png");
+    destination: (req, file, cb) => cb(null, UPLOAD_DIR),
+    filename: (req, file, cb) => {
+        const name = file.fieldname === "qrZalo" ? "qr_zalo.png" : "qr_tiktok.png";
+        cb(null, name);
     },
 });
-const upload = multer({ storage: storage });
+const upload = multer({ storage });
 
-// =============================
-// 📄 ĐỌC / GHI DỮ LIỆU JSON
-// =============================
-const dataPath = process.env.DATA_FILE || "./data.json";
-const messagePath = process.env.MESSAGE_FILE || "./messages.json";
+// 🧠 Đọc dữ liệu hiện tại
+function loadData() {
+    if (!fs.existsSync(DATA_FILE)) return { notifications: [], contacts: [] };
+    return JSON.parse(fs.readFileSync(DATA_FILE));
+}
 
-// Tạo file JSON nếu chưa có
-if (!fs.existsSync(dataPath))
-    fs.writeFileSync(
-        dataPath,
-        JSON.stringify({ notifications: [], contacts: [] }, null, 2)
-    );
-if (!fs.existsSync(messagePath))
-    fs.writeFileSync(messagePath, JSON.stringify([], null, 2));
+function saveData(data) {
+    fs.writeFileSync(DATA_FILE, JSON.stringify(data, null, 2));
+}
 
-// =============================
-// 🌐 TRANG CHỦ & TRANG QUẢN TRỊ
-// =============================
-app.get("/", (req, res) => {
-    res.sendFile(path.join(__dirname, "index.html"));
-});
-app.get("/admin", (req, res) => {
-    res.sendFile(path.join(__dirname, "admin.html"));
-});
+function loadMessages() {
+    if (!fs.existsSync(MESSAGE_FILE)) return [];
+    return JSON.parse(fs.readFileSync(MESSAGE_FILE));
+}
 
-// =============================
-// 📥 API LẤY DỮ LIỆU
-// =============================
+function saveMessages(msgs) {
+    fs.writeFileSync(MESSAGE_FILE, JSON.stringify(msgs, null, 2));
+}
+
+// 🧾 API lấy dữ liệu cho trang chủ
 app.get("/api/getData", (req, res) => {
-    try {
-        const data = JSON.parse(fs.readFileSync(dataPath));
-        const zaloQR = fs.existsSync("uploads/qr_zalo.png")
-            ? "uploads/qr_zalo.png"
-            : null;
-        const tiktokQR = fs.existsSync("uploads/qr_tiktok.png")
-            ? "uploads/qr_tiktok.png"
-            : null;
-        res.json({ ...data, qr_zalo: zaloQR, qr_tiktok: tiktokQR });
-    } catch (err) {
-        res.status(500).json({ error: "Lỗi đọc dữ liệu!" });
-    }
+    const data = loadData();
+    const qr_zalo = "/uploads/qr_zalo.png";
+    const qr_tiktok = "/uploads/qr_tiktok.png";
+    res.json({ ...data, qr_zalo, qr_tiktok });
 });
 
-// =============================
-// 💾 API LƯU DỮ LIỆU
-// =============================
-app.post("/api/saveData", (req, res) => {
-    try {
-        fs.writeFileSync(dataPath, JSON.stringify(req.body, null, 2));
-        res.json({ message: "Đã lưu dữ liệu thành công!" });
-    } catch (err) {
-        res.status(500).json({ error: "Lỗi khi lưu dữ liệu!" });
-    }
-});
-
-// =============================
-// 📤 API UPLOAD ẢNH QR
-// =============================
-app.post(
-    "/api/uploadQR",
-    upload.fields([
-        { name: "qrZalo", maxCount: 1 },
-        { name: "qrTiktok", maxCount: 1 },
-    ]),
-    (req, res) => {
-        res.json({ message: "Upload thành công!" });
-    }
-);
-
-// =============================
-// 📬 API GỬI TIN NHẮN LIÊN HỆ
-// =============================
+// 📩 API nhận tin nhắn từ khách
 app.post("/api/sendMessage", (req, res) => {
-    try {
-        const { name, phone, message } = req.body;
-        if (!name || !phone || !message)
-            return res.status(400).json({ error: "Thiếu thông tin!" });
-        const allMessages = JSON.parse(fs.readFileSync(messagePath));
-        allMessages.push({
-            name,
-            phone,
-            message,
-            time: new Date().toLocaleString("vi-VN"),
-        });
-        fs.writeFileSync(messagePath, JSON.stringify(allMessages, null, 2));
-        res.json({ message: "Tin nhắn của bạn đã được gửi thành công!" });
-    } catch (err) {
-        res.status(500).json({ error: "Không thể gửi tin nhắn!" });
-    }
+    const { name, phone, message } = req.body;
+    if (!name || !phone || !message)
+        return res.status(400).json({ message: "Thiếu thông tin!" });
+    const msgs = loadMessages();
+    msgs.push({ name, phone, message, time: new Date().toLocaleString() });
+    saveMessages(msgs);
+    res.json({ message: "Cảm ơn bạn! Tin nhắn đã được gửi." });
 });
 
-// =============================
-// 📩 API LẤY TIN NHẮN CHO ADMIN
-// =============================
+// 🧾 API lấy tin nhắn trong admin
 app.get("/api/getMessages", (req, res) => {
-    try {
-        const msgs = JSON.parse(fs.readFileSync(messagePath));
-        res.json(msgs);
-    } catch (err) {
-        res.status(500).json({ error: "Không đọc được tin nhắn!" });
-    }
+    res.json(loadMessages());
 });
 
-// =============================
-// 🤖 CALLBACK XÁC THỰC ZALO OA
-// =============================
-app.post("/zalo-callback", (req, res) => {
-    console.log("📩 Callback từ Zalo OA:", req.body);
-
-    // Trả về “OK” để xác thực
-    res.status(200).send("OK");
+// 🖼️ API upload QR
+app.post("/api/uploadQR", upload.fields([{ name: "qrZalo" }, { name: "qrTiktok" }]), (req, res) => {
+    res.json({ message: "Ảnh QR đã được tải lên!" });
 });
 
-// =============================
-// 🧠 KIỂM TRA XÁC THỰC ZALO OA
-// =============================
-app.get("/zalo-verification", (req, res) => {
-    const verifier = req.query["verify"];
-    if (!verifier)
-        return res.status(400).send("Thiếu mã xác thực từ Zalo OA!");
-    res.send(`Zalo OA xác thực thành công với mã: ${verifier}`);
+// 💾 API lưu dữ liệu thay đổi (thông báo + liên hệ)
+app.post("/api/saveData", (req, res) => {
+    const { notifications, contacts } = req.body;
+    const data = { notifications, contacts };
+    saveData(data);
+    res.json({ message: "Lưu thành công!" });
 });
 
-// =============================
-// 🚀 KHỞI CHẠY SERVER
-// =============================
+// ✅ Trang test
+app.get("/", (req, res) => {
+    res.send("✅ TikTokShop server đang hoạt động!");
+});
+
+// 🚀 Khởi chạy server
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-    console.log(`🚀 TikTokShop server chạy tại: http://localhost:${PORT}`);
+    console.log(`TikTokShop server đang chạy tại http://localhost:${PORT}`);
 });

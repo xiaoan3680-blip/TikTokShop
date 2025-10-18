@@ -1,16 +1,11 @@
 services:
   - type: web
-    name: tiktokshop-admin
+    name: tiktokshop
     env: node
+    region: singapore
     plan: free
-    buildCommand: npm install
-    startCommand: npm start
-    envVars:
-      - key: NODE_ENV
-        value: production
-      - key: PORT
-        value: 3000
+    buildCommand: "npm install"
+    startCommand: "npm start"
     autoDeploy: true
-    healthCheckPath: /
-    domains:
-      - tiktokshop888.com
+    envVars:
+      NODE_ENV: production

@@ -1,8 +1,8 @@
 node_modules/
-npm-debug.log*
 uploads/*
-!/uploads/qr_zalo.png
-!/uploads/qr_tiktok.png
+!uploads/qr_zalo.png
+!uploads/qr_tiktok.png
+*.log
 .env
 .DS_Store
 .vscode/

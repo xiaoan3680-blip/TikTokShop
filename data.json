@@ -1,16 +1,19 @@
 {
-    "notifications": [
-        "🎉 Chào mừng bạn đến với TikTokShop!",
-        "🚀 Hỗ trợ mở shop và chăm sóc khách hàng tự động!"
-    ],
-    "contacts": [
-        {
-            "type": "Zalo CSKH",
-            "link": "https://zalo.me/+84523554811"
-        },
-        {
-            "type": "TikTok",
-            "link": "https://www.tiktok.com/@goccuaembong88"
-        }
-    ]
+    "adminKey": "1234",
+    "title": "TikTokShop - Nền tảng bán hàng chuyên nghiệp 2025",
+    "description": "Phát triển kinh doanh hiệu quả và tạo đầu vào cùng TikTok Thương mại điện tử.",
+    "about": "TikTokShop giúp bạn kết nối sản phẩm với hàng triệu người dùng TikTok. Với công cụ thông minh, tính năng tự động hóa và giao diện hiện đại, bạn có thể bán hàng dễ dàng và bền vững.",
+    "logo": "https://product.hstatic.net/200000376071/product/tiktok-shop_c25424051528441eaa7680b85eb94fdf.jpg",
+    "favicon": "https://product.hstatic.net/200000376071/product/tiktok-shop_c25424051528441eaa7680b85eb94fdf.jpg",
+    "contact": {
+        "email": "support@tiktokshop.vn",
+        "phone": "0123456789",
+        "facebook": "https://facebook.com/tiktokshopvn",
+        "tiktok": "https://tiktok.com/@tiktokshop",
+        "zalo": "https://zalo.me/84994143176"
+    },
+    "qr": {
+        "zalo": "/uploads/qr_zalo.png",
+        "tiktok": "/uploads/qr_tiktok.png"
+    }
 }

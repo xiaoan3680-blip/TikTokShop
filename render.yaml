@@ -1,13 +1,37 @@
+# ==========================================
+# TikTokShop Render Deployment Configuration
+# ==========================================
+
 services:
   - type: web
     name: tiktokshop-admin
     env: node
     plan: free
+
+    # Lệnh chạy khi Render build
     buildCommand: npm install
+
+    # Lệnh khởi chạy server (server.js là file chính)
     startCommand: node server.js
-    autoDeploy: true
+
+    # Thông tin runtime
     envVars:
       - key: NODE_ENV
         value: production
       - key: PORT
-        value: 10000
+        value: 3000
+
+    # Giữ site luôn active
+    autoDeploy: true
+
+    # Thiết lập health check để Render biết server hoạt động
+    healthCheckPath: /
+    healthCheckTimeout: 30
+
+    # Cache dependencies để build nhanh hơn
+    cacheDirectories:
+      - node_modules
+
+    # Public domain (đã liên kết)
+    domains:
+      - tiktokshop888.com

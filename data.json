@@ -1,14 +1,16 @@
 {
-    "qr_zalo": "uploads/qr_zalo.png",
-    "qr_tiktok": "uploads/qr_tiktok.png",
     "notifications": [
-        "🎉 Chào mừng bạn đến với TikTokShop chính thức!",
-        "🔥 Hỗ trợ mở shop miễn phí, liên hệ ngay!"
+        "Chào mừng bạn đến với TikTokShop!",
+        "Liên hệ để được hỗ trợ mở shop miễn phí!"
     ],
     "contacts": [
         {
             "type": "Zalo CSKH",
             "link": "https://zalo.me/+84523554811"
+        },
+        {
+            "type": "TikTok Shop",
+            "link": "https://www.tiktok.com/"
         }
     ]
 }

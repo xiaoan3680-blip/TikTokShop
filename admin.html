@@ -2,12 +2,12 @@
 <html lang="vi">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TikTokShop Admin</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Trang Quản Trị TikTokShop</title>
     <link rel="icon"
         href="https://swamediainc.storage.googleapis.com/swa.co.id/wp-content/uploads/2023/09/27121051/TikTok-Shop.jpg"
-        type="image/jpeg">
+        type="image/jpeg" />
     <style>
         body {
             font-family: 'Poppins', sans-serif;
@@ -99,10 +99,11 @@
 
 <body>
     <header>
-        <h1>🎛️ Quản Trị TikTokShop</h1>
+        <h1>🎛️ Quản Trị Hệ Thống TikTokShop</h1>
     </header>
     <main>
-        <section class="section">
+        <!-- Form đăng nhập -->
+        <section id="loginSection">
             <h2>Đăng nhập quản trị viên</h2>
             <input type="text" id="username" placeholder="Tên đăng nhập (admin1 - admin5)">
             <input type="password" id="password" placeholder="Mật khẩu">
@@ -110,23 +111,26 @@
             <p id="loginError" style="color:#FE2C55;"></p>
         </section>
 
+        <!-- Giao diện quản trị -->
         <section id="adminPanel" style="display:none;">
-            <h2>Ảnh QR Liên hệ</h2>
-            <label>QR Zalo:</label>
-            <input type="file" id="qrZalo" accept="image/*">
-            <label>QR TikTok:</label>
-            <input type="file" id="qrTiktok" accept="image/*">
-            <button onclick="uploadQRCodes()">📤 Tải ảnh lên</button>
+            <div class="section">
+                <h2>Ảnh QR Liên hệ</h2>
+                <label>QR Zalo:</label>
+                <input type="file" id="qrZalo" accept="image/*">
+                <label>QR TikTok:</label>
+                <input type="file" id="qrTiktok" accept="image/*">
+                <button onclick="uploadQRCodes()">📤 Tải ảnh lên</button>
+            </div>
 
             <div class="section">
-                <h2>Thông báo sự kiện</h2>
+                <h2>Danh sách thông báo</h2>
                 <div id="notificationsList"></div>
                 <button onclick="addNotification()">+ Thêm thông báo</button>
                 <button onclick="saveData()">💾 Lưu thay đổi</button>
             </div>
 
             <div class="section">
-                <h2>Liên hệ</h2>
+                <h2>Liên hệ (Hiển thị ở Trang chủ)</h2>
                 <div id="contactsList"></div>
                 <button onclick="addContact()">+ Thêm liên hệ</button>
             </div>
@@ -153,12 +157,12 @@
             const err = document.getElementById("loginError");
             const valid = admins.find(a => a.user === u && a.pass === p);
             if (valid) {
-                document.querySelector("section").style.display = "none";
+                document.getElementById("loginSection").style.display = "none";
                 document.getElementById("adminPanel").style.display = "block";
                 fetchData();
                 loadMessages();
             } else {
-                err.textContent = "Sai tài khoản hoặc mật khẩu!";
+                err.textContent = "❌ Sai tài khoản hoặc mật khẩu!";
             }
         }
 
@@ -179,6 +183,8 @@
         async function fetchData() {
             const res = await fetch("/api/getData");
             const data = await res.json();
+
+            // Notifications
             const notiList = document.getElementById("notificationsList");
             notiList.innerHTML = "";
             data.notifications.forEach(n => {
@@ -187,6 +193,8 @@
                 div.innerHTML = `<input type="text" value="${n}"><button onclick="this.parentElement.remove()">Xóa</button>`;
                 notiList.appendChild(div);
             });
+
+            // Contacts
             const cList = document.getElementById("contactsList");
             cList.innerHTML = "";
             data.contacts.forEach(c => {
@@ -204,7 +212,7 @@
             if (zalo) formData.append("qrZalo", zalo);
             if (tiktok) formData.append("qrTiktok", tiktok);
             await fetch("/api/uploadQR", { method: "POST", body: formData });
-            alert("✅ Đã tải ảnh QR lên!");
+            alert("✅ Ảnh QR đã được tải lên!");
         }
 
         async function saveData() {
@@ -218,7 +226,7 @@
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ notifications, contacts }),
             });
-            alert("✅ Đã lưu thay đổi!");
+            alert("✅ Đã lưu thay đổi thành công!");
         }
 
         async function loadMessages() {

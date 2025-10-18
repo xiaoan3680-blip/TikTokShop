@@ -2,15 +2,19 @@
     "adminKey": "1234",
     "title": "TikTokShop - Nền tảng bán hàng chuyên nghiệp 2025",
     "description": "Phát triển kinh doanh hiệu quả và tạo đầu vào cùng TikTok Thương mại điện tử.",
-    "about": "TikTokShop giúp bạn kết nối sản phẩm với hàng triệu người dùng TikTok. Với công cụ thông minh, tính năng tự động hóa và giao diện hiện đại, bạn có thể bán hàng dễ dàng và bền vững.",
+    "about": "TikTokShop giúp bạn kết nối sản phẩm với hàng triệu người dùng TikTok.",
     "logo": "https://product.hstatic.net/200000376071/product/tiktok-shop_c25424051528441eaa7680b85eb94fdf.jpg",
     "favicon": "https://product.hstatic.net/200000376071/product/tiktok-shop_c25424051528441eaa7680b85eb94fdf.jpg",
+    "autoMessage": "Xin chào! 👋 Bạn cần hỗ trợ mở shop TikTok hay tư vấn bán hàng? Nhắn cho chúng tôi ngay nhé!",
     "contact": {
         "email": "support@tiktokshop.vn",
         "phone": "0123456789",
+        "zalo": "https://zalo.me/84994143176",
         "facebook": "https://facebook.com/tiktokshopvn",
         "tiktok": "https://tiktok.com/@tiktokshop",
-        "zalo": "https://zalo.me/84994143176"
+        "telegram": "https://t.me/tiktokshopvn",
+        "shopee": "https://shopee.vn/tiktokshop",
+        "instagram": "https://instagram.com/tiktokshop.vn"
     },
     "qr": {
         "zalo": "/uploads/qr_zalo.png",

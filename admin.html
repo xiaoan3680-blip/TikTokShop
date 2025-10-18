@@ -29,9 +29,9 @@
         </div>
     </div>
 
-    <!-- Nội dung chính -->
+    <!-- Nội dung -->
     <div class="container mx-auto py-10 max-w-3xl flex-1">
-        <h2 class="text-3xl font-semibold text-center mb-6">Quản lý nội dung trang chủ</h2>
+        <h2 class="text-3xl font-semibold text-center mb-6">Quản lý nội dung & liên hệ</h2>
 
         <!-- Form đăng nhập -->
         <div id="login" class="text-center mt-6">
@@ -40,52 +40,51 @@
             <button onclick="login()" class="bg-[#25F4EE] text-black px-6 py-2 rounded ml-2">Đăng nhập</button>
         </div>
 
-        <!-- Form chỉnh sửa -->
+        <!-- Form quản lý -->
         <form id="adminForm" class="hidden mt-8 space-y-4">
-            <div class="grid grid-cols-1 gap-4">
-                <h3 class="text-lg font-semibold text-[#25F4EE]">Thông tin cơ bản</h3>
-                <input id="title" class="w-full p-2 rounded text-black" placeholder="Tiêu đề">
-                <textarea id="description" rows="2" class="w-full p-2 rounded text-black"
-                    placeholder="Mô tả"></textarea>
-                <textarea id="about" rows="3" class="w-full p-2 rounded text-black" placeholder="Giới thiệu"></textarea>
+            <h3 class="text-lg font-semibold text-[#25F4EE]">Thông tin cơ bản</h3>
+            <input id="title" class="w-full p-2 rounded text-black" placeholder="Tiêu đề">
+            <textarea id="description" rows="2" class="w-full p-2 rounded text-black" placeholder="Mô tả"></textarea>
+            <textarea id="about" rows="3" class="w-full p-2 rounded text-black" placeholder="Giới thiệu"></textarea>
 
-                <div class="border-t border-gray-700 my-4"></div>
-                <h3 class="text-lg font-semibold text-[#25F4EE]">Ảnh và giao diện</h3>
-                <input id="logo" class="w-full p-2 rounded text-black" placeholder="URL logo (hiển thị trên đầu trang)">
-                <input id="faviconUrl" class="w-full p-2 rounded text-black"
-                    placeholder="URL favicon (hiển thị trên tab trình duyệt)">
-                <button type="button" onclick="updateLogoPreview()"
-                    class="bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded text-white">Xem thử logo & favicon</button>
-                <div class="flex justify-center mt-4">
-                    <img id="previewLogo" src="" alt="Preview Logo" class="w-16 h-16 rounded-lg hidden">
-                </div>
+            <h3 class="text-lg font-semibold text-[#25F4EE] mt-4">Logo & Favicon</h3>
+            <input id="logo" class="w-full p-2 rounded text-black" placeholder="URL logo hiển thị trên đầu trang">
+            <input id="faviconUrl" class="w-full p-2 rounded text-black" placeholder="URL favicon (hiển thị trên tab)">
+            <button type="button" onclick="updateLogoPreview()"
+                class="bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded text-white mt-2">Xem thử</button>
 
-                <div class="border-t border-gray-700 my-4"></div>
-                <h3 class="text-lg font-semibold text-[#25F4EE]">Thông tin liên hệ</h3>
-                <input id="email" class="w-full p-2 rounded text-black" placeholder="Email">
-                <input id="phone" class="w-full p-2 rounded text-black" placeholder="Số điện thoại">
-                <input id="facebook" class="w-full p-2 rounded text-black" placeholder="Facebook">
-                <input id="tiktok" class="w-full p-2 rounded text-black" placeholder="TikTok">
-                <input id="zalo" class="w-full p-2 rounded text-black" placeholder="Zalo">
+            <div class="flex justify-center mt-4">
+                <img id="previewLogo" src="" alt="Preview Logo" class="w-16 h-16 rounded-lg hidden">
+            </div>
 
-                <div class="border-t border-gray-700 my-4"></div>
-                <h3 class="text-lg font-semibold text-[#FE2C55]">Ảnh mã QR</h3>
-                <input id="qrZalo" class="w-full p-2 rounded text-black" placeholder="Đường dẫn QR Zalo">
-                <input id="qrTiktok" class="w-full p-2 rounded text-black" placeholder="Đường dẫn QR TikTok">
+            <h3 class="text-lg font-semibold text-[#FE2C55] mt-6">Tin nhắn chào tự động (Chatbox)</h3>
+            <textarea id="autoMessage" rows="2" class="w-full p-2 rounded text-black"
+                placeholder="Nội dung chào khi người dùng truy cập trang"></textarea>
 
-                <div class="flex justify-between items-center mt-6">
-                    <button type="button" onclick="saveChanges()"
-                        class="bg-[#FE2C55] text-white px-6 py-2 rounded hover:bg-[#25F4EE] transition">💾 Lưu thay
-                        đổi</button>
-                    <button type="button" onclick="window.location.href='index.html'"
-                        class="bg-gray-700 text-white px-6 py-2 rounded hover:bg-gray-600">🏠 Quay lại trang
-                        chủ</button>
-                </div>
+            <h3 class="text-lg font-semibold text-[#25F4EE] mt-4">Thông tin liên hệ</h3>
+            <input id="email" class="w-full p-2 rounded text-black" placeholder="Email">
+            <input id="phone" class="w-full p-2 rounded text-black" placeholder="Hotline / Số điện thoại">
+            <input id="facebook" class="w-full p-2 rounded text-black" placeholder="Facebook">
+            <input id="tiktok" class="w-full p-2 rounded text-black" placeholder="TikTok">
+            <input id="zalo" class="w-full p-2 rounded text-black" placeholder="Zalo">
+            <input id="telegram" class="w-full p-2 rounded text-black" placeholder="Telegram">
+            <input id="shopee" class="w-full p-2 rounded text-black" placeholder="Shopee">
+            <input id="instagram" class="w-full p-2 rounded text-black" placeholder="Instagram">
+
+            <h3 class="text-lg font-semibold text-[#FE2C55] mt-6">Ảnh mã QR</h3>
+            <input id="qrZalo" class="w-full p-2 rounded text-black" placeholder="Đường dẫn ảnh QR Zalo">
+            <input id="qrTiktok" class="w-full p-2 rounded text-black" placeholder="Đường dẫn ảnh QR TikTok">
+
+            <div class="flex justify-between items-center mt-6">
+                <button type="button" onclick="saveChanges()"
+                    class="bg-[#FE2C55] text-white px-6 py-2 rounded hover:bg-[#25F4EE] transition">💾 Lưu thay
+                    đổi</button>
+                <button type="button" onclick="window.location.href='index.html'"
+                    class="bg-gray-700 text-white px-6 py-2 rounded hover:bg-gray-600">🏠 Quay lại trang chủ</button>
             </div>
         </form>
     </div>
 
-    <!-- Footer -->
     <footer class="bg-black border-t border-gray-700 text-center py-4">
         <p class="text-gray-500 text-sm">© 2025 TikTokShop Admin Panel</p>
     </footer>

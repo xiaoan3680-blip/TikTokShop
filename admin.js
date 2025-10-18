@@ -10,21 +10,26 @@ function login() {
             document.getElementById("login").classList.add("hidden");
             document.getElementById("adminForm").classList.remove("hidden");
 
-            // Điền dữ liệu hiện tại vào form
             document.getElementById("title").value = data.title;
             document.getElementById("description").value = data.description;
             document.getElementById("about").value = data.about;
             document.getElementById("logo").value = data.logo || "";
             document.getElementById("faviconUrl").value = data.favicon || "";
-            document.getElementById("email").value = data.contact.email;
-            document.getElementById("phone").value = data.contact.phone;
-            document.getElementById("facebook").value = data.contact.facebook;
-            document.getElementById("tiktok").value = data.contact.tiktok;
-            document.getElementById("zalo").value = data.contact.zalo;
+            document.getElementById("autoMessage").value = data.autoMessage || "";
+
+            const c = data.contact;
+            document.getElementById("email").value = c.email;
+            document.getElementById("phone").value = c.phone;
+            document.getElementById("facebook").value = c.facebook;
+            document.getElementById("tiktok").value = c.tiktok;
+            document.getElementById("zalo").value = c.zalo;
+            document.getElementById("telegram").value = c.telegram || "";
+            document.getElementById("shopee").value = c.shopee || "";
+            document.getElementById("instagram").value = c.instagram || "";
+
             document.getElementById("qrZalo").value = data.qr.zalo;
             document.getElementById("qrTiktok").value = data.qr.tiktok;
 
-            // Cập nhật logo và favicon hiện tại
             updateLogoPreview();
         });
 }
@@ -34,9 +39,8 @@ function updateLogoPreview() {
     const faviconUrl = document.getElementById("faviconUrl").value.trim();
 
     if (logoUrl) {
-        const img = document.getElementById("siteLogo");
+        document.getElementById("siteLogo").src = logoUrl;
         const preview = document.getElementById("previewLogo");
-        img.src = logoUrl;
         preview.src = logoUrl;
         preview.classList.remove("hidden");
     }
@@ -54,12 +58,16 @@ function saveChanges() {
         about: document.getElementById("about").value,
         logo: document.getElementById("logo").value,
         favicon: document.getElementById("faviconUrl").value,
+        autoMessage: document.getElementById("autoMessage").value,
         contact: {
             email: document.getElementById("email").value,
             phone: document.getElementById("phone").value,
             facebook: document.getElementById("facebook").value,
             tiktok: document.getElementById("tiktok").value,
-            zalo: document.getElementById("zalo").value
+            zalo: document.getElementById("zalo").value,
+            telegram: document.getElementById("telegram").value,
+            shopee: document.getElementById("shopee").value,
+            instagram: document.getElementById("instagram").value
         },
         qr: {
             zalo: document.getElementById("qrZalo").value,

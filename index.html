@@ -2,126 +2,215 @@
 <html lang="vi">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TikTokShop - Nền tảng bán hàng chuyên nghiệp 2025</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="admin.css" />
+    <link id="favicon" rel="icon" type="image/png" href="">
+    <style>
+        body {
+            background-color: #0a0a0a;
+            color: #e5e7eb;
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #25F4EE 0%, #FE2C55 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .gradient-bg {
+            background: linear-gradient(135deg, #25F4EE 0%, #FE2C55 100%);
+        }
+
+        .benefit-card {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            border: 1px solid #374151;
+            transition: all 0.3s;
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 20px rgba(37, 244, 238, 0.3), 0 0 30px rgba(254, 44, 85, 0.3);
+        }
+
+        .dark-card {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            border: 1px solid #374151;
+        }
+    </style>
 </head>
 
 <body class="bg-gray-900 text-gray-100">
 
     <!-- Header -->
-    <header class="sticky top-0 bg-gray-900 border-b border-gray-700 text-white z-50">
-        <nav class="container mx-auto px-4 py-4 flex justify-between items-center">
-            <h1 id="title" class="text-2xl font-bold gradient-text">TikTokShop</h1>
-            <div class="space-x-6 hidden md:flex">
+    <header class="bg-gray-900 border-b border-gray-700 sticky top-0 z-50 backdrop-blur-sm bg-opacity-95">
+        <nav class="container mx-auto px-4 py-4 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <img id="logo" src="" alt="TikTokShop Logo" class="w-10 h-10 rounded-lg">
+                <div class="text-2xl font-bold gradient-text">TikTokShop</div>
+            </div>
+            <div class="hidden md:flex space-x-8">
                 <a href="#about" class="hover:text-[#25F4EE]">Giới thiệu</a>
                 <a href="#benefits" class="hover:text-[#25F4EE]">Lợi ích</a>
                 <a href="#contact" class="hover:text-[#25F4EE]">Liên hệ</a>
             </div>
-            <a href="admin.html" class="text-[#25F4EE] hover:text-white">Admin</a>
         </nav>
     </header>
 
     <!-- Hero -->
     <section class="text-center py-20 bg-gray-800">
         <div class="container mx-auto px-4">
-            <h2 class="text-5xl font-bold mb-4 gradient-text">Nền tảng bán hàng chuyên nghiệp 2025</h2>
-            <p id="description" class="text-lg text-gray-300 max-w-2xl mx-auto mb-8"></p>
+            <h1 class="text-5xl font-bold mb-6" id="siteTitle"></h1>
+            <p class="text-xl mb-8" id="siteDesc"></p>
             <a href="#contact"
-                class="gradient-bg text-white px-8 py-3 rounded-full font-semibold shadow-lg hover:shadow-[#25F4EE]/50 transition-all duration-300">Bắt
+                class="inline-block gradient-bg text-white px-8 py-4 rounded-full font-semibold hover:scale-105 transition-transform">Bắt
                 đầu ngay</a>
         </div>
     </section>
 
     <!-- About -->
-    <section id="about" class="py-16 bg-gray-900 text-center">
-        <div class="container mx-auto px-4">
-            <h2 class="text-4xl font-bold mb-6 text-white">Về TikTokShop</h2>
-            <p id="aboutText" class="max-w-3xl mx-auto text-gray-300 leading-relaxed"></p>
+    <section id="about" class="py-16 bg-gray-900">
+        <div class="container mx-auto px-4 text-center max-w-3xl">
+            <h2 class="text-4xl font-bold mb-6">Về TikTokShop</h2>
+            <p class="text-lg text-gray-300 mb-6" id="aboutText"></p>
+            <div class="dark-card rounded-lg p-6 mx-auto w-fit">
+                <img id="aboutLogo" src="" class="w-32 h-20 mx-auto rounded-lg" alt="TikTok Shop">
+                <p class="text-gray-400 text-sm mt-2">Giao diện minh họa TikTok Shop</p>
+            </div>
         </div>
     </section>
 
-    <!-- Benefits -->
-    <section id="benefits" class="py-16 bg-gray-800">
-        <div class="container mx-auto px-4">
-            <h2 class="text-4xl font-bold text-center mb-12 text-white">Lợi ích khi mở shop TikTok</h2>
-            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <div class="dark-card p-6 rounded-lg text-center">
-                    <h3 class="font-semibold mb-2 text-[#25F4EE]">Tăng doanh thu tự nhiên</h3>
-                    <p class="text-gray-400 text-sm">Nhờ video ngắn thu hút</p>
+    <!-- QR Section -->
+    <section class="py-16 bg-gray-800">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-4xl font-bold mb-8">Kết nối nhanh qua Mã QR</h2>
+            <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                <div class="dark-card p-6 rounded-lg">
+                    <h3 class="text-xl font-semibold mb-4 text-[#25F4EE]">Zalo CSKH</h3>
+                    <img id="qrZalo" src="" alt="QR Zalo" class="w-48 h-48 mx-auto rounded-lg mb-4">
+                    <button
+                        class="bg-[#25F4EE] text-black px-6 py-2 rounded-full hover:bg-[#FE2C55] hover:text-white transition-colors">Quét
+                        để kết nối</button>
                 </div>
-                <div class="dark-card p-6 rounded-lg text-center">
-                    <h3 class="font-semibold mb-2 text-[#FE2C55]">Bán hàng 24/7</h3>
-                    <p class="text-gray-400 text-sm">Nhận đơn tự động</p>
-                </div>
-                <div class="dark-card p-6 rounded-lg text-center">
-                    <h3 class="font-semibold mb-2 text-[#25F4EE]">Dễ dàng quản lý</h3>
-                    <p class="text-gray-400 text-sm">Phù hợp người mới bắt đầu</p>
-                </div>
-                <div class="dark-card p-6 rounded-lg text-center">
-                    <h3 class="font-semibold mb-2 text-[#FE2C55]">Hỗ trợ miễn phí</h3>
-                    <p class="text-gray-400 text-sm">Chuyên viên hỗ trợ mở shop</p>
+                <div class="dark-card p-6 rounded-lg">
+                    <h3 class="text-xl font-semibold mb-4 text-[#FE2C55]">TikTok Shop</h3>
+                    <img id="qrTiktok" src="" alt="QR TikTok" class="w-48 h-48 mx-auto rounded-lg mb-4">
+                    <button class="gradient-bg text-white px-6 py-2 rounded-full hover:shadow-lg transition-all">Quét để
+                        kết nối</button>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- QR -->
-    <section class="py-16 bg-gray-900">
+    <!-- Benefits -->
+    <section id="benefits" class="py-16 bg-gray-900">
         <div class="container mx-auto px-4">
-            <h2 class="text-4xl font-bold mb-12 text-center text-white">Kết nối nhanh qua mã QR</h2>
-            <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-                <div class="dark-card p-8 text-center rounded-lg">
-                    <h3 class="text-xl font-semibold mb-4 text-[#25F4EE]">Zalo CSKH</h3>
-                    <img id="qrZalo" src="" alt="QR Zalo" class="mx-auto rounded-lg w-48 mb-4" />
-                    <a id="linkZalo" href="#" target="_blank" class="gradient-bg text-white px-6 py-2 rounded-full">Kết
-                        nối Zalo</a>
+            <h2 class="text-4xl font-bold mb-8 text-center">Lợi ích khi mở shop TikTok</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto mb-12">
+                <div class="benefit-card p-6 text-center rounded-lg">
+                    <h3 class="font-semibold text-[#25F4EE] mb-2">Tăng doanh thu tự nhiên</h3>
+                    <p class="text-gray-400 text-sm">Nhờ video ngắn thu hút khách hàng</p>
                 </div>
-                <div class="dark-card p-8 text-center rounded-lg">
-                    <h3 class="text-xl font-semibold mb-4 text-[#FE2C55]">TikTok Shop</h3>
-                    <img id="qrTiktok" src="" alt="QR TikTok" class="mx-auto rounded-lg w-48 mb-4" />
-                    <a id="linkTiktok" href="#" target="_blank"
-                        class="gradient-bg text-white px-6 py-2 rounded-full">Theo dõi TikTok</a>
+                <div class="benefit-card p-6 text-center rounded-lg">
+                    <h3 class="font-semibold text-[#FE2C55] mb-2">Bán hàng 24/7</h3>
+                    <p class="text-gray-400 text-sm">Nhận đơn tự động mọi lúc</p>
+                </div>
+                <div class="benefit-card p-6 text-center rounded-lg">
+                    <h3 class="font-semibold text-[#25F4EE] mb-2">Dễ dàng quản lý</h3>
+                    <p class="text-gray-400 text-sm">Phù hợp với người mới bắt đầu</p>
+                </div>
+                <div class="benefit-card p-6 text-center rounded-lg">
+                    <h3 class="font-semibold text-[#FE2C55] mb-2">Hỗ trợ miễn phí</h3>
+                    <p class="text-gray-400 text-sm">Chuyên viên hỗ trợ tận tình</p>
+                </div>
+            </div>
+
+            <div class="dark-card rounded-lg p-8 text-center">
+                <h4 class="text-2xl font-bold gradient-text mb-6">Thống kê thành công</h4>
+                <div class="grid md:grid-cols-4 gap-6">
+                    <div>
+                        <div class="text-3xl font-bold text-[#25F4EE] mb-2">85%</div>
+                        <p class="text-gray-300 text-sm">Người bán tăng doanh thu sau 3 tháng</p>
+                    </div>
+                    <div>
+                        <div class="text-3xl font-bold text-[#FE2C55] mb-2">3.2x</div>
+                        <p class="text-gray-300 text-sm">Tỷ lệ chuyển đổi cao hơn</p>
+                    </div>
+                    <div>
+                        <div class="text-3xl font-bold text-[#25F4EE] mb-2">24h</div>
+                        <p class="text-gray-300 text-sm">Thời gian setup shop</p>
+                    </div>
+                    <div>
+                        <div class="text-3xl font-bold text-[#FE2C55] mb-2">0đ</div>
+                        <p class="text-gray-300 text-sm">Phí mở shop ban đầu</p>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Contact -->
-    <section id="contact" class="py-16 bg-gray-800 text-center">
-        <div class="container mx-auto px-4">
-            <h2 class="text-4xl font-bold mb-6 text-white">Liên hệ với chúng tôi</h2>
-            <p id="contactInfo" class="text-gray-400 mb-8"></p>
-            <a href="mailto:support@tiktokshop.vn"
-                class="gradient-bg text-white px-8 py-3 rounded-full font-semibold hover:shadow-lg">Gửi Email</a>
+    <section id="contact" class="py-16 bg-gray-800">
+        <div class="container mx-auto px-4 max-w-3xl text-center">
+            <h2 class="text-4xl font-bold mb-8">Liên hệ với chúng tôi</h2>
+            <p class="text-gray-400 mb-6" id="contactInfo"></p>
+            <div id="contactLinks" class="flex flex-wrap justify-center gap-4 text-sm"></div>
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="bg-black border-t border-gray-700 text-center py-8">
+    <!-- Chat tự động -->
+    <div id="chatBubble"
+        class="fixed bottom-5 right-5 bg-[#25F4EE] text-black px-5 py-3 rounded-full shadow-lg cursor-pointer hover:bg-[#FE2C55] hover:text-white transition-all hidden">
+        💬 Chat với chúng tôi
+    </div>
+
+    <footer class="bg-black border-t border-gray-700 py-8 text-center">
         <p class="text-gray-400">© 2025 TikTokShop – Nền tảng bán hàng chuyên nghiệp</p>
     </footer>
 
     <script>
-        fetch("/api/data")
+        fetch('/api/data')
             .then(res => res.json())
             .then(data => {
-                document.getElementById("title").innerText = data.title;
-                document.getElementById("description").innerText = data.description;
-                document.getElementById("aboutText").innerText = data.about;
-                document.getElementById("qrZalo").src = data.qr.zalo;
-                document.getElementById("qrTiktok").src = data.qr.tiktok;
-                document.getElementById("linkZalo").href = data.contact.zalo;
-                document.getElementById("linkTiktok").href = data.contact.tiktok;
-                document.getElementById("contactInfo").innerHTML = `
-          📞 ${data.contact.phone} |
-          ✉️ <a href="mailto:${data.contact.email}" class="text-[#25F4EE]">${data.contact.email}</a> |
-          🌐 <a href="${data.contact.facebook}" target="_blank" class="text-[#FE2C55]">Facebook</a>
+                // Logo, favicon, text
+                document.title = data.title;
+                document.getElementById('favicon').href = data.favicon;
+                document.getElementById('logo').src = data.logo;
+                document.getElementById('aboutLogo').src = data.logo;
+                document.getElementById('siteTitle').innerText = data.title;
+                document.getElementById('siteDesc').innerText = data.description;
+                document.getElementById('aboutText').innerText = data.about;
+
+                // QR
+                document.getElementById('qrZalo').src = data.qr.zalo;
+                document.getElementById('qrTiktok').src = data.qr.tiktok;
+
+                // Liên hệ
+                const c = data.contact;
+                document.getElementById('contactInfo').innerHTML = `
+          📧 ${c.email || ''} | ☎️ ${c.phone || ''}
         `;
-            });
+                document.getElementById('contactLinks').innerHTML = `
+          ${c.zalo ? `<a href="${c.zalo}" target="_blank" class="text-[#25F4EE] hover:underline">Zalo</a>` : ''}
+          ${c.facebook ? `<a href="${c.facebook}" target="_blank" class="text-[#FE2C55] hover:underline">Facebook</a>` : ''}
+          ${c.tiktok ? `<a href="${c.tiktok}" target="_blank" class="text-[#25F4EE] hover:underline">TikTok</a>` : ''}
+          ${c.telegram ? `<a href="${c.telegram}" target="_blank" class="text-[#25F4EE] hover:underline">Telegram</a>` : ''}
+          ${c.shopee ? `<a href="${c.shopee}" target="_blank" class="text-[#FE2C55] hover:underline">Shopee</a>` : ''}
+          ${c.instagram ? `<a href="${c.instagram}" target="_blank" class="text-[#FE2C55] hover:underline">Instagram</a>` : ''}
+        `;
+
+                // Chat tự động
+                const msg = data.autoMessage || "Xin chào 👋 Bạn cần hỗ trợ mở shop TikTok?";
+                const bubble = document.getElementById('chatBubble');
+                bubble.classList.remove('hidden');
+                bubble.addEventListener('click', () => {
+                    const zalo = c.zalo ? `\n👉 Zalo: ${c.zalo}` : '';
+                    alert(msg + zalo);
+                });
+            })
+            .catch(() => console.error("Không thể tải dữ liệu trang."));
     </script>
 </body>
 
-</html
+</html>

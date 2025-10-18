@@ -1,4 +1,55 @@
+# ==============================
+# TikTokShop Project .gitignore
+# ==============================
+
+# Node modules & dependencies
 node_modules/
-uploads/
-*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+
+# Environment variables
 .env
+.env.local
+.env.*.local
+
+# Build outputs & temp
+dist/
+build/
+cache/
+.tmp/
+.DS_Store
+
+# Logs
+logs/
+*.log
+*.log.*
+
+# VS Code settings
+.vscode/
+*.code-workspace
+
+# OS-generated files
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Render build cache
+.render/
+.vercel/
+.netlify/
+
+# Ignore uploaded files except QR
+/uploads/*
+!/uploads/qr_zalo.png
+!/uploads/qr_tiktok.png
+
+# JSON data (nếu bạn muốn lưu giữ)
+!data.json
+!messages.json
+
+# Ignore backup or old versions
+*.bak
+*.old
+*.tmp

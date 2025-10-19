@@ -9,7 +9,9 @@ jobs:
   ping:
     runs-on: ubuntu-latest
     steps:
-      - name: Ping Render App
+      - name: Ping Render App (Main Domain)
         run: |
-          echo "Pinging Render app..."
-          curl -s -o /dev/null -w "%{http_code}" https://tiktokshop-fb59.onrender.com
+          echo "🔄 Đang ping trang chính Render..."
+          # Ping domain chính của bạn
+          curl -s -o /dev/null -w "%{http_code}" https://tiktokshop888.com/
+          echo "✅ Ping thành công!"

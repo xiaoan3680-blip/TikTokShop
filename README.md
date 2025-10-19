@@ -88,18 +88,3 @@ Hoặc liên hệ qua GitHub: xiaoan3680-blip
 ❤️ Ghi chú
 Dự án được xây dựng với mục tiêu học tập & thực hành triển khai web tĩnh + Node.js trên Render.
 Mọi đóng góp đều được hoan nghênh!
-
-yaml
-Sao chép mã
-
----
-
-## 💡 Gợi ý:
-Sau khi bạn thêm file này:
-1. Quay lại repo → GitHub sẽ tự hiển thị đẹp như một trang giới thiệu.  
-2. Huy hiệu “Keep Render Awake” 🟢 sẽ luôn cập nhật tự động.  
-
----
-
-Bạn có muốn mình **thêm phần “Ảnh xem trước website (preview)”** ở đầu README luôn cho đẹp không?  
-Mình có

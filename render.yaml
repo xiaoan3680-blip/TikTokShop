@@ -2,10 +2,11 @@ services:
   - type: web
     name: tiktokshop
     env: node
-    region: singapore
     plan: free
-    buildCommand: "npm install"
-    startCommand: "npm start"
+    buildCommand: npm install
+    startCommand: node server.js
     autoDeploy: true
+    region: singapore
     envVars:
-      NODE_ENV: production
+      - key: NODE_ENV
+        value: production

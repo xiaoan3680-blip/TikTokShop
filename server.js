@@ -11,32 +11,28 @@ app.use(express.static(__dirname));
 
 const DATA_FILE = path.join(__dirname, "data.json");
 
-// ✅ Lấy dữ liệu (contacts + messages)
 app.get("/api/data", (req, res) => {
     try {
         const data = JSON.parse(fs.readFileSync(DATA_FILE, "utf8"));
         res.json(data);
-    } catch (err) {
-        res.status(500).json({ error: "Không đọc được dữ liệu" });
+    } catch {
+        res.status(500).json({ error: "Không đọc được dữ liệu." });
     }
 });
 
-// ✅ Cập nhật toàn bộ data.json (từ admin)
 app.post("/api/update", (req, res) => {
     try {
         fs.writeFileSync(DATA_FILE, JSON.stringify(req.body, null, 2));
         res.json({ success: true });
-    } catch (err) {
-        res.status(500).json({ error: "Không thể lưu dữ liệu" });
+    } catch {
+        res.status(500).json({ error: "Không thể lưu dữ liệu." });
     }
 });
 
-// ✅ Lưu tin nhắn khách gửi
 app.post("/api/message", (req, res) => {
     const { name, phone, message } = req.body;
-    if (!name || !phone || !message) {
-        return res.status(400).json({ error: "Thiếu thông tin" });
-    }
+    if (!name || !phone || !message)
+        return res.status(400).json({ error: "Thiếu thông tin." });
 
     try {
         const data = JSON.parse(fs.readFileSync(DATA_FILE, "utf8"));
@@ -45,24 +41,23 @@ app.post("/api/message", (req, res) => {
             name,
             phone,
             message,
-            time: new Date().toLocaleString("vi-VN")
+            time: new Date().toLocaleString("vi-VN"),
         };
         data.messages = data.messages || [];
         data.messages.push(newMsg);
         fs.writeFileSync(DATA_FILE, JSON.stringify(data, null, 2));
         res.json({ success: true });
-    } catch (err) {
-        res.status(500).json({ error: "Không thể lưu tin nhắn" });
+    } catch {
+        res.status(500).json({ error: "Không thể lưu tin nhắn." });
     }
 });
 
-// ✅ Lấy danh sách tin nhắn
 app.get("/api/messages", (req, res) => {
     try {
         const data = JSON.parse(fs.readFileSync(DATA_FILE, "utf8"));
         res.json(data.messages || []);
-    } catch (err) {
-        res.status(500).json({ error: "Không thể đọc tin nhắn" });
+    } catch {
+        res.status(500).json({ error: "Không thể đọc tin nhắn." });
     }
 });
 

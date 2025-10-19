@@ -1,7 +1,6 @@
 {
   "name": "tiktokshop",
   "version": "1.0.0",
-  "description": "TikTokShop - nền tảng bán hàng chuyên nghiệp 2025",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"

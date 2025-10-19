@@ -2,88 +2,137 @@
 <html lang="vi">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TikTokShop - Trang chính</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TikTokShop - Bán hàng chuyên nghiệp 2025</title>
     <link rel="icon"
         href="https://product.hstatic.net/200000376071/product/tiktok-shop_c25424051528441eaa7680b85eb94fdf.jpg">
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .gradient-text {
+            background: linear-gradient(135deg, #25F4EE 0%, #FE2C55 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .gradient-bg {
+            background: linear-gradient(135deg, #25F4EE 0%, #FE2C55 100%);
+        }
+
+        .dark-card {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            border: 1px solid #374151;
+        }
+    </style>
 </head>
 
 <body class="bg-gray-900 text-gray-100">
 
-    <header class="bg-black text-center text-3xl font-bold py-4">
-        TikTokShop - Bán hàng chuyên nghiệp 2025
+    <!-- Header -->
+    <header class="bg-black border-b border-gray-700 sticky top-0 z-50">
+        <nav class="container mx-auto px-4 py-4 flex items-center justify-between">
+            <div class="text-2xl font-bold gradient-text">TikTokShop</div>
+            <div class="hidden md:flex space-x-6">
+                <a href="#about" class="hover:text-[#25F4EE]">Giới thiệu</a>
+                <a href="#contact" class="hover:text-[#25F4EE]">Liên hệ</a>
+                <a href="/admin.html" class="hover:text-[#FE2C55]">Admin</a>
+            </div>
+        </nav>
     </header>
 
-    <main class="text-center py-10">
-        <h1 class="text-4xl font-bold text-[#25F4EE] mb-6">Kết nối và bán hàng cùng TikTokShop</h1>
-        <p class="text-gray-300 mb-12">Tăng trưởng tự nhiên, dễ quản lý và tự động hóa bán hàng hiệu quả.</p>
+    <!-- Hero -->
+    <section class="text-center py-20">
+        <h1 class="text-5xl md:text-6xl font-bold mb-6">Phát triển kinh doanh cùng <span
+                class="gradient-text">TikTokShop</span></h1>
+        <p class="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
+            Nền tảng thương mại điện tử giúp bạn tiếp cận hàng triệu người dùng, tối ưu doanh thu và quản lý hiệu quả.
+        </p>
+        <a href="#contact" class="gradient-bg text-white px-8 py-4 rounded-full text-lg font-semibold">Bắt đầu ngay</a>
+    </section>
 
-        <!-- QR động -->
-        <div id="qrSection" class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto px-6 mb-16"></div>
+    <!-- Giới thiệu -->
+    <section id="about" class="py-16 bg-gray-800">
+        <div class="container mx-auto text-center max-w-4xl">
+            <h2 class="text-4xl font-bold mb-8">Về TikTokShop</h2>
+            <p class="text-lg text-gray-300 mb-8">
+                TikTokShop là cầu nối giữa thương hiệu và người dùng TikTok — giúp bạn bán hàng qua video, livestream và
+                cửa hàng tích hợp.
+            </p>
+            <div class="dark-card p-8 rounded-lg">
+                <p class="text-gray-400">Giao diện minh họa nền tảng TikTokShop</p>
+            </div>
+        </div>
+    </section>
 
-        <!-- Form liên hệ -->
-        <section id="contact" class="max-w-2xl mx-auto bg-gray-800 p-6 rounded-xl border border-gray-700">
-            <h2 class="text-3xl font-bold mb-6">Liên hệ tư vấn mở shop</h2>
-            <form id="contactForm" class="space-y-4">
+    <!-- Liên hệ động -->
+    <section id="contact" class="py-16 bg-gray-900">
+        <div class="container mx-auto text-center max-w-5xl">
+            <h2 class="text-4xl font-bold mb-8">Kênh kết nối chính thức</h2>
+            <div id="contactLinks" class="grid md:grid-cols-3 gap-8"></div>
+            <div id="hotlineBox" class="mt-10 text-lg text-gray-300"></div>
+        </div>
+    </section>
+
+    <!-- Form liên hệ -->
+    <section class="py-16 bg-gray-800">
+        <div class="container mx-auto text-center max-w-2xl">
+            <h2 class="text-4xl font-bold mb-6">Liên hệ tư vấn mở shop</h2>
+            <form id="contactForm" class="dark-card p-8 rounded-lg space-y-4">
                 <input type="text" name="name" placeholder="Họ và tên" required
                     class="w-full p-3 rounded bg-gray-900 border border-gray-700" />
                 <input type="tel" name="phone" placeholder="Số điện thoại" required pattern="[0-9]{9,11}"
                     class="w-full p-3 rounded bg-gray-900 border border-gray-700" />
                 <textarea name="message" rows="4" placeholder="Nội dung cần hỗ trợ..." required
                     class="w-full p-3 rounded bg-gray-900 border border-gray-700"></textarea>
-                <button type="submit"
-                    class="w-full py-3 bg-gradient-to-r from-[#25F4EE] to-[#FE2C55] text-white font-semibold rounded-lg hover:opacity-90 transition">Gửi
-                    liên hệ</button>
+                <button type="submit" class="w-full py-3 gradient-bg text-white font-semibold rounded-lg">Gửi liên
+                    hệ</button>
             </form>
-        </section>
-    </main>
+        </div>
+    </section>
 
-    <footer class="bg-black text-center text-gray-400 py-8 border-t border-gray-700">
-        © 2025 TikTokShop. All rights reserved.
+    <footer class="bg-black text-center text-gray-400 py-10 border-t border-gray-700">
+        <p>© 2025 TikTokShop. All rights reserved.</p>
     </footer>
 
     <script>
-        // Gửi form liên hệ
-        document.getElementById('contactForm').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const f = e.target;
-            const data = { name: f.name.value, phone: f.phone.value, message: f.message.value };
-            const res = await fetch('/api/message', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) });
-            alert(res.ok ? '✅ Gửi thành công!' : '❌ Lỗi, thử lại sau.');
-            if (res.ok) f.reset();
-        });
-
-        // Tải thông tin & QR từ data.json
         async function loadContacts() {
             const res = await fetch('/api/data');
             const data = await res.json();
             const c = data.contacts || {};
             let html = '';
 
-            for (let key of ['zalo', 'tiktok', 'lotus']) {
-                if (c[key]) {
-                    html += `
-        <div class="bg-gray-800 p-6 rounded-lg border border-gray-700">
-          <h3 class="text-2xl font-bold mb-4 capitalize">${key}</h3>
-          <img src="${c[key].qr}" alt="QR ${key}" class="mx-auto w-40 h-40 rounded border border-gray-600 mb-4">
-          <a href="${c[key].link}" target="_blank" class="inline-block px-6 py-2 bg-[#25F4EE] text-black font-semibold rounded-full hover:bg-[#FE2C55] hover:text-white transition">
-            Kết nối ${key}
+            for (let key of Object.keys(c)) {
+                if (key === 'hotline') continue;
+                const info = c[key];
+                const name = key.charAt(0).toUpperCase() + key.slice(1);
+                html += `
+        <div class="dark-card p-6 rounded-lg border border-gray-700">
+          <h3 class="text-2xl font-bold mb-4">${name}</h3>
+          <a href="${info.link}" target="_blank"
+             class="inline-block px-6 py-2 bg-[#25F4EE] text-black font-semibold rounded-full hover:bg-[#FE2C55] hover:text-white transition">
+             Kết nối ${name}
           </a>
         </div>`;
-                }
             }
 
-            html += `
-      <div class="col-span-3 mt-8">
-        <p class="text-lg text-gray-300">📞 Hotline: <b class="text-[#25F4EE]">${c.hotline || 'Chưa có số điện thoại'}</b></p>
-      </div>
-    `;
-
-            document.getElementById('qrSection').innerHTML = html;
+            document.getElementById('contactLinks').innerHTML = html;
+            document.getElementById('hotlineBox').innerHTML =
+                `<p>📞 Hotline: <b class="text-[#25F4EE]">${c.hotline || "Chưa có số điện thoại"}</b></p>`;
         }
         loadContacts();
+
+        document.getElementById('contactForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const f = e.target;
+            const data = { name: f.name.value, phone: f.phone.value, message: f.message.value };
+            const res = await fetch('/api/message', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            });
+            alert(res.ok ? '✅ Gửi thành công!' : '❌ Lỗi, thử lại sau.');
+            if (res.ok) f.reset();
+        });
     </script>
 
     <!-- Chat tự động -->
@@ -92,6 +141,7 @@
         const tudong_chatbox = new TuDongChat('Nd9qOWI0l8QwPObLIb9Dx');
         tudong_chatbox.initial();
     </script>
+
 </body>
 
 </html>

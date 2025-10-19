@@ -1,0 +1,16 @@
+name: Keep Render Awake
+
+on:
+  schedule:
+    - cron: "*/10 * * * *"  # Chạy mỗi 10 phút
+  workflow_dispatch:  # Cho phép chạy thủ công nếu cần
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping Render App
+        run: |
+          echo "Pinging Render app..."
+          curl -s -o /dev/null -w "%{http_code}" https://www.tiktokshop888.com
+          curl -s -o /dev/null -w "%{http_code}" https://tiktokshop-fb59.onrender.com
